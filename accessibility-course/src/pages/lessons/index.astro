@@ -1,0 +1,73 @@
+---
+import '../../styles/global.css';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import { getCollection } from 'astro:content';
+
+// Get all lesson files from the "lessons" collection
+const lessons = await getCollection('lessons');
+
+// Group lessons by the folder name (i.e. the first part of the `lesson.id` before the "/")
+const groupedLessons = lessons.reduce((groups: { [key: string]: typeof lessons }, lesson) => {
+  const folder = lesson.id.split('/')[0];
+  if (!groups[folder]) {
+    groups[folder] = [];
+  }
+  groups[folder].push(lesson);
+  return groups;
+}, {});
+
+// Convert the grouped object to an array for easier iteration.
+// If order matters, you may want to sort the groups here.
+const groupedLessonsArray = Object.entries(groupedLessons);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Accessibility Course</title>
+  </head>
+  <body>
+    <Header />
+    <main id="main-content">
+      {JSON.stringify(groupedLessonsArray)}
+        <aside>
+                    {
+                        groupedLessonsArray.map(([folder, lessonGroup], index) => (
+                        <div>
+                            {/* Use the first lesson’s data.title as the overall lesson title */}
+                            <h2>Lesson {index + 1}: {lessonGroup[0].data.title}</h2>
+                            <ul>
+                            {
+                                lessonGroup.map((subLesson) => {
+                                    // Extract a friendly label from the filename.
+                                    const fileName = subLesson.id.split('/')[1]; // "activity.md" or "instruction.md"
+                                    const label = fileName.replace('.md', '').replace('-', ' ');
+                    
+                                    return (
+                                        <li>
+                                            <a 
+                                                href={`/lessons/${(subLesson as any).slug}`}
+                                                class="text-xl font-semibold text-blue-600 hover:underline"
+                                            >
+                                                {label}
+                                            </a>
+                                        </li>
+                                    );
+                                })
+                            }
+                            </ul>
+                        </div>
+                        ))
+                    }
+        </aside>
+
+      <slot></slot>
+    </main>
+    <Footer />
+  </body>
+  <script>
+    console.log("Slot content:", Astro.props);
+  </script>
+</html>
