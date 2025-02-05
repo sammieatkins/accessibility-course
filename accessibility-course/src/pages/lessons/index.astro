@@ -31,43 +31,55 @@ const groupedLessonsArray = Object.entries(groupedLessons);
   <body>
     <Header />
     <main id="main-content">
-      {JSON.stringify(groupedLessonsArray)}
-        <aside>
-                    {
-                        groupedLessonsArray.map(([folder, lessonGroup], index) => (
-                        <div>
-                            {/* Use the first lesson’s data.title as the overall lesson title */}
-                            <h2>Lesson {index + 1}: {lessonGroup[0].data.title}</h2>
-                            <ul>
-                            {
-                                lessonGroup.map((subLesson) => {
-                                    // Extract a friendly label from the filename.
-                                    const fileName = subLesson.id.split('/')[1]; // "activity.md" or "instruction.md"
-                                    const label = fileName.replace('.md', '').replace('-', ' ');
-                    
-                                    return (
-                                        <li>
-                                            <a 
-                                                href={`/lessons/${(subLesson as any).slug}`}
-                                                class="text-xl font-semibold text-blue-600 hover:underline"
-                                            >
-                                                {label}
-                                            </a>
-                                        </li>
-                                    );
-                                })
-                            }
-                            </ul>
-                        </div>
-                        ))
-                    }
-        </aside>
+      <!-- {JSON.stringify(groupedLessonsArray)} -->
+      <aside role="navigation" aria-label="Lessons Navigation">
+        {
+          groupedLessonsArray.map(([folder, lessonGroup], index) => {
+            // Sort lessons by the `order` field in the frontmatter
+            lessonGroup.sort((a, b) => a.data.order - b.data.order);
+
+            return (
+              <div>
+                {/* Use the first lesson’s data.title as the overall lesson title */}
+                <h2>Lesson {index + 1}: {lessonGroup[0].data.title}</h2>
+                <ul>
+                  {
+                    lessonGroup.map((subLesson, subIndex) => {
+                      // Extract a friendly label from the filename.
+                      const fileName = subLesson.id.split('/')[1]; // "activity.md" or "instruction.md"
+                      let label = fileName.replace('.md', '').replace('-', ' ');
+
+                      // Capitalize the label
+                      label = label.charAt(0).toUpperCase() + label.slice(1);
+
+                      // If the folder name contains 'intro', change the label of 'instruction.md' to 'Introduction'
+                      if (folder.includes('intro') && fileName === 'instruction.md') {
+                        label = 'Introduction';
+                      } else {
+                        label = `${lessonGroup[0].data.title}: ${label}`;
+                      }
+
+                      return (
+                        <li>
+                          <a 
+                            href={`/lessons/${(subLesson as any).slug}`}
+                            class="text-xl font-semibold text-blue-600 hover:underline"
+                          >
+                            {label}
+                          </a>
+                        </li>
+                      );
+                    })
+                  }
+                </ul>
+              </div>
+            );
+          })
+        }
+      </aside>
 
       <slot></slot>
     </main>
     <Footer />
   </body>
-  <script>
-    console.log("Slot content:", Astro.props);
-  </script>
 </html>

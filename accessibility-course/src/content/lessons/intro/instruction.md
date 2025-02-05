@@ -1,3 +1,0 @@
----
-title: Introduction to Accessibility
----

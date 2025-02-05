@@ -4,29 +4,33 @@ import { type CollectionEntry, getCollection } from 'astro:content';
 export async function getStaticPaths() {
   const lessons = await getCollection('lessons');
   return lessons.map((lesson) => ({
-    params: { slug: lesson!.filePath!.replace('src/content/lessons/', '').replace('.md', '') },
-  props: lesson
+    params: { slug: lesson.filePath!.replace('src/content/lessons/', '').replace('.md', '') },
+    props: { lesson }
 
   }))
 }
 
 // const { slug } = Astro.params;
-
 // const lessons = await getCollection('lessons');
 // const lesson = lessons.find(lesson => 
 //   lesson!.filePath!.includes(slug)
 // );
 
 // console.log('Lesson Data:', lesson);
-const lesson = Astro.props as CollectionEntry<'lessons'>;
+const { lesson } = Astro.props as { lesson: CollectionEntry<'lessons'> };
+console.log(lesson);
 
 // const lesson = Astro.props;
 // const { Content } = await lesson.render();
-const { rendered } = lesson; // Access the 'rendered' property for HTML content
+// const { rendered } = lesson; // Access the 'rendered' property for HTML content
+// const { Content } = await lesson.render();
+
 
 ---
 
 <article>
-  <!-- How to show content???? -->
-  <!-- <div>{Astro.render(rendered)}</div> -->
+  {lesson.rendered?.html 
+    ? <div set:html={lesson.rendered.html}></div>
+    : <p>No content available for this lesson.</p>
+  }
 </article>
