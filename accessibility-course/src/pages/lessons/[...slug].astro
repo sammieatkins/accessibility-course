@@ -15,12 +15,12 @@ export async function getStaticPaths() {
 
 // Get all lesson files from the "lessons" collection
 const lessons = await getCollection('lessons');
-console.log(lessons)
+// console.log(lessons)
 
 // Group lessons by the folder name (i.e. the first part of the `lesson.id` before the "/")
 const groupedLessons = lessons.reduce((groups: { [key: string]: typeof lessons }, lesson) => {
   const folder = lesson.id.split('/')[0];
-  console.log(folder)
+  // console.log(folder)
   if (!groups[folder]) {
     groups[folder] = [];
   }
