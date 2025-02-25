@@ -18,47 +18,70 @@ interface Props {
 }
 
 const { groupedLessonsArray } = Astro.props;
-console.log(groupedLessonsArray);
+// console.log(groupedLessonsArray);
 ---
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Accessibility Course</title>
   </head>
-  <body>
+  <body class="bg-[#f1f5f9] font-sans">
+    <!-- Skip link (custom CSS from your global.css still applies) -->
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    
     <Header />
-    <main id="main-content">
+    
+    <!-- Flex container for aside and main content -->
+    <div class="flex w-full">
+      <!-- Aside: fixed width, flush with left edge, blue background -->
       <aside 
+        id="merged-sidebar"
         role="navigation" 
         aria-label="Lessons Navigation"
-        class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+        class="w-72 overflow-y-auto bg-blue-100 dark:bg-blue-900 px-3 py-4"
       >
+        <!-- Dynamic Lesson Links -->
         {groupedLessonsArray.map(([folder, lessons], index) => {
-          // Sort the lessons array
-          lessons.sort((a, b) => a.data.order - b.data.order);
-
+          lessons.sort((a, b) => {
+            const aFileName = a.id.split('/')[1];
+            const bFileName = b.id.split('/')[1];
+            
+            // Place instruction.md first regardless of order property
+            if (aFileName === 'instruction.md' && bFileName !== 'instruction.md') {
+              return -1;
+            }
+            if (bFileName === 'instruction.md' && aFileName !== 'instruction.md') {
+              return 1;
+            }
+            
+            // Otherwise, sort by the order property
+            return a.data.order - b.data.order;
+          });
           return (
-            <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
-              <h2>Lesson {index + 1}: {lessons[0].data.title}</h2>
-              <ul class="space-y-2 font-medium">
+            <div class="mb-6">
+              <h2 class="mb-2 pl-2 text-lg font-bold">
+                Lesson {index + 1}: {lessons[0].data.title}
+              </h2>
+              <ul class="pl-4 space-y-2 font-medium">
                 {lessons.map((subLesson) => {
                   const fileName = subLesson.id.split('/')[1];
                   let label = fileName.replace('.md', '').replace('-', ' ');
                   label = label.charAt(0).toUpperCase() + label.slice(1);
-
+  
                   if (folder.includes('intro') && fileName === 'instruction.md') {
                     label = 'Introduction';
                   } else {
                     label = `${lessons[0].data.title}: ${label}`;
                   }
-
+  
                   return (
                     <li class="block p-2 text-gray-900 rounded-lg hover:bg-gray-100">
                       <a 
                         href={`/lessons/${(subLesson as any).slug}`}
                         class="text-xl font-semibold text-blue-600 hover:underline"
+                        title={label}
                       >
                         {label}
                       </a>
@@ -70,55 +93,15 @@ console.log(groupedLessonsArray);
           );
         })}
       </aside>
-
-      <p class="text-red-500">HELLOO????</p>
-
-      <!-- Simplified sidebar template -->
-      <button
-        data-drawer-target="default-sidebar"
-        data-drawer-toggle="default-sidebar"
-        aria-controls="default-sidebar"
-        type="button"
-        class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
-      >
-        <span class="sr-only">Open sidebar</span>
-        Open Sidebar
-      </button>
-
-      <aside
-        id="default-sidebar"
-        class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
-        aria-label="Sidebar"
-      >
-        <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
-          <ul class="space-y-2 font-medium">
-            <li>
-              <a href="#" class="block p-2 text-gray-900 rounded-lg hover:bg-gray-100">Dashboard</a>
-            </li>
-            <li>
-              <a href="#" class="block p-2 text-gray-900 rounded-lg hover:bg-gray-100">Kanban</a>
-            </li>
-            <li>
-              <a href="#" class="block p-2 text-gray-900 rounded-lg hover:bg-gray-100">Inbox</a>
-            </li>
-            <li>
-              <a href="#" class="block p-2 text-gray-900 rounded-lg hover:bg-gray-100">Users</a>
-            </li>
-            <li>
-              <a href="#" class="block p-2 text-gray-900 rounded-lg hover:bg-gray-100">Products</a>
-            </li>
-            <li>
-              <a href="#" class="block p-2 text-gray-900 rounded-lg hover:bg-gray-100">Sign In</a>
-            </li>
-            <li>
-              <a href="#" class="block p-2 text-gray-900 rounded-lg hover:bg-gray-100">Sign Up</a>
-            </li>
-          </ul>
+      
+      <!-- Main content: takes up remaining space, left aligned -->
+      <main id="main-content" class="flex-1 mx-0 pl-10">
+        <div class="max-w-[80ch] p-4">
+          <slot></slot>
         </div>
-      </aside>
-
-      <slot></slot>
-    </main>
+      </main>
+    </div>
+    
     <Footer />
   </body>
 </html>
