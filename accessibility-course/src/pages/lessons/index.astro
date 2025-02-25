@@ -1,15 +1,17 @@
 ---
-import '../../styles/global.css';
-import Footer from '../../components/Footer.astro';
-import Header from '../../components/Header.astro';
+import Layout from '../../layouts/LessonLayout.astro';
 import { getCollection } from 'astro:content';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
 
 // Get all lesson files from the "lessons" collection
 const lessons = await getCollection('lessons');
+// console.log(lessons)
 
 // Group lessons by the folder name (i.e. the first part of the `lesson.id` before the "/")
 const groupedLessons = lessons.reduce((groups: { [key: string]: typeof lessons }, lesson) => {
   const folder = lesson.id.split('/')[0];
+  // console.log(folder)
   if (!groups[folder]) {
     groups[folder] = [];
   }
@@ -18,9 +20,13 @@ const groupedLessons = lessons.reduce((groups: { [key: string]: typeof lessons }
 }, {});
 
 // Convert the grouped object to an array for easier iteration.
-// If order matters, you may want to sort the groups here.
 const groupedLessonsArray = Object.entries(groupedLessons);
+// console.log(groupedLessonsArray)
+// goes to lessons array, which is a list of lists. then each list has the folder name and a list of objects. each object is a lesson file in that folder. those objects have data, including: id (the file path), slug (it's the same as the filepath but with dangler left off, like without ".md"), body (the content of the file), collection (the collection name), data (the frontmatter data), render (the rendered content)
+// console.log(groupedLessonsArray[0][1][0].data.title)
 ---
+
+<!-- <Layout groupedLessonsArray={groupedLessonsArray} /> -->
 
 <html lang="en">
   <head>
@@ -31,38 +37,38 @@ const groupedLessonsArray = Object.entries(groupedLessons);
   <body>
     <Header />
     <main id="main-content">
-      <!-- {JSON.stringify(groupedLessonsArray)} -->
       <aside role="navigation" aria-label="Lessons Navigation">
         {
-          groupedLessonsArray.map(([folder, lessonGroup], index) => {
-            // Sort lessons by the `order` field in the frontmatter
-            lessonGroup.sort((a, b) => a.data.order - b.data.order);
+          groupedLessonsArray.map(([folder, lessonObject], index) => {
+            console.log(`lesson group: ${lessonObject}`)
+            lessonObject.sort((a, b) => a.data.order - b.data.order);
+            // console.log(`lesson group after sort: ${lessonObject[0].data}`)
 
             return (
               <div>
-                {/* Use the first lesson’s data.title as the overall lesson title */}
-                <h2>Lesson {index + 1}: {lessonGroup[0].data.title}</h2>
+                <h2>Lesson {index + 1}: {lessonObject[0].data.title}</h2>
                 <ul>
                   {
-                    lessonGroup.map((subLesson, subIndex) => {
-                      // Extract a friendly label from the filename.
-                      const fileName = subLesson.id.split('/')[1]; // "activity.md" or "instruction.md"
-                      let label = fileName.replace('.md', '').replace('-', ' ');
+                    lessonObject.map((subLesson) => {
+                      // console.log(`subLesson.id: ${subLesson.id}`)
 
-                      // Capitalize the label
+                      // every file has to be in a sub folder for this to work, otherwise it won't have a '/' to work with and will break.
+                      const fileName = subLesson.id.split('/')[1];
+                      // console.log(`fileName: ${fileName}`)
+
+                      let label = fileName.replace('.md', '').replace('-', ' ');
                       label = label.charAt(0).toUpperCase() + label.slice(1);
 
-                      // If the folder name contains 'intro', change the label of 'instruction.md' to 'Introduction'
                       if (folder.includes('intro') && fileName === 'instruction.md') {
                         label = 'Introduction';
                       } else {
-                        label = `${lessonGroup[0].data.title}: ${label}`;
+                        label = `${lessonObject[0].data.title}: ${label}`;
                       }
 
                       return (
                         <li>
                           <a 
-                            href={`/lessons/${(subLesson as any).slug}`}
+                            href={`/lessons/${subLesson.slug}`}
                             class="text-xl font-semibold text-blue-600 hover:underline"
                           >
                             {label}

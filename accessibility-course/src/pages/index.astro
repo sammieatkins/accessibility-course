@@ -2,7 +2,7 @@
 import '../styles/global.css';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { Content as Home } from '../content/home.md';
+import { Content as Home } from '../content/lessons/01_intro/home.md';
 ---
 <html lang="en">
   <head>
@@ -20,6 +20,6 @@ import { Content as Home } from '../content/home.md';
     <Footer />
   </body>
   <script>
-    console.log("Slot content:", Astro.props);
+    console.log("Slot content:" + Astro.props);
   </script>
 </html>
