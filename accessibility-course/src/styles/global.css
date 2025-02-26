@@ -1,12 +1,37 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --shiki-background: #1e1e1e !important; /* Default Dark Plus background */
+    --shiki-foreground: #d4d4d4 !important; /* Default text color */
+  
+    /* Dark Plus Syntax Colors */
+    --shiki-token-keyword: #569cd6 !important; /* Blue (keywords) */
+    --shiki-token-string: #ce9178 !important; /* Light Brown (strings) */
+    --shiki-token-comment: #6a9955 !important; /* Green (comments) */
+    --shiki-token-function: #dcdcaa !important; /* Yellow (functions) */
+    --shiki-token-parameter: #9cdcfe !important; /* Light Blue (parameters) */
+    --shiki-token-punctuation: #d4d4d4 !important; /* Default text color */
+    --shiki-token-operator: #d4d4d4 !important; /* Default text color */
+  }
+  
+  
+
 html {
   background-color: #f1f5f9;
   font-family: sans-serif;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Nunito", sans-serif;
+  font-weight: 1000;
 }
 
 * {
@@ -55,7 +80,7 @@ h1 {
 
 .logo {
   font-size: 1.5rem;
-  font-weight: bold;
+  font-weight: 800;
   color: white;
   text-decoration: none;
   /* margin-bottom: 1rem; */
@@ -110,6 +135,31 @@ footer .small-text {
   font-size: 0.8rem;
   margin-top: 1rem;
   color: #ccc;
+}
+
+/* Custom Styling for Markdown Code Blocks */
+pre {
+  @apply p-4 m-4 rounded-lg overflow-x-auto shadow-lg;
+}
+
+/* Target Shiki's rendered code blocks */
+pre.astro-code.dark-plus {
+  background-color: #1e1e1e !important; /* Ensures correct dark background */
+  color: #ffffff !important; /* Force light text for contrast */
+}
+
+/* Adjust specific low-contrast elements */
+pre.astro-code.dark-plus .token.punctuation,
+pre.astro-code.dark-plus .token.operator {
+  color: #bbbbbb !important; /* Lighten brackets, operators */
+}
+
+pre.astro-code.dark-plus .token.comment {
+  color: #7aa2f7 !important; /* Make comments more visible */
+}
+
+pre.astro-code.dark-plus .token.string {
+  color: #ff9e64 !important; /* Adjust string colors */
 }
 
 @media (min-width: 768px) {

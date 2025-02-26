@@ -57,7 +57,7 @@ const formattedLessonsArray = groupedLessonsArray.map(([folder, lessons], index)
       >
         {formattedLessonsArray.map(({ index, title, lessons }) => (
           <div class="mb-6">
-            <h2 class="mb-2 pl-2 text-lg font-bold">
+            <h2 class="mb-2 pl-2 text-lg font-black">
               Lesson {index}: {title}
             </h2>
             <ul class="pl-4 space-y-2 font-medium">
@@ -81,7 +81,7 @@ const formattedLessonsArray = groupedLessonsArray.map(([folder, lessons], index)
                     <li>
                       <a
                         href={`/lessons/${subLesson.slug}`}
-                        class="block w-full p-2 rounded-lg text-md text-blue-600 hover:bg-gray-100 hover:text-blue-800 transition"
+                        class="block w-full p-2 rounded-lg text-md text-blue-600 hover:bg-gray-100 hover:text-blue-800 transition font-bold"
                         title={label}
                       >
                         {label}

@@ -4,6 +4,8 @@
 - make browser tab title change based on lesson
 - look into hosting on netlify
 - work through content checklist
+- color contrast on side nav
+- dark mode
 
 
 smaller
