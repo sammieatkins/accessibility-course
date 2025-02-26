@@ -1,5 +1,4 @@
 ---
-title: Alt Text
+title: Alt Text Activity
 ---
-
-# Alt Text
+# Alt Text Activity

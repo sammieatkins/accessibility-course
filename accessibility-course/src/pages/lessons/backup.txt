@@ -1,0 +1,46 @@
+<!-- <aside role="navigation" aria-label="Lessons Navigation">
+        {
+          groupedLessonsArray.map(([folder, lessonObject], index) => {
+            console.log(`lesson group: ${lessonObject}`)
+            lessonObject.sort((a, b) => a.data.order - b.data.order);
+            // console.log(`lesson group after sort: ${lessonObject[0].data}`)
+
+            return (
+              <div>
+                <h2>Lesson {index + 1}: {lessonObject[0].data.title}</h2>
+                <ul>
+                  {
+                    lessonObject.map((subLesson) => {
+                      // console.log(`subLesson.id: ${subLesson.id}`)
+
+                      // every file has to be in a sub folder for this to work, otherwise it won't have a '/' to work with and will break.
+                      const fileName = subLesson.id.split('/')[1];
+                      // console.log(`fileName: ${fileName}`)
+
+                      let label = fileName.replace('.md', '').replace('-', ' ');
+                      label = label.charAt(0).toUpperCase() + label.slice(1);
+
+                      if (folder.includes('intro') && fileName === 'instruction.md') {
+                        label = 'Introduction';
+                      } else {
+                        label = `${lessonObject[0].data.title}: ${label}`;
+                      }
+
+                      return (
+                        <li>
+                          <a 
+                            href={`/lessons/${subLesson.slug}`}
+                            class="text-xl font-semibold text-blue-600 hover:underline"
+                          >
+                            {label}
+                          </a>
+                        </li>
+                      );
+                    })
+                  }
+                </ul>
+              </div>
+            );
+          })
+        }
+      </aside> -->

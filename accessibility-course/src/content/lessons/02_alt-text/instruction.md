@@ -1,5 +1,5 @@
 ---
-title: Alt Text
+title: Alt Text Intro
 author: Samantha Atkins
 description: "How to write useful alt text"
 # image:

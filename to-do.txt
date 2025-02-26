@@ -1,0 +1,15 @@
+- form to report accessibility barriers
+- contact us page
+- about page
+- make browser tab title change based on lesson
+- look into hosting on netlify
+- work through content checklist
+
+
+smaller
+change highlight
+clear style
+finish font imports
+more fun hover effect? => make it look more designed and intentional
+progress indicator icons
+- icon on both instruction and activity. (good bc informative icon)

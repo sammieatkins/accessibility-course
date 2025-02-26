@@ -1,6 +1,6 @@
 ---
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 
 import "../styles/global.css";
 
@@ -18,7 +18,25 @@ interface Props {
 }
 
 const { groupedLessonsArray } = Astro.props;
-// console.log(groupedLessonsArray);
+
+const formattedLessonsArray = groupedLessonsArray.map(([folder, lessons], index) => {
+  const lessonTitle = folder
+    .replace(/^\d+_/, "") // Remove leading numbers & underscores (e.g., "01_intro" → "intro")
+    .replace(/-/g, " ") // Replace hyphens with spaces
+    .replace(/\b\w/g, (char) => char.toUpperCase()); // Capitalize first letter of each word
+
+  const sortedLessons = lessons.sort((a, b) => {
+    const aFile = a.id.split("/").pop();
+    const bFile = b.id.split("/").pop();
+
+    if (aFile === "instruction.md") return -1;
+    if (bFile === "instruction.md") return 1;
+
+    return (a.data.order || 100) - (b.data.order || 100);
+  });
+
+  return { index: index + 1, title: lessonTitle, lessons: sortedLessons };
+});
 ---
 
 <html lang="en">
@@ -28,59 +46,42 @@ const { groupedLessonsArray } = Astro.props;
     <title>Accessibility Course</title>
   </head>
   <body class="bg-[#f1f5f9] font-sans">
-    <!-- Skip link (custom CSS from your global.css still applies) -->
-    <a class="skip-link" href="#main-content">Skip to content</a>
-    
     <Header />
-    
-    <!-- Flex container for aside and main content -->
+
     <div class="flex w-full">
-      <!-- Aside: fixed width, flush with left edge, blue background -->
-      <aside 
+      <aside
         id="merged-sidebar"
-        role="navigation" 
+        role="navigation"
         aria-label="Lessons Navigation"
         class="w-72 overflow-y-auto bg-blue-100 dark:bg-blue-900 px-3 py-4"
       >
-        <!-- Dynamic Lesson Links -->
-        {groupedLessonsArray.map(([folder, lessons], index) => {
-          lessons.sort((a, b) => {
-            const aFileName = a.id.split('/')[1];
-            const bFileName = b.id.split('/')[1];
-            
-            // Place instruction.md first regardless of order property
-            if (aFileName === 'instruction.md' && bFileName !== 'instruction.md') {
-              return -1;
-            }
-            if (bFileName === 'instruction.md' && aFileName !== 'instruction.md') {
-              return 1;
-            }
-            
-            // Otherwise, sort by the order property
-            return a.data.order - b.data.order;
-          });
-          return (
-            <div class="mb-6">
-              <h2 class="mb-2 pl-2 text-lg font-bold">
-                Lesson {index + 1}: {lessons[0].data.title}
-              </h2>
-              <ul class="pl-4 space-y-2 font-medium">
-                {lessons.map((subLesson) => {
-                  const fileName = subLesson.id.split('/')[1];
-                  let label = fileName.replace('.md', '').replace('-', ' ');
+        {formattedLessonsArray.map(({ index, title, lessons }) => (
+          <div class="mb-6">
+            <h2 class="mb-2 pl-2 text-lg font-bold">
+              Lesson {index}: {title}
+            </h2>
+            <ul class="pl-4 space-y-2 font-medium">
+              {lessons
+                .filter((subLesson) => !subLesson.id.endsWith("home.md"))
+                .map((subLesson) => {
+                  const fileName = subLesson.id.split("/")[1];
+                  let label = fileName.replace(".md", "").replace("-", " ");
                   label = label.charAt(0).toUpperCase() + label.slice(1);
-  
-                  if (folder.includes('intro') && fileName === 'instruction.md') {
-                    label = 'Introduction';
+
+                  if (
+                    title.includes("Intro") &&
+                    fileName === "instruction.md"
+                  ) {
+                    label = "Introduction";
                   } else {
-                    label = `${lessons[0].data.title}: ${label}`;
+                    label = `${title}: ${label}`;
                   }
-  
+
                   return (
-                    <li class="block p-2 text-gray-900 rounded-lg hover:bg-gray-100">
-                      <a 
-                        href={`/lessons/${(subLesson as any).slug}`}
-                        class="text-xl font-semibold text-blue-600 hover:underline"
+                    <li>
+                      <a
+                        href={`/lessons/${subLesson.slug}`}
+                        class="block w-full p-2 rounded-lg text-md text-blue-600 hover:bg-gray-100 hover:text-blue-800 transition"
                         title={label}
                       >
                         {label}
@@ -88,20 +89,22 @@ const { groupedLessonsArray } = Astro.props;
                     </li>
                   );
                 })}
-              </ul>
-            </div>
-          );
-        })}
+            </ul>
+          </div>
+        ))}
       </aside>
-      
+
       <!-- Main content: takes up remaining space, left aligned -->
-      <main id="main-content" class="flex-1 mx-0 pl-10">
+      <main
+        id="main-content"
+        class="flex-1 mx-0 pl-10 min-h-[calc(100vh-4rem-4rem)]"
+      >
         <div class="max-w-[80ch] p-4">
-          <slot></slot>
+          <slot />
         </div>
       </main>
     </div>
-    
+
     <Footer />
   </body>
 </html>
