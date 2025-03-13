@@ -11,7 +11,7 @@ export default defineConfig({
   integrations: [tailwind()],
   markdown: {
     shikiConfig: {
-      theme: myTheme,
+      theme: "github-light",
       wrap: true,
     },
   },

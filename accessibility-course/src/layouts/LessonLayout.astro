@@ -19,24 +19,26 @@ interface Props {
 
 const { groupedLessonsArray } = Astro.props;
 
-const formattedLessonsArray = groupedLessonsArray.map(([folder, lessons], index) => {
-  const lessonTitle = folder
-    .replace(/^\d+_/, "") // Remove leading numbers & underscores (e.g., "01_intro" → "intro")
-    .replace(/-/g, " ") // Replace hyphens with spaces
-    .replace(/\b\w/g, (char) => char.toUpperCase()); // Capitalize first letter of each word
+const formattedLessonsArray = groupedLessonsArray.map(
+  ([folder, lessons], index) => {
+    const lessonTitle = folder
+      .replace(/^\d+_/, "") // Remove leading numbers & underscores (e.g., "01_intro" → "intro")
+      .replace(/-/g, " ") // Replace hyphens with spaces
+      .replace(/\b\w/g, (char) => char.toUpperCase()); // Capitalize first letter of each word
 
-  const sortedLessons = lessons.sort((a, b) => {
-    const aFile = a.id.split("/").pop();
-    const bFile = b.id.split("/").pop();
+    const sortedLessons = lessons.sort((a, b) => {
+      const aFile = a.id.split("/").pop();
+      const bFile = b.id.split("/").pop();
 
-    if (aFile === "instruction.md") return -1;
-    if (bFile === "instruction.md") return 1;
+      if (aFile === "instruction.md") return -1;
+      if (bFile === "instruction.md") return 1;
 
-    return (a.data.order || 100) - (b.data.order || 100);
-  });
+      return (a.data.order || 100) - (b.data.order || 100);
+    });
 
-  return { index: index + 1, title: lessonTitle, lessons: sortedLessons };
-});
+    return { index: index + 1, title: lessonTitle, lessons: sortedLessons };
+  }
+);
 ---
 
 <html lang="en">
@@ -44,20 +46,26 @@ const formattedLessonsArray = groupedLessonsArray.map(([folder, lessons], index)
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Accessibility Course</title>
+
+    <style is:global>
+      @import "../styles/global.css"; /* Adjust the path if necessary */
+    </style>
   </head>
-  <body class="bg-[#f1f5f9] font-sans">
+  <body class="bg-background-color font-sans flex flex-col min-h-screen">
     <Header />
 
-    <div class="flex w-full">
+    <!-- Main Layout -->
+    <div class="flex flex-1 w-full">
+      <!-- Sidebar -->
       <aside
         id="merged-sidebar"
         role="navigation"
         aria-label="Lessons Navigation"
-        class="w-72 overflow-y-auto bg-blue-100 dark:bg-blue-900 px-3 py-4"
+        class="w-72 overflow-y-auto bg-primary-color px-3 py-4 text-link-color"
       >
         {formattedLessonsArray.map(({ index, title, lessons }) => (
           <div class="mb-6">
-            <h2 class="mb-2 pl-2 text-lg font-black">
+            <h2 class="mb-2 pl-2 text-lg font-black text-link-color">
               Lesson {index}: {title}
             </h2>
             <ul class="pl-4 space-y-2 font-medium">
@@ -68,10 +76,7 @@ const formattedLessonsArray = groupedLessonsArray.map(([folder, lessons], index)
                   let label = fileName.replace(".md", "").replace("-", " ");
                   label = label.charAt(0).toUpperCase() + label.slice(1);
 
-                  if (
-                    title.includes("Intro") &&
-                    fileName === "instruction.md"
-                  ) {
+                  if (title.includes("Intro") && fileName === "instruction.md") {
                     label = "Introduction";
                   } else {
                     label = `${title}: ${label}`;
@@ -81,7 +86,7 @@ const formattedLessonsArray = groupedLessonsArray.map(([folder, lessons], index)
                     <li>
                       <a
                         href={`/lessons/${subLesson.slug}`}
-                        class="block w-full p-2 rounded-lg text-md text-blue-600 hover:bg-gray-100 hover:text-blue-800 transition font-bold"
+                        class="sidenav-links block w-full p-2 rounded-lg text-md text-text-color hover:bg-accent-color hover:text-link-color transition font-bold"
                         title={label}
                       >
                         {label}
@@ -94,15 +99,56 @@ const formattedLessonsArray = groupedLessonsArray.map(([folder, lessons], index)
         ))}
       </aside>
 
-      <!-- Main content: takes up remaining space, left aligned -->
-      <main
-        id="main-content"
-        class="flex-1 mx-0 pl-10 min-h-[calc(100vh-4rem-4rem)]"
-      >
-        <div class="max-w-[80ch] p-4">
-          <slot />
+      <!-- Main Content & Bottom Navigation Wrapper -->
+      <div class="flex flex-col flex-1">
+        <!-- Main Content (Scrollable) -->
+        <main id="main-content" class="mx-0 pl-10 pb-0 mb-0 h-[calc(100vh-14rem)] overflow-y-auto">
+          <div class="prose max-w-[80ch] p-4 text-text-color">
+            <slot />
+          </div>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <div class="px-10 py-4 flex justify-between items-center">
+          <a
+            href="#"
+            class="sidenav-links text-text-color hover:text-link-hover-color transition bg-secondary-color px-4 py-2 rounded-lg shadow"
+            aria-label="Previous lesson"
+          >
+            ← Previous Lesson
+          </a>
+
+          <!-- Current Lesson Display -->
+          <span class="text-text-color font-bold">
+            {formattedLessonsArray
+              .map(({ index, title, lessons }) => {
+                const currentSlug = Astro.url?.pathname?.replace("/lessons/", "") || "";
+                const currentLesson = lessons.find((lesson) => lesson.slug === currentSlug);
+
+                if (!currentLesson) return null; // Skip if no matching lesson is found
+
+                let fileName = currentLesson?.id?.split("/")?.pop()?.replace(".md", "").replace("-", " ") || "Unknown";
+                fileName = fileName.charAt(0).toUpperCase() + fileName.slice(1); // Capitalize first letter
+
+                // Ensure the correct page title format
+                let pageTitle = title.includes("Intro") && fileName === "Instruction"
+                  ? "Introduction"
+                  : `${title}: ${fileName}`;
+
+                return `Lesson ${index}: ${title} | ${pageTitle}`;
+              })
+              .filter(Boolean)[0] || "Lesson Title Not Found"}
+          </span>
+
+          <a
+            href="#"
+            class="sidenav-links text-text-color hover:text-link-hover-color transition bg-secondary-color px-4 py-2 rounded-lg shadow"
+            aria-label="Next lesson"
+          >
+            Next Lesson →
+          </a>
         </div>
-      </main>
+      </div>
     </div>
 
     <Footer />

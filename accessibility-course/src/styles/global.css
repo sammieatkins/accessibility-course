@@ -5,33 +5,58 @@
 @tailwind utilities;
 
 :root {
-    --shiki-background: #1e1e1e !important; /* Default Dark Plus background */
-    --shiki-foreground: #d4d4d4 !important; /* Default text color */
-  
-    /* Dark Plus Syntax Colors */
-    --shiki-token-keyword: #569cd6 !important; /* Blue (keywords) */
-    --shiki-token-string: #ce9178 !important; /* Light Brown (strings) */
-    --shiki-token-comment: #6a9955 !important; /* Green (comments) */
-    --shiki-token-function: #dcdcaa !important; /* Yellow (functions) */
-    --shiki-token-parameter: #9cdcfe !important; /* Light Blue (parameters) */
-    --shiki-token-punctuation: #d4d4d4 !important; /* Default text color */
-    --shiki-token-operator: #d4d4d4 !important; /* Default text color */
-  }
-  
-  
+  --primary-color: #2f6cbe; /* Main brand color, used in navbar, footer, etc. */
+  --secondary-color: #5094ea; /* Previous hover color, now updated */
+  --hover-dark-color: #1a4c8b; /* New hover color for contrast */
+  --accent-color: #f9ac4a; /* Used for callout elements, hover effects */
+  --accent-color-dark: #e29038; /* Darker version of accent color */
+  --background-color: #FFFFFF; /* Page background */
+  --text-color: #13242B; /* Default text color */
+  --link-color: white; /* Default link color */
+  --link-hover-color: var(--hover-dark-color); /* Improved hover contrast */
+  --button-bg: var(--primary-color); /* Background for buttons */
+  --button-hover-bg: var(--hover-dark-color); /* Hover background for buttons */
+  --code-bg: #e8e8e8; /* Background for inline code */
+  --code-text-color: #326273; /* Adjusted inline code text color for consistency */
+  --skip-link-bg: var(--primary-color); /* Background for skip link */
+  --skip-link-text: white; /* Text color for skip link */
+  --footer-border: var(--secondary-color); /* Footer top border */
+  --muted-text: #ccc; /* Muted text color */
+  --sidenav-bg: #f2f2f2; /* Light gray sidebar background */
+  --bottom-nav-bg: #f9ac4a; /* New color for bottom navigation buttons */
+}
+
+pre {
+  @apply p-4 m-4 rounded-lg overflow-x-auto;
+  background-color: var(--code-bg);
+}
+
+p code {
+  background-color: var(--code-bg);
+  color: var(--code-text-color);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.3rem;
+  font-family: monospace;
+  @apply rounded-lg overflow-x-auto;
+}
 
 html {
-  background-color: #f1f5f9;
+  background-color: var(--background-color);
   font-family: sans-serif;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+
+h1, h2, h3, h4, h5, h6 {
   font-family: "Nunito", sans-serif;
   font-weight: 1000;
+  color: var(--text-color);
+}
+p {
+  color: var(--text-color);
+}
+
+h1 {
+  margin: 1rem 0;
+  font-size: 2.5rem;
 }
 
 * {
@@ -44,16 +69,11 @@ a:hover {
   text-decoration: underline;
 }
 
-h1 {
-  margin: 1rem 0;
-  font-size: 2.5rem;
-}
-
 .skip-link {
   position: absolute;
   top: -50px;
   left: 10px;
-  background: #1e3a8a; /* Adjusted for consistency */
+  background: var(--primary-color);
   color: white;
   padding: 10px;
   z-index: 100;
@@ -68,7 +88,7 @@ h1 {
 }
 
 .navbar {
-  background-color: #1e3a8a;
+  background-color: var(--primary-color);
   padding: 1rem;
 }
 
@@ -78,12 +98,11 @@ h1 {
   align-items: center;
 }
 
-.logo {
+#logo {
   font-size: 1.5rem;
   font-weight: 800;
   color: white;
   text-decoration: none;
-  /* margin-bottom: 1rem; */
 }
 
 .navlinks {
@@ -93,7 +112,8 @@ h1 {
   align-items: center;
 }
 
-.navlinks a {
+.navlinks a,
+.nav-container a {
   text-decoration: none;
   color: white;
   font-size: 1.1rem;
@@ -104,19 +124,27 @@ h1 {
 }
 
 .navlinks a:hover,
-.navlinks a:focus {
-  background-color: #4f81e1; /* Hover color */
-  transform: scale(1.1);
+.navlinks a:focus,
+.nav-container a:hover,
+.nav-container a:focus {
+  background-color: var(--hover-dark-color);
+}
+
+.sidenav-links {
+  color: var(--primary-color);
+}
+
+aside#merged-sidebar {
+  background-color: var(--sidenav-bg);
 }
 
 footer {
-  background-color: #1e3a8a;
+  background-color: var(--primary-color);
   color: white;
   padding: 1.5rem;
   text-align: center;
   font-size: 0.9rem;
-  /* margin-top: 2rem; */
-  border-top: 2px solid #4f81e1; /* Slight border for separation */
+  border-top: 2px solid var(--footer-border);
 }
 
 footer a {
@@ -128,38 +156,23 @@ footer a {
 
 footer a:hover,
 footer a:focus {
-  color: #ff9776;
+  color: var(--accent-color);
 }
 
 footer .small-text {
   font-size: 0.8rem;
   margin-top: 1rem;
-  color: #ccc;
+  color: var(--muted-text);
 }
 
-/* Custom Styling for Markdown Code Blocks */
-pre {
-  @apply p-4 m-4 rounded-lg overflow-x-auto shadow-lg;
+.prose ul {
+  list-style-type: disc !important;
+  margin-left: 1.5rem;
 }
 
-/* Target Shiki's rendered code blocks */
-pre.astro-code.dark-plus {
-  background-color: #1e1e1e !important; /* Ensures correct dark background */
-  color: #ffffff !important; /* Force light text for contrast */
-}
-
-/* Adjust specific low-contrast elements */
-pre.astro-code.dark-plus .token.punctuation,
-pre.astro-code.dark-plus .token.operator {
-  color: #bbbbbb !important; /* Lighten brackets, operators */
-}
-
-pre.astro-code.dark-plus .token.comment {
-  color: #7aa2f7 !important; /* Make comments more visible */
-}
-
-pre.astro-code.dark-plus .token.string {
-  color: #ff9e64 !important; /* Adjust string colors */
+.prose ol {
+  list-style-type: decimal !important;
+  margin-left: 1.5rem;
 }
 
 @media (min-width: 768px) {
@@ -193,4 +206,31 @@ pre.astro-code.dark-plus .token.string {
   footer {
     font-size: 1.1rem;
   }
+}
+
+/* Bottom Navigation Buttons */
+.px-10.py-4 a {
+  background-color: var(--bottom-nav-bg);
+  color: var(--text-color);
+}
+
+.px-10.py-4 a:hover,
+.px-10.py-4 a:focus {
+  background-color: var(--accent-color-dark);
+  color: var(--text-color);
+}
+
+.start-button {
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.start-button:hover,
+.start-button:focus {
+  background-color: var(--accent-color-dark);
+  color: var(--text-color);
 }
