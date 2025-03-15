@@ -55,54 +55,62 @@ const formattedLessonsArray = groupedLessonsArray.map(
     <Header />
 
     <!-- Main Layout -->
-    <div class="flex flex-1 w-full">
+    <div class="flex w-full">
       <!-- Sidebar -->
       <aside
         id="merged-sidebar"
         role="navigation"
         aria-label="Lessons Navigation"
-        class="w-72 overflow-y-auto bg-primary-color px-3 py-4 text-link-color"
+        class="w-96 h-[calc(100vh-8rem)] overflow-y-scroll bg-primary-color px-3 py-4 text-link-color"
       >
-        {formattedLessonsArray.map(({ index, title, lessons }) => (
-          <div class="mb-6">
-            <h2 class="mb-2 pl-2 text-lg font-black text-link-color">
-              Lesson {index}: {title}
-            </h2>
-            <ul class="pl-4 space-y-2 font-medium">
-              {lessons
-                .filter((subLesson) => !subLesson.id.endsWith("home.md"))
-                .map((subLesson) => {
-                  const fileName = subLesson.id.split("/")[1];
-                  let label = fileName.replace(".md", "").replace("-", " ");
-                  label = label.charAt(0).toUpperCase() + label.slice(1);
+        {
+          formattedLessonsArray.map(({ index, title, lessons }) => (
+            <div class="mb-6">
+              <h2 class="mb-2 pl-2 text-lg font-black text-link-color">
+                Lesson {index}: {title}
+              </h2>
+              <ul class="pl-4 space-y-2 font-medium">
+                {lessons
+                  .filter((subLesson) => !subLesson.id.endsWith("home.md"))
+                  .map((subLesson) => {
+                    const fileName = subLesson.id.split("/")[1];
+                    let label = fileName.replace(".md", "").replace("-", " ");
+                    label = label.charAt(0).toUpperCase() + label.slice(1);
 
-                  if (title.includes("Intro") && fileName === "instruction.md") {
-                    label = "Introduction";
-                  } else {
-                    label = `${title}: ${label}`;
-                  }
+                    if (
+                      title.includes("Intro") &&
+                      fileName === "instruction.md"
+                    ) {
+                      label = "Introduction";
+                    } else {
+                      label = `${title}: ${label}`;
+                    }
 
-                  return (
-                    <li>
-                      <a
-                        href={`/lessons/${subLesson.slug}`}
-                        class="sidenav-links block w-full p-2 rounded-lg text-md text-text-color hover:bg-accent-color hover:text-link-color transition font-bold"
-                        title={label}
-                      >
-                        {label}
-                      </a>
-                    </li>
-                  );
-                })}
-            </ul>
-          </div>
-        ))}
+                    return (
+                      <li>
+                        <a
+                          href={`/lessons/${subLesson.slug}`}
+                          class="sidenav-links block w-full p-2 rounded-lg text-md text-text-color hover:bg-accent-color hover:text-link-color transition font-bold"
+                          title={label}
+                        >
+                          {label}
+                        </a>
+                      </li>
+                    );
+                  })}
+              </ul>
+            </div>
+          ))
+        }
       </aside>
 
       <!-- Main Content & Bottom Navigation Wrapper -->
       <div class="flex flex-col flex-1">
         <!-- Main Content (Scrollable) -->
-        <main id="main-content" class="mx-0 pl-10 pb-0 mb-0 h-[calc(100vh-14rem)] overflow-y-auto">
+        <main
+          id="main-content"
+          class="mx-0 pl-10 pb-0 mb-0 h-[calc(100vh-14rem)] overflow-y-auto"
+        >
           <div class="prose max-w-[80ch] p-4 text-text-color">
             <slot />
           </div>
@@ -110,43 +118,63 @@ const formattedLessonsArray = groupedLessonsArray.map(
 
         <!-- Bottom Navigation -->
         <div class="px-10 py-4 flex justify-between items-center">
-          <a
-            href="#"
-            class="sidenav-links text-text-color hover:text-link-hover-color transition bg-secondary-color px-4 py-2 rounded-lg shadow"
-            aria-label="Previous lesson"
-          >
-            ← Previous Lesson
-          </a>
+          {
+            (() => {
+              const currentSlug =
+                Astro.url?.pathname?.replace("/lessons/", "") || "";
+              
+              // Flatten the lessons into a single array in order
+              const allLessons = formattedLessonsArray.flatMap(({ lessons }) => lessons);
+              
+              // Find the index of the current lesson
+              const currentIndex = allLessons.findIndex(lesson => lesson.slug === currentSlug);
+              
+              // Get previous and next lessons
+              const prevLesson = currentIndex > 0 ? allLessons[currentIndex - 1] : null;
+              const nextLesson = currentIndex < allLessons.length - 1 ? allLessons[currentIndex + 1] : null;
 
-          <!-- Current Lesson Display -->
-          <span class="text-text-color font-bold">
-            {formattedLessonsArray
-              .map(({ index, title, lessons }) => {
-                const currentSlug = Astro.url?.pathname?.replace("/lessons/", "") || "";
-                const currentLesson = lessons.find((lesson) => lesson.slug === currentSlug);
+              return (
+                <>
+                  <a
+                    href={prevLesson ? `/lessons/${prevLesson.slug}` : "#"}
+                    class={`sidenav-links text-text-color hover:text-link-hover-color transition bg-secondary-color px-4 py-2 rounded-lg shadow ${
+                      prevLesson ? "" : "opacity-50 pointer-events-none"
+                    }`}
+                    aria-label="Previous lesson"
+                  >
+                    ← Previous Lesson
+                  </a>
 
-                if (!currentLesson) return null; // Skip if no matching lesson is found
+                  <!-- Current Lesson Display -->
+                  <span class="text-text-color font-bold">
+                    {
+                      formattedLessonsArray
+                        .map(({ index, title, lessons }) => {
+                          const currentLesson = lessons.find(lesson => lesson.slug === currentSlug);
+                          if (!currentLesson) return null;
 
-                let fileName = currentLesson?.id?.split("/")?.pop()?.replace(".md", "").replace("-", " ") || "Unknown";
-                fileName = fileName.charAt(0).toUpperCase() + fileName.slice(1); // Capitalize first letter
+                          let fileName = currentLesson.id.split("/").pop()?.replace(".md", "").replace("-", " ") || "Unknown";
+                          fileName = fileName.charAt(0).toUpperCase() + fileName.slice(1);
 
-                // Ensure the correct page title format
-                let pageTitle = title.includes("Intro") && fileName === "Instruction"
-                  ? "Introduction"
-                  : `${title}: ${fileName}`;
+                          return `Lesson ${index}: ${title} | ${fileName}`;
+                        })
+                        .filter(Boolean)[0] || "Lesson Title Not Found"
+                    }
+                  </span>
 
-                return `Lesson ${index}: ${title} | ${pageTitle}`;
-              })
-              .filter(Boolean)[0] || "Lesson Title Not Found"}
-          </span>
-
-          <a
-            href="#"
-            class="sidenav-links text-text-color hover:text-link-hover-color transition bg-secondary-color px-4 py-2 rounded-lg shadow"
-            aria-label="Next lesson"
-          >
-            Next Lesson →
-          </a>
+                  <a
+                    href={nextLesson ? `/lessons/${nextLesson.slug}` : "#"}
+                    class={`sidenav-links text-text-color hover:text-link-hover-color transition bg-secondary-color px-4 py-2 rounded-lg shadow ${
+                      nextLesson ? "" : "opacity-50 pointer-events-none"
+                    }`}
+                    aria-label="Next lesson"
+                  >
+                    Next Lesson →
+                  </a>
+                </>
+              );
+            })()
+          }
         </div>
       </div>
     </div>
