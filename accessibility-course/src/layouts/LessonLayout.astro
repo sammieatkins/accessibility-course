@@ -1,8 +1,11 @@
 ---
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-
+import Header from "../components/layout/Header.astro";
+import Footer from "../components/layout/Footer.astro";
 import "../styles/global.css";
+import ActivityLoader from "../components/ActivityLoader"; // New wrapper
+
+// Import React components dynamically based on the activity name
+const { activity, groupedLessonsArray } = Astro.props;
 
 interface Lesson {
   id: string;
@@ -15,16 +18,15 @@ interface Lesson {
 
 interface Props {
   groupedLessonsArray: [string, Lesson[]][];
+  activity: string;
 }
-
-const { groupedLessonsArray } = Astro.props;
 
 const formattedLessonsArray = groupedLessonsArray.map(
   ([folder, lessons], index) => {
     const lessonTitle = folder
-      .replace(/^\d+_/, "") // Remove leading numbers & underscores (e.g., "01_intro" → "intro")
-      .replace(/-/g, " ") // Replace hyphens with spaces
-      .replace(/\b\w/g, (char) => char.toUpperCase()); // Capitalize first letter of each word
+      .replace(/^\d+_/, "")
+      .replace(/-/g, " ")
+      .replace(/\b\w/g, (char) => char.toUpperCase());
 
     const sortedLessons = lessons.sort((a, b) => {
       const aFile = a.id.split("/").pop();
@@ -48,15 +50,14 @@ const formattedLessonsArray = groupedLessonsArray.map(
     <title>Accessibility Course</title>
 
     <style is:global>
-      @import "../styles/global.css"; /* Adjust the path if necessary */
+      @import "../styles/global.css";
     </style>
   </head>
   <body class="bg-background-color font-sans flex flex-col min-h-screen">
     <Header />
 
-    <!-- Main Layout -->
     <div class="flex w-full">
-      <!-- Sidebar -->
+      <!-- Sidebar for navigation -->
       <aside
         id="merged-sidebar"
         role="navigation"
@@ -104,34 +105,37 @@ const formattedLessonsArray = groupedLessonsArray.map(
         }
       </aside>
 
-      <!-- Main Content & Bottom Navigation Wrapper -->
+      <!-- Main Content -->
       <div class="flex flex-col flex-1">
-        <!-- Main Content (Scrollable) -->
         <main
           id="main-content"
           class="mx-0 pl-10 pb-0 mb-0 h-[calc(100vh-14rem)] overflow-y-auto"
         >
           <div class="prose max-w-[80ch] p-4 text-text-color">
             <slot />
+            <!-- This renders Markdown instructions -->
+            {activity ? <ActivityLoader activity={activity} /> : null}
           </div>
         </main>
 
-        <!-- Bottom Navigation -->
         <div class="px-10 py-4 flex justify-between items-center">
           {
             (() => {
               const currentSlug =
                 Astro.url?.pathname?.replace("/lessons/", "") || "";
-              
-              // Flatten the lessons into a single array in order
-              const allLessons = formattedLessonsArray.flatMap(({ lessons }) => lessons);
-              
-              // Find the index of the current lesson
-              const currentIndex = allLessons.findIndex(lesson => lesson.slug === currentSlug);
-              
-              // Get previous and next lessons
-              const prevLesson = currentIndex > 0 ? allLessons[currentIndex - 1] : null;
-              const nextLesson = currentIndex < allLessons.length - 1 ? allLessons[currentIndex + 1] : null;
+
+              const allLessons = formattedLessonsArray.flatMap(
+                ({ lessons }) => lessons
+              );
+              const currentIndex = allLessons.findIndex(
+                (lesson) => lesson.slug === currentSlug
+              );
+              const prevLesson =
+                currentIndex > 0 ? allLessons[currentIndex - 1] : null;
+              const nextLesson =
+                currentIndex < allLessons.length - 1
+                  ? allLessons[currentIndex + 1]
+                  : null;
 
               return (
                 <>
@@ -145,21 +149,26 @@ const formattedLessonsArray = groupedLessonsArray.map(
                     ← Previous Lesson
                   </a>
 
-                  <!-- Current Lesson Display -->
                   <span class="text-text-color font-bold">
-                    {
-                      formattedLessonsArray
-                        .map(({ index, title, lessons }) => {
-                          const currentLesson = lessons.find(lesson => lesson.slug === currentSlug);
-                          if (!currentLesson) return null;
+                    {formattedLessonsArray
+                      .map(({ index, title, lessons }) => {
+                        const currentLesson = lessons.find(
+                          (lesson) => lesson.slug === currentSlug
+                        );
+                        if (!currentLesson) return null;
 
-                          let fileName = currentLesson.id.split("/").pop()?.replace(".md", "").replace("-", " ") || "Unknown";
-                          fileName = fileName.charAt(0).toUpperCase() + fileName.slice(1);
+                        let fileName =
+                          currentLesson.id
+                            .split("/")
+                            .pop()
+                            ?.replace(".md", "")
+                            .replace("-", " ") || "Unknown";
+                        fileName =
+                          fileName.charAt(0).toUpperCase() + fileName.slice(1);
 
-                          return `Lesson ${index}: ${title} | ${fileName}`;
-                        })
-                        .filter(Boolean)[0] || "Lesson Title Not Found"
-                    }
+                        return `Lesson ${index}: ${title} | ${fileName}`;
+                      })
+                      .filter(Boolean)[0] || "Lesson Title Not Found"}
                   </span>
 
                   <a
