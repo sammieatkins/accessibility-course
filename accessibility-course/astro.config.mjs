@@ -1,16 +1,11 @@
 import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
-import { createCssVariablesTheme } from "shiki/core";
+import mdx from '@astrojs/mdx';
 
 import react from "@astrojs/react";
 
-const myTheme = createCssVariablesTheme({
-  name: "dark-plus-custom",
-  variablePrefix: "--shiki-",
-});
-
 export default defineConfig({
-  integrations: [tailwind(), react()],
+  integrations: [tailwind(), react(), mdx()],
   markdown: {
     shikiConfig: {
       theme: "github-light",

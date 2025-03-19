@@ -1,9 +1,12 @@
-import AltTextPractice from "./activities/altTextPractice";
+"use client";
+import AltTextPractice from "./activities/AltTextPractice";
 import LinkTextPractice from "./activities/LinkTextPractice";
+import SensoryCharacteristicsPractice from "./activities/SensoryCharacteristicsPractice";
 
 const activityMap = {
   AltTextPractice,
   LinkTextPractice,
+  SensoryCharacteristicsPractice,
 };
 
 const ActivityLoader = ({ activity }) => {

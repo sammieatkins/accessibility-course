@@ -2,7 +2,7 @@
 import Header from "../components/layout/Header.astro";
 import Footer from "../components/layout/Footer.astro";
 import "../styles/global.css";
-import ActivityLoader from "../components/ActivityLoader"; // New wrapper
+import ActivityLoader from "../components/ActivityLoader";
 
 // Import React components dynamically based on the activity name
 const { activity, groupedLessonsArray } = Astro.props;
@@ -114,7 +114,7 @@ const formattedLessonsArray = groupedLessonsArray.map(
           <div class="prose max-w-[80ch] p-4 text-text-color">
             <slot />
             <!-- This renders Markdown instructions -->
-            {activity ? <ActivityLoader activity={activity} /> : null}
+            {activity ? <ActivityLoader activity={activity} client:visible /> : null}
           </div>
         </main>
 
@@ -161,7 +161,7 @@ const formattedLessonsArray = groupedLessonsArray.map(
                           currentLesson.id
                             .split("/")
                             .pop()
-                            ?.replace(".md", "")
+                            ?.replace(/\.mdx?$/, "")
                             .replace("-", " ") || "Unknown";
                         fileName =
                           fileName.charAt(0).toUpperCase() + fileName.slice(1);
