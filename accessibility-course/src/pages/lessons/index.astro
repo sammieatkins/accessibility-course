@@ -3,6 +3,7 @@ import Layout from '../../layouts/LessonLayout.astro';
 import { getGroupedLessons } from '../../utils/getGroupedLessons';
 
 const groupedLessonsArray = await getGroupedLessons();
+const activity = ""; // Ensure activity is always defined
 ---
 
 <html lang="en">
@@ -13,7 +14,7 @@ const groupedLessonsArray = await getGroupedLessons();
   </head>
   <body>
     <!-- <Header /> -->
-    <Layout groupedLessonsArray={groupedLessonsArray} />
+    <Layout groupedLessonsArray={groupedLessonsArray} activity={activity}/>
     <main id="main-content" class="flex-1 mx-0 pl-10 min-h-[calc(100vh-4rem-4rem)]">
       <slot></slot>
     </main>

@@ -1,0 +1,29 @@
+<!-- ---
+import { useEffect } from "react";
+
+useEffect(() => {
+  const skipButton = document.getElementById("skip-link");
+  if (skipButton) {
+    skipButton.addEventListener("click", () => {
+      document.getElementById("bad-nav").style.display = "none";
+      document.getElementById("main-content").scrollIntoView({ behavior: "smooth" });
+    });
+  }
+}, []);
+---
+
+<button id="skip-link" class="skip-btn">
+  I'm already using a screen reader, so I know how bad this is.
+</button>
+
+<style>
+  .skip-btn {
+    display: block;
+    margin-bottom: 10px;
+    padding: 5px;
+    background: #ddd;
+    border: none;
+    font-size: small;
+    cursor: pointer;
+  }
+</style> -->

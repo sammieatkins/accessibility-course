@@ -56,13 +56,13 @@ const formattedLessonsArray = groupedLessonsArray.map(
   <body class="bg-background-color font-sans flex flex-col min-h-screen">
     <Header />
 
-    <div class="flex w-full">
+    <div class="flex w-full flex-1">
       <!-- Sidebar for navigation -->
       <aside
         id="merged-sidebar"
         role="navigation"
         aria-label="Lessons Navigation"
-        class="w-96 h-[calc(100vh-8rem)] overflow-y-scroll bg-primary-color px-3 py-4 text-link-color"
+        class="w-96 overflow-y-scroll bg-primary-color px-3 py-4 text-link-color"
       >
         {
           formattedLessonsArray.map(({ index, title, lessons }) => (
@@ -109,11 +109,10 @@ const formattedLessonsArray = groupedLessonsArray.map(
       <div class="flex flex-col flex-1">
         <main
           id="main-content"
-          class="mx-0 pl-10 pb-0 mb-0 h-[calc(100vh-14rem)] overflow-y-auto"
+          class="mx-0 pl-10 pb-0 mb-0 flex-1 overflow-y-auto"
         >
-          <div class="prose max-w-[80ch] p-4 text-text-color">
+          <div class="prose p-4 text-text-color">
             <slot />
-            <!-- This renders Markdown instructions -->
             {activity ? <ActivityLoader activity={activity} client:visible /> : null}
           </div>
         </main>
