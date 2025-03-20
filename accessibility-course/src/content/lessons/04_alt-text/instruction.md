@@ -1,10 +1,11 @@
 ---
-title: Alt Text Intro
+title: "Alt Text: Intro"
 author: Samantha Atkins
 description: "How to write useful alt text"
 ---
 
 # Alt Text
+<h2 class="subheading">It's more than just 'dog.jpg'</h2>
 
 Alt text is a short text alternative to the image. In general, alt text is limited to approximately 250 characters or less.
 

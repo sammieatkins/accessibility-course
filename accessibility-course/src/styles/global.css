@@ -24,6 +24,26 @@
   --muted-text: #ccc; /* Muted text color */
   --sidenav-bg: #f2f2f2; /* Light gray sidebar background */
   --bottom-nav-bg: #f9ac4a; /* New color for bottom navigation buttons */
+  --dark-grey: #c2c2c2;
+}
+
+input[type="color"] {
+  border-radius: 5px;
+  padding: 0;
+  border: 2px solid var(--dark-grey);
+}
+
+input[type="color"]::-moz-color-swatch {
+  border: none;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+  border-radius: 0;
+}
+
+input[type="color"]::-webkit-color-swatch {
+  border: none;
 }
 
 pre {
@@ -50,13 +70,30 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 1000;
   color: var(--text-color);
 }
+
 p {
   color: var(--text-color);
 }
 
 h1 {
-  margin: 1rem 0;
-  font-size: 2.5rem;
+  margin-top: 1rem;
+  font-size: 3rem;
+}
+
+.subheading {
+  font-family: "Nunito", sans-serif;
+  font-weight: 700; /* Slightly lighter than h1 for contrast */
+  color: var(--primary-color);
+  font-size: 1.2rem; /* slightly smaller than h1 */
+  margin-bottom: 1rem;
+  margin-top: -.5rem;
+}
+
+.subheading code {
+  font-family: monospace;
+  color: var(--code-text-color);
+  border-radius: 0.3rem;
+  font-size: 0.9em;
 }
 
 * {

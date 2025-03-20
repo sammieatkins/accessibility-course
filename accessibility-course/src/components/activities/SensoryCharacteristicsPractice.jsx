@@ -1,21 +1,45 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const SensoryCharacteristicsPractice = () => {
-  const [colors, setColors] = useState({
+  const initialColors = {
     backgroundColor: "#ffffff",
     largeTextColor: "#000000",
     smallTextColor: "#333333",
     buttonBackgroundColor: "#007bff",
     buttonTextColor: "#ffffff",
     linkColor: "#0000ee",
-  });
+  };
 
+  // Initialize colors with defaults and track hydration state
+  const [colors, setColors] = useState(initialColors);
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  // Load colors from localStorage on first render
+  useEffect(() => {
+    const savedColors = localStorage.getItem("savedColors");
+    if (savedColors) {
+      setColors(JSON.parse(savedColors));
+    }
+    setIsHydrated(true); // Mark hydration complete
+  }, []);
+
+  // Save colors to localStorage only after hydration is complete
+  useEffect(() => {
+    if (isHydrated) {
+      localStorage.setItem("savedColors", JSON.stringify(colors));
+    }
+  }, [colors, isHydrated]);
+
+  // Function to reset colors to initial values
+  const resetColors = () => {
+    setColors(initialColors);
+    localStorage.setItem("savedColors", JSON.stringify(initialColors));
+  };
   // Handle color changes
   const handleColorChange = (key, value) => {
     setColors((prevColors) => ({ ...prevColors, [key]: value }));
   };
-
   // Function to calculate contrast ratio
   const getContrastRatio = (color1, color2) => {
     const hexToRgb = (hex) => {
@@ -80,8 +104,13 @@ const SensoryCharacteristicsPractice = () => {
       <h1 className="mb-4">Accessible Color Palette Tester</h1>
 
       <p className="mb-4">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus,
-        eos alias voluptate nobis perspiciatis voluptatum velit accusamus.
+        Good design isn’t just about looking nice—it needs to work for everyone.
+        In this activity, you’ll adjust colors for text, buttons, and links to
+        see how contrast affects readability. The preview updates as you make
+        changes, so any color combinations that don’t meet WCAG standards will
+        be flagged. Experiment with different options, find a fully accessible
+        palette, and export your colors as CSS variables to use in your own
+        projects.
       </p>
 
       {/* Row 1: Pick Colors & Website Preview */}
@@ -99,7 +128,7 @@ const SensoryCharacteristicsPractice = () => {
                     id={id}
                     value={value}
                     onChange={(e) => handleColorChange(key, e.target.value)}
-                    className="w-10 h-6 border rounded"
+                    className="w-10 h-6 rounded-lg appearance-none border-none outline-none p-0 bg-transparent"
                     aria-labelledby={`${id}-label`}
                   />
                   <label
@@ -113,6 +142,12 @@ const SensoryCharacteristicsPractice = () => {
               );
             })}
           </div>
+          <button
+            onClick={resetColors}
+            className="text-text-color transition bg-[var(--bottom-nav-bg)] px-4 py-2 rounded-lg shadow hover:bg-[var(--accent-color-dark)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-color-dark)]"
+          >
+            Reset Colors
+          </button>
         </div>
 
         {/* Website Template Preview */}
@@ -123,53 +158,54 @@ const SensoryCharacteristicsPractice = () => {
             style={{ backgroundColor: colors.backgroundColor }}
           >
             {/* Large Heading */}
-            <div className="relative inline-flex items-center">
+            <div className="flex items-center">
               <h3
-                className="text-xl font-semibold mb-2"
+                className="text-xl font-semibold mb-0"
                 style={{ color: colors.largeTextColor }}
               >
                 This is Large Heading Text
               </h3>
               {getRatingStyle(contrastRatios["Large Text to Background"], 3.0)
                 .text === "Fail" && (
-                <div className="ml-3 bg-red-100 text-red-700 border border-red-300 text-xs p-1 rounded-lg shadow w-max">
-                  Large text does not pass contrast.
-                </div>
+                <p className="ml-3 p-1 pl-2 pr-2 bg-red-100 text-red-700 border border-red-300 text-xs rounded-lg shadow w-max">
+                  Large text fails contrast.
+                </p>
               )}
             </div>
 
             {/* Small Text */}
-            <div className="relative inline-flex items-center">
-              <p className="mb-4" style={{ color: colors.smallTextColor }}>
+            <div className="flex items-center">
+              <p style={{ color: colors.smallTextColor }}>
                 This is regular body text.
               </p>
               {getRatingStyle(contrastRatios["Small Text to Background"], 4.5)
                 .text === "Fail" && (
-                <div className="ml-3 bg-red-100 text-red-700 border border-red-300 text-xs rounded-lg shadow w-max">
-                  Small text does not pass contrast.
-                </div>
+                <p className="mt-1 ml-3 p-1 pl-2 pr-2 bg-red-100 text-red-700 border border-red-300 text-xs rounded-lg shadow w-max">
+                  Small text fails contrast.
+                </p>
               )}
             </div>
 
             {/* Link */}
-            <div className="relative inline-flex items-center">
+            <div className="flex items-center">
               <a
                 href="#"
-                className="underline"
+                className="underline mt-2 mb-2 block"
                 style={{ color: colors.linkColor }}
               >
                 This is a sample link
               </a>
               {getRatingStyle(contrastRatios["Link to Background"], 4.5)
                 .text === "Fail" && (
-                <div className="ml-3 bg-red-100 text-red-700 border border-red-300 text-xs rounded-lg shadow w-max">
-                  Link color does not pass contrast.
-                </div>
+                <p className="ml-3 p-1 pl-2 pr-2 bg-red-100 text-red-700 border border-red-300 text-xs rounded-lg shadow w-max">
+                  Link color fails contrast.
+                </p>
               )}
             </div>
 
             {/* Button */}
-            <div className="relative inline-flex items-center mt-4">
+            {/* Button */}
+            <div className="flex items-center mt-2">
               <button
                 className="px-4 py-2 rounded block"
                 style={{
@@ -179,12 +215,25 @@ const SensoryCharacteristicsPractice = () => {
               >
                 Sample Button
               </button>
-              {getRatingStyle(contrastRatios["Button to Background"], 4.5)
-                .text === "Fail" && (
-                <div className="ml-3 bg-red-100 text-red-700 border border-red-300 text-xs rounded-lg shadow w-max">
-                  Button background does not pass contrast.
-                </div>
-              )}
+
+              {/* Warnings */}
+              <div className="flex flex-col gap-1 ml-3">
+                {/* Button Background to Page Background Contrast */}
+                {getRatingStyle(contrastRatios["Button to Background"], 4.5)
+                  .text === "Fail" && (
+                  <p className="bg-red-100 text-red-700 border border-red-300 text-xs p-1 rounded-lg shadow w-max">
+                    Button background fails contrast.
+                  </p>
+                )}
+
+                {/* Button Text to Button Background Contrast */}
+                {getRatingStyle(contrastRatios["Button Text to Button"], 4.5)
+                  .text === "Fail" && (
+                  <p className="bg-red-100 text-red-700 border border-red-300 text-xs p-1 rounded-lg shadow w-max">
+                    Button text fails contrast.
+                  </p>
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -209,7 +258,7 @@ const SensoryCharacteristicsPractice = () => {
             return (
               <div
                 key={index}
-                className="p-3 rounded shadow-sm bg-gray-100 text-sm flex flex-col items-start"
+                className="p-3 rounded shadow-sm bg-[#f2f2f2] border border-gray-300 text-sm flex flex-col items-start"
               >
                 <h3 className="text-lg font-semibold">{label}</h3>
                 <div className="flex items-center justify-between w-full">
@@ -229,42 +278,66 @@ const SensoryCharacteristicsPractice = () => {
         </div>
       </div>
 
+      {/* Export Explanation */}
+      <div className="mt-6 p-4 bg-[#D8EBFF] border border-[#A4D1FF] rounded-lg shadow">
+        <h2 className="text-lg font-semibold text-text-color mb-2">
+          Export Your Accessible Colors
+        </h2>
+        <p className="text-text-color">
+          Great job creating an accessible color palette! Now, you can easily
+          apply it to your own projects. Just copy the CSS code below and paste
+          it into your stylesheets. This will ensure your design remains
+          visually inclusive and meets accessibility standards.
+        </p>
+      </div>
+
       {/* Row 3: CSS & Color Table */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
         <div>
           <h2 className="text-xl font-medium mb-3">CSS Export</h2>
-          <pre className="bg-gray-100 p-2 rounded text-sm border">
+          <pre className="bg-[#f2f2f2] p-2 rounded text-sm border !m-0">
+            {/* leave it all funky indent bc it messes with the output */}
             {`:root {
-${Object.entries(colors)
-  .map(
-    ([key, value]) =>
-      `  --${key.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`)}: ${value};`
-  )
-  .join("\n")}
-}`}
+  ${Object.entries(colors)
+    .map(
+      ([key, value]) =>
+        `  --${key.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`)}: ${value};`
+    )
+    .join("\n")}
+  }`}
           </pre>
         </div>
-
         <div>
           <h2 className="text-xl font-medium mb-3">Color Table</h2>
-          <table className="w-full border-collapse border border-gray-300 mt-2">
-            <tbody>
-              {Object.entries(colors).map(([key, value]) => (
-                <tr key={key}>
-                  <td className="border p-2 capitalize">
-                    {key.replace(/([A-Z])/g, " $1")}
-                  </td>
-                  <td className="border p-2">{value}</td>
-                  <td className="border p-2">
-                    <div
-                      className="w-6 h-6 rounded border border-gray-400"
-                      style={{ backgroundColor: value }}
-                    ></div>
-                  </td>
+          <div className="rounded-lg border border-gray-300 overflow-hidden">
+            <table className="w-full border-collapse">
+              <thead>
+                <tr>
+                  <th className="border p-2 text-left bg-[#f2f2f2]">
+                    Property
+                  </th>
+                  <th className="border p-2 text-left bg-[#f2f2f2]">Value</th>
+                  <th className="border p-2 text-left bg-[#f2f2f2]">Preview</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {Object.entries(colors).map(([key, value], index) => (
+                  <tr key={key}>
+                    <td className="border p-2 capitalize">
+                      {key.replace(/([A-Z])/g, " $1")}
+                    </td>
+                    <td className="border p-2">{value}</td>
+                    <td className="border p-2">
+                      <div
+                        className="w-6 h-6 rounded border border-gray-400"
+                        style={{ backgroundColor: value }}
+                      ></div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
