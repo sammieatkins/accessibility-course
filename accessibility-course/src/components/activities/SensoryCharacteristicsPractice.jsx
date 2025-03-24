@@ -117,7 +117,7 @@ const SensoryCharacteristicsPractice = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Pick Your Colors */}
         <div>
-          <h2 className="text-xl font-medium mb-3">Pick Your Colors</h2>
+          <h2 className="text-xl mb-3">Pick Your Colors</h2>
           <div className="grid gap-3 mb-6">
             {Object.entries(colors).map(([key, value]) => {
               const id = `color-${key}`;
@@ -152,7 +152,7 @@ const SensoryCharacteristicsPractice = () => {
 
         {/* Website Template Preview */}
         <div>
-          <h2 className="text-xl font-medium mb-3">Preview</h2>
+          <h2 className="text-xl mb-3">Preview</h2>
           <div
             className="p-6 border rounded-lg shadow relative"
             style={{ backgroundColor: colors.backgroundColor }}
@@ -241,7 +241,7 @@ const SensoryCharacteristicsPractice = () => {
 
       {/* Row 2: WCAG Contrast Ratings */}
       <div className="mt-6">
-        <h2 className="text-xl font-medium mb-3">WCAG Contrast Ratings</h2>
+        <h2 className="text-xl mb-3">WCAG Contrast Ratings</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {Object.entries(contrastRatios).map(([label, contrast], index) => {
             const requiredAA = label.includes("Large") ? 3.0 : 4.5;
@@ -294,7 +294,7 @@ const SensoryCharacteristicsPractice = () => {
       {/* Row 3: CSS & Color Table */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
         <div>
-          <h2 className="text-xl font-medium mb-3">CSS Export</h2>
+          <h2 className="text-xl mb-3">CSS Export</h2>
           <pre className="bg-[#f2f2f2] p-2 rounded text-sm border !m-0">
             {/* leave it all funky indent bc it messes with the output */}
             {`:root {
@@ -308,7 +308,7 @@ const SensoryCharacteristicsPractice = () => {
           </pre>
         </div>
         <div>
-          <h2 className="text-xl font-medium mb-3">Color Table</h2>
+          <h2 className="text-xl mb-3">Color Table</h2>
           <div className="rounded-lg border border-gray-300 overflow-hidden">
             <table className="w-full border-collapse">
               <thead>

@@ -1,30 +1,41 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --primary-color: #2f6cbe; /* Main brand color, used in navbar, footer, etc. */
-  --secondary-color: #5094ea; /* Previous hover color, now updated */
-  --hover-dark-color: #1a4c8b; /* New hover color for contrast */
-  --accent-color: #f9ac4a; /* Used for callout elements, hover effects */
-  --accent-color-dark: #e29038; /* Darker version of accent color */
-  --background-color: #FFFFFF; /* Page background */
-  --text-color: #13242B; /* Default text color */
-  --link-color: white; /* Default link color */
-  --link-hover-color: var(--hover-dark-color); /* Improved hover contrast */
-  --button-bg: var(--primary-color); /* Background for buttons */
-  --button-hover-bg: var(--hover-dark-color); /* Hover background for buttons */
-  --code-bg: #e8e8e8; /* Background for inline code */
-  --code-text-color: #326273; /* Adjusted inline code text color for consistency */
-  --skip-link-bg: var(--primary-color); /* Background for skip link */
-  --skip-link-text: white; /* Text color for skip link */
-  --footer-border: var(--secondary-color); /* Footer top border */
-  --muted-text: #ccc; /* Muted text color */
-  --sidenav-bg: #f2f2f2; /* Light gray sidebar background */
-  --bottom-nav-bg: #f9ac4a; /* New color for bottom navigation buttons */
+  /* Color Variables */
+  --primary-color: #3b7c4d;
+  --sidenav-link: #2d5e3b;
+  --secondary-color: #5cab74;
+  --light-green: #def7e5;
+  --hover-dark-color: #2c5c3a;
+  --accent-color: #f9ac4a;
+  --accent-color-dark: #e29038;
+  --background-color: #ffffff;
+  --text-color: #13242b;
+  --link-color: white;
+  --link-hover-color: var(--hover-dark-color);
+  --button-bg: var(--primary-color);
+  --button-hover-bg: var(--hover-dark-color);
+  --code-bg: #e8e8e8;
+  --code-text-color: #326273;
+  --skip-link-bg: var(--primary-color);
+  --skip-link-text: white;
+  --footer-border: var(--secondary-color);
+  --muted-text: #ccc;
+  --light-gray: #f1f1f1;
+  --bottom-nav-bg: #f9ac4a;
   --dark-grey: #c2c2c2;
+
+  /* Font Variables */
+  --heading-font: "Nunito Sans", sans-serif;
+  --body-font: "Nunito Sans", monospace;
+}
+
+html {
+  font-family: var(--body-font);
 }
 
 input[type="color"] {
@@ -60,33 +71,63 @@ p code {
   @apply rounded-lg overflow-x-auto;
 }
 
-html {
-  background-color: var(--background-color);
-  font-family: sans-serif;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: "Nunito", sans-serif;
-  font-weight: 1000;
-  color: var(--text-color);
-}
-
 p {
+  font-family: var(--body-font);
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.6;
   color: var(--text-color);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--heading-font);
+  color: var(--text-color);
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 h1 {
-  margin-top: 1rem;
   font-size: 3rem;
+  font-weight: 900;
+}
+
+h2 {
+  font-size: 2.25rem;
+  font-weight: 800;
+}
+
+h3 {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+h4 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+h5 {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+h6 {
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .subheading {
-  font-family: "Nunito", sans-serif;
-  font-weight: 700; /* Slightly lighter than h1 for contrast */
+  font-family: var(--heading-font);
+  font-weight: 600;
   color: var(--primary-color);
-  font-size: 1.2rem; /* slightly smaller than h1 */
+  font-size: 1.25rem;
   margin-bottom: 1rem;
-  margin-top: -.5rem;
+  margin-top: -0.5rem;
 }
 
 .subheading code {
@@ -133,6 +174,7 @@ a:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: var(--main-font);
 }
 
 #logo {
@@ -140,6 +182,7 @@ a:hover {
   font-weight: 800;
   color: white;
   text-decoration: none;
+  font-family: var(--main-font);
 }
 
 .navlinks {
@@ -158,6 +201,7 @@ a:hover {
   transition: color 0.3s ease, transform 0.2s ease;
   padding: 10px;
   border-radius: 5px;
+  font-family: var(--main-font);
 }
 
 .navlinks a:hover,
@@ -168,11 +212,7 @@ a:hover {
 }
 
 .sidenav-links {
-  color: var(--primary-color);
-}
-
-aside#merged-sidebar {
-  background-color: var(--sidenav-bg);
+  color: var(--sidenav-link);
 }
 
 footer {
@@ -245,7 +285,6 @@ footer .small-text {
   }
 }
 
-/* Bottom Navigation Buttons */
 .px-10.py-4 a {
   background-color: var(--bottom-nav-bg);
   color: var(--text-color);
@@ -264,6 +303,7 @@ footer .small-text {
   border-radius: 9999px;
   font-size: 0.875rem;
   font-weight: 600;
+  font-family: var(--main-font);
 }
 
 .start-button:hover,

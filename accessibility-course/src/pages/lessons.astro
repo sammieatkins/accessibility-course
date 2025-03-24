@@ -2,43 +2,7 @@
 import "../styles/global.css";
 import Footer from "../components/layout/Footer.astro";
 import Header from "../components/layout/Header.astro";
-import { getGroupedLessons } from "../utils/getGroupedLessons";
-
-interface Lesson {
-  id: string;
-  slug: string;
-  body: string;
-  collection: string;
-  data: {
-    title: string;
-    order?: number; // Ensure lessons with order numbers are sorted properly
-  };
-  render: any;
-}
-
-const groupedLessonsArray: [string, Lesson[]][] = await getGroupedLessons();
-
-// ✅ Process folder names and sort lessons correctly
-const formattedLessonsArray = groupedLessonsArray.map(([folder, lessons], index) => {
-  const lessonTitle = folder
-    .replace(/^\d+_/, "") // Remove leading numbers & underscores (e.g., "01_intro" → "intro")
-    .replace(/-/g, " ") // Replace hyphens with spaces
-    .replace(/\b\w/g, (char) => char.toUpperCase()); // Capitalize first letter of each word
-
-  // ✅ Sort lessons: "instruction.md" always first, then by order property
-  const sortedLessons = lessons.sort((a, b) => {
-    const aFile = a.id.split("/").pop(); // Get filename
-    const bFile = b.id.split("/").pop();
-
-    if (aFile === "instruction.md") return -1; // Instruction always first
-    if (bFile === "instruction.md") return 1;
-    
-    return (a.data.order || 100) - (b.data.order || 100); // Sort by order if available
-  });
-
-  return { index: index + 1, title: lessonTitle, lessons: sortedLessons };
-});
-
+import LessonGroups from "../components/LessonGroups.astro";
 ---
 
 <html lang="en">
@@ -47,46 +11,19 @@ const formattedLessonsArray = groupedLessonsArray.map(([folder, lessons], index)
     <meta name="viewport" content="width=device-width" />
     <title>Accessibility Course</title>
   </head>
-  <Header />
-  <body class="bg-[#f1f5f9] font-sans">
+  <body class="font-sans">
+    <Header />
+
     <main
       id="main-content"
       class="flex justify-center min-h-[calc(100vh-4rem-4rem)]"
     >
-    <div class="max-w-screen-lg w-full p-4">
-        <h1>Lessons</h1>
-        <div class="bg-white shadow-md rounded-lg overflow-hidden">
-            {formattedLessonsArray.map(({ index, title, lessons }) => (
-              <div class="border-b border-gray-200">
-                <h3 class="bg-blue-100 text-blue-900 px-4 py-2 font-semibold text-lg">
-                  Lesson {index}: {title}
-                </h3>
-                {lessons
-                  .filter((lesson) => !lesson.id.endsWith("home.md")) // ✅ Exclude home.md
-                  .map((lesson) => (
-                    <div class="flex items-center justify-between p-4 border-b border-gray-300">
-                      <div class="flex items-center space-x-3">
-                        <a 
-                          href={`/lessons/${lesson.slug}`} 
-                          class="text-lg font-medium text-blue-800"
-                        >
-                          {lesson.data.title}
-                        </a>
-                      </div>
-                      <a 
-                        href={`/lessons/${lesson.slug}`} 
-                        class="start-button"
-                      >
-                        Start
-                      </a>
-                    </div>
-                  ))}
-              </div>
-            ))}
-          </div>
+      <div class="max-w-screen-lg w-full p-4">
+        <h1 class="text-2xl font-bold text-text mb-4">Lessons</h1>
+        <LessonGroups />
       </div>
     </main>
-  </body>
 
-  <Footer />
+    <Footer />
+  </body>
 </html>

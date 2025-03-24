@@ -40,7 +40,7 @@ const AltTextPractice = () => {
 
   return (
     <div className="activity-container p-4 border rounded-lg max-w-lg mx-auto">
-      <h2 className="text-xl font-bold mb-4">Alt Text Practice</h2>
+      <h2 className="text-xl mb-4">Alt Text Practice</h2>
       <p className="mb-2 font-semibold">{images[imageIndex].question}</p>
 
       <img

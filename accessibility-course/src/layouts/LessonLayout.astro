@@ -55,6 +55,7 @@ const formattedLessonsArray = groupedLessonsArray.map(
   </head>
   <body class="bg-background-color font-sans flex flex-col min-h-screen">
     <Header />
+    
 
     <div class="flex w-full flex-1">
       <!-- Sidebar for navigation -->
@@ -62,7 +63,7 @@ const formattedLessonsArray = groupedLessonsArray.map(
         id="merged-sidebar"
         role="navigation"
         aria-label="Lessons Navigation"
-        class="w-96 overflow-y-scroll bg-primary-color px-3 py-4 text-link-color"
+        class="w-96 overflow-y-scroll bg-lightgray px-3 py-4 text-link-color"
       >
         {
           formattedLessonsArray.map(({ index, title, lessons }) => (
@@ -92,7 +93,6 @@ const formattedLessonsArray = groupedLessonsArray.map(
                         <a
                           href={`/lessons/${subLesson.slug}`}
                           class="sidenav-links block w-full p-2 rounded-lg text-md text-text-color hover:bg-accent-color hover:text-link-color transition font-bold"
-                          title={label}
                         >
                           {label}
                         </a>
@@ -113,11 +113,15 @@ const formattedLessonsArray = groupedLessonsArray.map(
         >
           <div class="prose p-4 text-text-color">
             <slot />
-            {activity ? <ActivityLoader activity={activity} client:visible /> : null}
+            {
+              activity ? (
+                <ActivityLoader activity={activity} client:visible />
+              ) : null
+            }
           </div>
         </main>
 
-        <div class="px-10 py-4 flex justify-between items-center">
+        <div class="px-10 py-4 grid grid-cols-3 items-center">
           {
             (() => {
               const currentSlug =
@@ -138,17 +142,21 @@ const formattedLessonsArray = groupedLessonsArray.map(
 
               return (
                 <>
-                  <a
-                    href={prevLesson ? `/lessons/${prevLesson.slug}` : "#"}
-                    class={`sidenav-links text-text-color hover:text-link-hover-color transition bg-secondary-color px-4 py-2 rounded-lg shadow ${
-                      prevLesson ? "" : "opacity-50 pointer-events-none"
-                    }`}
-                    aria-label="Previous lesson"
-                  >
-                    ← Previous Lesson
-                  </a>
+                  {/* Left column (Previous) */}
+                  {prevLesson ? (
+                    <a
+                      href={`/lessons/${prevLesson.slug}`}
+                      class="justify-self-start sidenav-links text-text-color hover:text-link-hover-color transition bg-secondary-color px-4 py-2 rounded-lg shadow"
+                      aria-label="Previous lesson"
+                    >
+                      ← Previous Lesson
+                    </a>
+                  ) : (
+                    <div />
+                  )}
 
-                  <span class="text-text-color font-bold">
+                  {/* Center column (Title) */}
+                  <span class="text-center text-text-color font-bold">
                     {formattedLessonsArray
                       .map(({ index, title, lessons }) => {
                         const currentLesson = lessons.find(
@@ -170,15 +178,18 @@ const formattedLessonsArray = groupedLessonsArray.map(
                       .filter(Boolean)[0] || "Lesson Title Not Found"}
                   </span>
 
-                  <a
-                    href={nextLesson ? `/lessons/${nextLesson.slug}` : "#"}
-                    class={`sidenav-links text-text-color hover:text-link-hover-color transition bg-secondary-color px-4 py-2 rounded-lg shadow ${
-                      nextLesson ? "" : "opacity-50 pointer-events-none"
-                    }`}
-                    aria-label="Next lesson"
-                  >
-                    Next Lesson →
-                  </a>
+                  {/* Right column (Next) */}
+                  {nextLesson ? (
+                    <a
+                      href={`/lessons/${nextLesson.slug}`}
+                      class="justify-self-end sidenav-links text-text-color hover:text-link-hover-color transition bg-secondary-color px-4 py-2 rounded-lg shadow"
+                      aria-label="Next lesson"
+                    >
+                      Next Lesson →
+                    </a>
+                  ) : (
+                    <div />
+                  )}
                 </>
               );
             })()

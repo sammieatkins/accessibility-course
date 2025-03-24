@@ -4,8 +4,22 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Nunito', 'sans-serif'], // Set Nunito as the default sans-serif font
-        nunito: ['Nunito', 'sans-serif'], // Explicitly define "font-nunito" class
+        sans: ['var(--main-font)', 'monospace'], // Use CSS variable
+        main: ['var(--main-font)', 'monospace'], // Optional utility: font-main
+      },
+      colors: {
+        primary: 'var(--primary-color)',
+        secondary: 'var(--secondary-color)',
+        hoverdark: 'var(--hover-dark-color)',
+        accent: 'var(--accent-color)',
+        accentdark: 'var(--accent-color-dark)',
+        text: 'var(--text-color)',
+        link: 'var(--link-color)',
+        linkhover: 'var(--link-hover-color)',
+        muted: 'var(--muted-text)',
+        lightgray: 'var(--light-gray)',
+        bottomnav: 'var(--bottom-nav-bg)',
+        lightgreen: 'var(--light-green)',
       },
     },
   },
