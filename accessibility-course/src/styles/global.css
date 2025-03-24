@@ -87,8 +87,16 @@ h5,
 h6 {
   font-family: var(--heading-font);
   color: var(--text-color);
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+#root {
+  font-size: 5rem;
+}
+
+#root-subheading {
+  margin-top: -4rem;
 }
 
 h1 {

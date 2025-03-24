@@ -1,11 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/**/*.{astro,html,js,jsx,ts,tsx,css}'],
+  content: ['./src/**/*.{astro,html,js,jsx,ts,tsx,css,md}'],
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--main-font)', 'monospace'], // Use CSS variable
-        main: ['var(--main-font)', 'monospace'], // Optional utility: font-main
+        sans: ['var(--main-font)', 'monospace'],
+        main: ['var(--main-font)', 'monospace'],
       },
       colors: {
         primary: 'var(--primary-color)',
@@ -23,5 +23,4 @@ module.exports = {
       },
     },
   },
-  plugins: [],
 };

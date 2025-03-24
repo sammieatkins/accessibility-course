@@ -100,7 +100,7 @@ const SensoryCharacteristicsPractice = () => {
   };
 
   return (
-    <div className="p-6 max-w-[1100px] mx-auto">
+    <div className="p-6 max-w-[1100px]">
       <h1 className="mb-4">Accessible Color Palette Tester</h1>
 
       <p className="mb-4">
