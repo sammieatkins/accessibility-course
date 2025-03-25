@@ -41,6 +41,10 @@ html {
   font-family: var(--body-font);
 }
 
+.uppercase {
+  text-transform: uppercase;
+}
+
 input[type="color"] {
   border-radius: 5px;
   padding: 0;
