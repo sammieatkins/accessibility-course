@@ -1,11 +1,10 @@
 ---
-import Header from "../components/layout/Header.astro";
-import Footer from "../components/layout/Footer.astro";
+// figure out the 80 characters thing. maybe only for paragraphs? or certain text? maybe just for lessons instead of activities?
 import "../styles/global.css";
 import ActivityLoader from "../components/ActivityLoader";
+import BaseLayout from "../layouts/BaseLayout.astro";
 
-// Import React components dynamically based on the activity name
-const { activity, groupedLessonsArray } = Astro.props;
+const { activity, groupedLessonsArray, title } = Astro.props;
 
 interface Lesson {
   id: string;
@@ -19,6 +18,7 @@ interface Lesson {
 interface Props {
   groupedLessonsArray: [string, Lesson[]][];
   activity: string;
+  title: string;
 }
 
 const formattedLessonsArray = groupedLessonsArray.map(
@@ -43,161 +43,145 @@ const formattedLessonsArray = groupedLessonsArray.map(
 );
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Accessibility Course</title>
+<BaseLayout title={title}>
+  <div class="flex w-full flex-1">
+    <!-- Sidebar for navigation -->
+    <aside
+      id="merged-sidebar"
+      role="navigation"
+      aria-label="Lessons Navigation"
+      class="w-96 overflow-y-scroll bg-lightgray px-3 py-4 text-link-color"
+    >
+      {
+        formattedLessonsArray.map(({ index, title, lessons }) => (
+          <div class="mb-6">
+            <h2 class="mb-2 pl-2 text-lg font-black text-link-color">
+              Lesson {index}: {title}
+            </h2>
+            <ul class="pl-4 space-y-2 font-medium">
+              {lessons
+                .filter((subLesson) => !subLesson.id.endsWith("home.md"))
+                .map((subLesson) => {
+                  const fileName = subLesson.id.split("/")[1];
+                  let label = fileName.replace(".md", "").replace("-", " ");
+                  label = label.charAt(0).toUpperCase() + label.slice(1);
 
-    <style is:global>
-      @import "../styles/global.css";
-    </style>
-  </head>
-  <body class="bg-background-color font-sans flex flex-col min-h-screen">
-    <Header />
-    
+                  if (
+                    title.includes("Intro") &&
+                    fileName === "instruction.md"
+                  ) {
+                    label = "Introduction";
+                  } else {
+                    label = `${title}: ${label}`;
+                  }
 
-    <div class="flex w-full flex-1">
-      <!-- Sidebar for navigation -->
-      <aside
-        id="merged-sidebar"
-        role="navigation"
-        aria-label="Lessons Navigation"
-        class="w-96 overflow-y-scroll bg-lightgray px-3 py-4 text-link-color"
-      >
-        {
-          formattedLessonsArray.map(({ index, title, lessons }) => (
-            <div class="mb-6">
-              <h2 class="mb-2 pl-2 text-lg font-black text-link-color">
-                Lesson {index}: {title}
-              </h2>
-              <ul class="pl-4 space-y-2 font-medium">
-                {lessons
-                  .filter((subLesson) => !subLesson.id.endsWith("home.md"))
-                  .map((subLesson) => {
-                    const fileName = subLesson.id.split("/")[1];
-                    let label = fileName.replace(".md", "").replace("-", " ");
-                    label = label.charAt(0).toUpperCase() + label.slice(1);
-
-                    if (
-                      title.includes("Intro") &&
-                      fileName === "instruction.md"
-                    ) {
-                      label = "Introduction";
-                    } else {
-                      label = `${title}: ${label}`;
-                    }
-
-                    return (
-                      <li>
-                        <a
-                          href={`/lessons/${subLesson.slug}`}
-                          class="sidenav-links block w-full p-2 rounded-lg text-md text-text-color hover:bg-accent-color hover:text-link-color transition font-bold"
-                        >
-                          {label}
-                        </a>
-                      </li>
-                    );
-                  })}
-              </ul>
-            </div>
-          ))
-        }
-      </aside>
-
-      <!-- Main Content -->
-      <div class="flex flex-col flex-1">
-        <main
-          id="main-content"
-          class="mx-0 pl-10 pb-0 mb-0 flex-1 overflow-y-auto"
-        >
-          <div class="prose p-4 text-text-color">
-            <slot />
-            {
-              activity ? (
-                <ActivityLoader activity={activity} client:visible />
-              ) : null
-            }
+                  return (
+                    <li>
+                      <a
+                        href={`/lessons/${subLesson.slug}`}
+                        class="sidenav-links block w-full p-2 rounded-lg text-md text-text-color hover:bg-accent-color hover:text-link-color transition font-bold"
+                      >
+                        {label}
+                      </a>
+                    </li>
+                  );
+                })}
+            </ul>
           </div>
-        </main>
+        ))
+      }
+    </aside>
 
-        <div class="px-10 py-4 grid grid-cols-3 items-center">
+    <!-- Main Content -->
+    <div class="flex flex-col flex-1">
+      <main
+        id="main-content"
+        class="mx-0 pl-10 pb-0 mb-0 flex-1 overflow-y-auto"
+      >
+        <div class="prose p-4 text-text-color">
+          <slot />
           {
-            (() => {
-              const currentSlug =
-                Astro.url?.pathname?.replace("/lessons/", "") || "";
-
-              const allLessons = formattedLessonsArray.flatMap(
-                ({ lessons }) => lessons
-              );
-              const currentIndex = allLessons.findIndex(
-                (lesson) => lesson.slug === currentSlug
-              );
-              const prevLesson =
-                currentIndex > 0 ? allLessons[currentIndex - 1] : null;
-              const nextLesson =
-                currentIndex < allLessons.length - 1
-                  ? allLessons[currentIndex + 1]
-                  : null;
-
-              return (
-                <>
-                  {/* Left column (Previous) */}
-                  {prevLesson ? (
-                    <a
-                      href={`/lessons/${prevLesson.slug}`}
-                      class="justify-self-start sidenav-links text-text-color hover:text-link-hover-color transition bg-secondary-color px-4 py-2 rounded-lg shadow"
-                      aria-label="Previous lesson"
-                    >
-                      ← Previous Lesson
-                    </a>
-                  ) : (
-                    <div />
-                  )}
-
-                  {/* Center column (Title) */}
-                  <span class="text-center text-text-color font-bold">
-                    {formattedLessonsArray
-                      .map(({ index, title, lessons }) => {
-                        const currentLesson = lessons.find(
-                          (lesson) => lesson.slug === currentSlug
-                        );
-                        if (!currentLesson) return null;
-
-                        let fileName =
-                          currentLesson.id
-                            .split("/")
-                            .pop()
-                            ?.replace(/\.mdx?$/, "")
-                            .replace("-", " ") || "Unknown";
-                        fileName =
-                          fileName.charAt(0).toUpperCase() + fileName.slice(1);
-
-                        return `Lesson ${index}: ${title} | ${fileName}`;
-                      })
-                      .filter(Boolean)[0] || "Lesson Title Not Found"}
-                  </span>
-
-                  {/* Right column (Next) */}
-                  {nextLesson ? (
-                    <a
-                      href={`/lessons/${nextLesson.slug}`}
-                      class="justify-self-end sidenav-links text-text-color hover:text-link-hover-color transition bg-secondary-color px-4 py-2 rounded-lg shadow"
-                      aria-label="Next lesson"
-                    >
-                      Next Lesson →
-                    </a>
-                  ) : (
-                    <div />
-                  )}
-                </>
-              );
-            })()
+            activity ? (
+              <ActivityLoader activity={activity} client:visible />
+            ) : null
           }
         </div>
+      </main>
+
+      <div class="px-10 py-4 grid grid-cols-3 items-center">
+        {
+          (() => {
+            const currentSlug =
+              Astro.url?.pathname?.replace("/lessons/", "") || "";
+
+            const allLessons = formattedLessonsArray.flatMap(
+              ({ lessons }) => lessons
+            );
+            const currentIndex = allLessons.findIndex(
+              (lesson) => lesson.slug === currentSlug
+            );
+            const prevLesson =
+              currentIndex > 0 ? allLessons[currentIndex - 1] : null;
+            const nextLesson =
+              currentIndex < allLessons.length - 1
+                ? allLessons[currentIndex + 1]
+                : null;
+
+            return (
+              <>
+                {/* Left column (Previous) */}
+                {prevLesson ? (
+                  <a
+                    href={`/lessons/${prevLesson.slug}`}
+                    class="justify-self-start sidenav-links text-text-color hover:text-link-hover-color transition bg-secondary-color px-4 py-2 rounded-lg shadow"
+                    aria-label="Previous lesson"
+                  >
+                    ← Previous Lesson
+                  </a>
+                ) : (
+                  <div />
+                )}
+
+                {/* Center column (Title) */}
+                <span class="text-center text-text-color font-bold">
+                  {formattedLessonsArray
+                    .map(({ index, title, lessons }) => {
+                      const currentLesson = lessons.find(
+                        (lesson) => lesson.slug === currentSlug
+                      );
+                      if (!currentLesson) return null;
+
+                      let fileName =
+                        currentLesson.id
+                          .split("/")
+                          .pop()
+                          ?.replace(/\.mdx?$/, "")
+                          .replace("-", " ") || "Unknown";
+                      fileName =
+                        fileName.charAt(0).toUpperCase() + fileName.slice(1);
+
+                      return `Lesson ${index}: ${title} | ${fileName}`;
+                    })
+                    .filter(Boolean)[0] || "Lesson Title Not Found"}
+                </span>
+
+                {/* Right column (Next) */}
+                {nextLesson ? (
+                  <a
+                    href={`/lessons/${nextLesson.slug}`}
+                    class="justify-self-end sidenav-links text-text-color hover:text-link-hover-color transition bg-secondary-color px-4 py-2 rounded-lg shadow"
+                    aria-label="Next lesson"
+                  >
+                    Next Lesson →
+                  </a>
+                ) : (
+                  <div />
+                )}
+              </>
+            );
+          })()
+        }
       </div>
     </div>
-
-    <Footer />
-  </body>
-</html>
+  </div>
+</BaseLayout>

@@ -1,6 +1,11 @@
 "use client";
 import { useState, useEffect } from "react";
 
+// change red to orange
+// focus indicator on inputs
+// change action color
+// put instructions in the md file
+
 const SensoryCharacteristicsPractice = () => {
   const initialColors = {
     backgroundColor: "#ffffff",
@@ -13,23 +18,21 @@ const SensoryCharacteristicsPractice = () => {
 
   // Initialize colors with defaults and track hydration state
   const [colors, setColors] = useState(initialColors);
-  const [isHydrated, setIsHydrated] = useState(false);
+  const [hasLoadedColors, setHasLoadedColors] = useState(false);
 
-  // Load colors from localStorage on first render
   useEffect(() => {
     const savedColors = localStorage.getItem("savedColors");
     if (savedColors) {
       setColors(JSON.parse(savedColors));
     }
-    setIsHydrated(true); // Mark hydration complete
+    setHasLoadedColors(true);
   }, []);
 
-  // Save colors to localStorage only after hydration is complete
   useEffect(() => {
-    if (isHydrated) {
+    if (hasLoadedColors) {
       localStorage.setItem("savedColors", JSON.stringify(colors));
     }
-  }, [colors, isHydrated]);
+  }, [colors, hasLoadedColors]);
 
   // Function to reset colors to initial values
   const resetColors = () => {
@@ -97,6 +100,33 @@ const SensoryCharacteristicsPractice = () => {
       colors.linkColor,
       colors.backgroundColor
     ),
+  };
+
+  // generates CSS export code
+  function generateCss(colors) {
+    return `:root {\n${Object.entries(colors)
+      .map(
+        ([key, value]) =>
+          `  --${key.replace(
+            /[A-Z]/g,
+            (m) => `-${m.toLowerCase()}`
+          )}: ${value};`
+      )
+      .join("\n")}\n}`;
+  }
+
+  // Copy button for export
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    const css = generateCss(colors);
+    try {
+      await navigator.clipboard.writeText(css);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy:", err);
+    }
   };
 
   return (
@@ -204,7 +234,6 @@ const SensoryCharacteristicsPractice = () => {
             </div>
 
             {/* Button */}
-            {/* Button */}
             <div className="flex items-center mt-2">
               <button
                 className="px-4 py-2 rounded block"
@@ -279,33 +308,62 @@ const SensoryCharacteristicsPractice = () => {
       </div>
 
       {/* Export Explanation */}
-      <div className="mt-6 p-4 bg-[#D8EBFF] border border-[#A4D1FF] rounded-lg shadow">
-        <h2 className="text-lg font-semibold text-text-color mb-2">
-          Export Your Accessible Colors
-        </h2>
-        <p className="text-text-color">
-          Great job creating an accessible color palette! Now, you can easily
-          apply it to your own projects. Just copy the CSS code below and paste
-          it into your stylesheets. This will ensure your design remains
-          visually inclusive and meets accessibility standards.
-        </p>
+      <div className="mt-6 p-4 flex items-start gap-4 bg-transparent">
+        <span
+          className="material-symbols--palette-outline text-2xl text-text-color mt-1"
+          aria-hidden="true"
+        ></span>
+        <div>
+          <h2 className="text-lg font-semibold text-text-color mb-2">
+            Export Your Accessible Colors
+          </h2>
+          <p className="text-text-color">
+            Great job creating an accessible color palette! Now, you can easily
+            apply it to your own projects. Just copy the CSS code below and
+            paste it into your stylesheets. This will ensure your design remains
+            visually inclusive and meets accessibility standards.
+          </p>
+        </div>
       </div>
 
       {/* Row 3: CSS & Color Table */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-        <div>
-          <h2 className="text-xl mb-3">CSS Export</h2>
-          <pre className="bg-[#f2f2f2] p-2 rounded text-sm border !m-0">
-            {/* leave it all funky indent bc it messes with the output */}
-            {`:root {
-  ${Object.entries(colors)
-    .map(
-      ([key, value]) =>
-        `  --${key.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`)}: ${value};`
-    )
-    .join("\n")}
-  }`}
-          </pre>
+        <div className="mb-6">
+          {/* Section title */}
+          <div className="flex justify-between items-center mb-2">
+            <h2 className="text-xl">CSS Export</h2>
+          </div>
+
+          {/* Code block + floating copy button */}
+          <div className="relative">
+            <button
+              onClick={handleCopy}
+              aria-live="polite"
+              className="absolute top-2 right-3 z-10 flex items-center gap-1 text-[var(--text-color)] hover:underline focus:outline-none"
+            >
+              {copied ? (
+                <>
+                  <span
+                    className="material-symbols--check-rounded text-base"
+                    aria-hidden="true"
+                  />
+                  Copied
+                </>
+              ) : (
+                <>
+                  <span
+                    className="material-symbols--content-copy-outline-rounded text-base"
+                    aria-hidden="true"
+                  />
+                  Copy
+                </>
+              )}
+            </button>
+
+            <pre className="bg-[var(--code-bg)] m-0 text-[var(--code-text-color)] p-4 rounded text-sm border whitespace-pre">
+              {generateCss(colors)}
+            </pre>
+          </div>
         </div>
         <div>
           <h2 className="text-xl mb-3">Color Table</h2>

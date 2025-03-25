@@ -1,3 +1,6 @@
+/* make the headings work out when coming from md. figure out that typography thingy? */
+/* fix variables :( */
+
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
 
 @tailwind base;
@@ -93,10 +96,11 @@ h6 {
 
 #root {
   font-size: 5rem;
+  color: #737373;
 }
 
 #root-subheading {
-  margin-top: -4rem;
+  margin-top: -2rem;
 }
 
 h1 {
@@ -173,11 +177,6 @@ a:hover {
   top: 10px;
 }
 
-.navbar {
-  background-color: var(--primary-color);
-  padding: 1rem;
-}
-
 .nav-container {
   display: flex;
   flex-direction: column;
@@ -185,25 +184,24 @@ a:hover {
   font-family: var(--main-font);
 }
 
+.navbar {
+  background-color: #ffffff; /* white background */
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* subtle drop shadow on bottom */
+}
+
 #logo {
   font-size: 1.5rem;
   font-weight: 800;
-  color: white;
+  color: var(--primary-color);
   text-decoration: none;
   font-family: var(--main-font);
-}
-
-.navlinks {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  align-items: center;
 }
 
 .navlinks a,
 .nav-container a {
   text-decoration: none;
-  color: white;
+  color: var(--primary-color); /* black text */
   font-size: 1.1rem;
   font-weight: bold;
   transition: color 0.3s ease, transform 0.2s ease;
@@ -216,24 +214,25 @@ a:hover {
 .navlinks a:focus,
 .nav-container a:hover,
 .nav-container a:focus {
-  background-color: var(--hover-dark-color);
+  background-color: var(--light-green); /* lighter hover color for contrast */
 }
+
 
 .sidenav-links {
   color: var(--sidenav-link);
 }
 
 footer {
-  background-color: var(--primary-color);
-  color: white;
+  background-color: #ffffff;
+  color: var(--primary-color);
   padding: 1.5rem;
   text-align: center;
   font-size: 0.9rem;
-  border-top: 2px solid var(--footer-border);
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
 }
 
 footer a {
-  color: white;
+  color: var(--primary-color);
   text-decoration: none;
   font-weight: bold;
   transition: color 0.3s ease;
@@ -241,14 +240,15 @@ footer a {
 
 footer a:hover,
 footer a:focus {
-  color: var(--accent-color);
+  color: var(--hover-dark-color);
 }
 
 footer .small-text {
   font-size: 0.8rem;
   margin-top: 1rem;
-  color: var(--muted-text);
+  color: var(--primary-color);
 }
+
 
 .prose ul {
   list-style-type: disc !important;
@@ -318,4 +318,48 @@ footer .small-text {
 .start-button:focus {
   background-color: var(--accent-color-dark);
   color: var(--text-color);
+}
+
+/* ICONS */
+.material-symbols--palette-outline {
+  display: inline-block;
+  width: 4em; /* changed */
+  height: 4em; /* changed */
+  color: var(--accent-color);
+  --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M12 22q-2.05 0-3.875-.788t-3.187-2.15t-2.15-3.187T2 12q0-2.075.813-3.9t2.2-3.175T8.25 2.788T12.2 2q2 0 3.775.688t3.113 1.9t2.125 2.875T22 11.05q0 2.875-1.75 4.413T16 17h-1.85q-.225 0-.312.125t-.088.275q0 .3.375.863t.375 1.287q0 1.25-.687 1.85T12 22m-5.5-9q.65 0 1.075-.425T8 11.5t-.425-1.075T6.5 10t-1.075.425T5 11.5t.425 1.075T6.5 13m3-4q.65 0 1.075-.425T11 7.5t-.425-1.075T9.5 6t-1.075.425T8 7.5t.425 1.075T9.5 9m5 0q.65 0 1.075-.425T16 7.5t-.425-1.075T14.5 6t-1.075.425T13 7.5t.425 1.075T14.5 9m3 4q.65 0 1.075-.425T19 11.5t-.425-1.075T17.5 10t-1.075.425T16 11.5t.425 1.075T17.5 13M12 20q.225 0 .363-.125t.137-.325q0-.35-.375-.825T11.75 17.3q0-1.05.725-1.675T14.25 15H16q1.65 0 2.825-.962T20 11.05q0-3.025-2.312-5.038T12.2 4Q8.8 4 6.4 6.325T4 12q0 3.325 2.338 5.663T12 20'/%3E%3C/svg%3E");
+  background-color: currentColor;
+  -webkit-mask-image: var(--svg);
+  mask-image: var(--svg);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+.material-symbols--content-copy-outline-rounded {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M9 18q-.825 0-1.412-.587T7 16V4q0-.825.588-1.412T9 2h9q.825 0 1.413.588T20 4v12q0 .825-.587 1.413T18 18zm0-2h9V4H9zm-4 6q-.825 0-1.412-.587T3 20V7q0-.425.288-.712T4 6t.713.288T5 7v13h10q.425 0 .713.288T16 21t-.288.713T15 22zm4-6V4z'/%3E%3C/svg%3E");
+  background-color: currentColor;
+  -webkit-mask-image: var(--svg);
+  mask-image: var(--svg);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+.material-symbols--check-rounded {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='m9.55 15.15l8.475-8.475q.3-.3.7-.3t.7.3t.3.713t-.3.712l-9.175 9.2q-.3.3-.7.3t-.7-.3L4.55 13q-.3-.3-.288-.712t.313-.713t.713-.3t.712.3z'/%3E%3C/svg%3E");
+  background-color: currentColor;
+  -webkit-mask-image: var(--svg);
+  mask-image: var(--svg);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
 }

@@ -1,17 +1,9 @@
 ---
 import "../styles/global.css";
-import Footer from "../components/layout/Footer.astro";
-import Header from "../components/layout/Header.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Accessibility Course</title>
-  </head>
-  <Header />
-  <body class="font-sans">
+<BaseLayout title="Contact">
     <main
       id="main-content"
       class="flex justify-center min-h-[calc(100vh-4rem-4rem)]"
@@ -20,7 +12,4 @@ import Header from "../components/layout/Header.astro";
         <h1>Contact</h1>
       </div>
     </main>
-  </body>
-
-  <Footer />
-</html>
+</BaseLayout>

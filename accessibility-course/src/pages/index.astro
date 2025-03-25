@@ -1,40 +1,24 @@
 ---
 import "../styles/global.css";
-import Footer from "../components/layout/Footer.astro";
-import Header from "../components/layout/Header.astro";
 import { Content as Home } from "../content/lessons/01_intro/home.md";
 import LessonGroups from "../components/LessonGroups.astro";
-
-
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Accessibility Course</title>
-  </head>
-  <body class="bg-background-color font-sans">
-    <Header />
-
-    <main
-      id="main-content"
-      class="flex justify-center min-h-[calc(100vh-4rem-4rem)]"
-    >
+<BaseLayout title="Accessibility Course">
+  <main
+    id="main-content"
+    class="flex justify-center min-h-[calc(100vh-4rem-4rem)]"
+  >
     <div class="p-4">
       <div class="prose prose-neutral max-w-[80ch]">
         <Home />
       </div>
-    
-      <!-- Lessons home nav -->
+      
       <section class="mt-8">
         <h2 class="text-2xl font-bold text-text mb-4">Start Learning</h2>
         <LessonGroups />
       </section>
     </div>
-    
-    </main>
-
-    <Footer />
-  </body>
-</html>
+  </main>
+</BaseLayout>

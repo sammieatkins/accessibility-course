@@ -1,29 +1,17 @@
 ---
 import "../styles/global.css";
-import Footer from "../components/layout/Footer.astro";
-import Header from "../components/layout/Header.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 import LessonGroups from "../components/LessonGroups.astro";
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Accessibility Course</title>
-  </head>
-  <body class="font-sans">
-    <Header />
-
-    <main
-      id="main-content"
-      class="flex justify-center min-h-[calc(100vh-4rem-4rem)]"
-    >
-      <div class="max-w-screen-lg w-full p-4">
-        <h1 class="text-2xl font-bold text-text mb-4">Lessons</h1>
-        <LessonGroups />
-      </div>
-    </main>
-
-    <Footer />
-  </body>
-</html>
+<BaseLayout title="Lessons">
+  <main
+    id="main-content"
+    class="flex justify-center min-h-[calc(100vh-4rem-4rem)]"
+  >
+    <div class="max-w-screen-lg w-full p-4">
+      <h1 class="text-2xl font-bold text-text mb-4">Lessons</h1>
+      <LessonGroups />
+    </div>
+  </main>
+</BaseLayout>
