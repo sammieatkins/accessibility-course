@@ -50,12 +50,12 @@ const formattedLessonsArray = groupedLessonsArray.map(
       id="merged-sidebar"
       role="navigation"
       aria-label="Lessons Navigation"
-      class="w-96 overflow-y-scroll bg-lightgray px-3 py-4 text-link-color"
+      class="w-96 overflow-y-scroll bg-lightgray px-3 py-4 text-primary"
     >
       {
         formattedLessonsArray.map(({ index, title, lessons }) => (
           <div class="mb-6">
-            <h2 class="mb-2 pl-2 text-lg font-black text-link-color">
+            <h2 class="mb-2 pl-2 text-lg font-black text-text">
               Lesson {index}: {title}
             </h2>
             <ul class="pl-4 space-y-2 font-medium">
@@ -79,7 +79,7 @@ const formattedLessonsArray = groupedLessonsArray.map(
                     <li>
                       <a
                         href={`/lessons/${subLesson.slug}`}
-                        class="sidenav-links block w-full p-2 rounded-lg text-md text-text-color hover:bg-accent-color hover:text-link-color transition font-bold"
+                        class="sidenav-links block w-full p-2 rounded-lg text-md text-text-color hover:bg-accent-color hover:text-primary transition font-bold"
                       >
                         {label}
                       </a>
@@ -133,7 +133,7 @@ const formattedLessonsArray = groupedLessonsArray.map(
                 {prevLesson ? (
                   <a
                     href={`/lessons/${prevLesson.slug}`}
-                    class="justify-self-start sidenav-links text-text-color hover:text-link-hover-color transition bg-secondary-color px-4 py-2 rounded-lg shadow"
+                    class="no-underline justify-self-start sidenav-links text-white bg-[var(--primary-color)] transition px-4 py-2 rounded-lg shadow hover:bg-[var(--hover-dark-color)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--hover-dark-color)]"
                     aria-label="Previous lesson"
                   >
                     ← Previous Lesson
@@ -142,7 +142,6 @@ const formattedLessonsArray = groupedLessonsArray.map(
                   <div />
                 )}
 
-                {/* Center column (Title) */}
                 <span class="text-center text-text-color font-bold">
                   {formattedLessonsArray
                     .map(({ index, title, lessons }) => {
@@ -165,11 +164,10 @@ const formattedLessonsArray = groupedLessonsArray.map(
                     .filter(Boolean)[0] || "Lesson Title Not Found"}
                 </span>
 
-                {/* Right column (Next) */}
                 {nextLesson ? (
                   <a
                     href={`/lessons/${nextLesson.slug}`}
-                    class="justify-self-end sidenav-links text-text-color hover:text-link-hover-color transition bg-secondary-color px-4 py-2 rounded-lg shadow"
+                    class="no-underline justify-self-end sidenav-links text-white bg-[var(--primary-color)] transition px-4 py-2 rounded-lg shadow hover:bg-[var(--hover-dark-color)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--hover-dark-color)]"
                     aria-label="Next lesson"
                   >
                     Next Lesson →

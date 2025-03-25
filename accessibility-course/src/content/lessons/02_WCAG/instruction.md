@@ -40,6 +40,15 @@ Understandable means things should be clear, consistent, and easy to follow. Tha
 ### Robust
 Can the site handle different tech and tools? Robust means your site should work across a wide range of browsers, screen readers, and assistive technologies — both now and as those tools evolve. That’s where clean, semantic HTML really matters. If your code is solid, assistive tech can do its job. If it’s a mess of div soup, it might work for you, but assistive tech will have no idea what to do with it. More on that in the [Semantic HTML](../07_semantic-HTML/instruction.md) lesson.
 
+## Click Around and Find Out
+Now that you know what WCAG is all about, it’s worth seeing how it’s actually structured in practice.
+
+The WCAG Quick Reference Guide is an interactive resource that lets you explore every guideline, success criterion, and technique in one place. You can filter by level (A, AA, AAA), by topic (like text, media, structure), or by technology.
+
+Take a few minutes to click around. Explore the different principles (POUR), and get a feel for how the success criteria are organized. It’s a great way to see how the guidelines translate into real decisions you’ll make while designing or coding a site.
+
+While you're there, check out the links next to each success criterion — the [Understanding](https://www.w3.org/WAI/WCAG22/Understanding/) pages explain the purpose and give real-world examples, while the [How to Meet](https://www.w3.org/WAI/WCAG22/quickref/#how-to-meet) sections offer practical guidance and techniques for implementation. You don’t need to memorize it all — just knowing where to look is half the battle.
+
 ## Final Thoughts
 
 So... WCAG. Hard to say, harder to ignore. If the internet is a house, WCAG is the building code. You can technically *not* follow it, but someone’s gonna trip over your uneven stairs, sue you, and you’ll deserve it. Alright, enough about lawsuits. Let’s get to work.

@@ -174,7 +174,7 @@ const SensoryCharacteristicsPractice = () => {
           </div>
           <button
             onClick={resetColors}
-            className="text-text-color transition bg-[var(--bottom-nav-bg)] px-4 py-2 rounded-lg shadow hover:bg-[var(--accent-color-dark)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-color-dark)]"
+            className="text-white transition bg-[var(--primary-color)] px-4 py-2 rounded-lg shadow hover:bg-[var(--accent-color-dark)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-color-dark)]"
           >
             Reset Colors
           </button>

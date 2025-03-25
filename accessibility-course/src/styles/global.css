@@ -1,5 +1,6 @@
 /* make the headings work out when coming from md. figure out that typography thingy? */
 /* fix variables :( */
+/* fix link text color */
 
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
 
@@ -9,36 +10,44 @@
 
 :root {
   /* Color Variables */
-  --primary-color: #3b7c4d;
-  --sidenav-link: #2d5e3b;
-  --secondary-color: #5cab74;
-  --light-green: #def7e5;
-  --hover-dark-color: #2c5c3a;
-  --accent-color: #f9ac4a;
-  --accent-color-dark: #e29038;
+  --primary-color: #2c5c3a;
+  --hover-dark-color: #20422a;
+  --light-green: #C2EEBF;
+  --accent-color: #2c5c3a;
+  --accent-color-dark: #20422a;
   --background-color: #ffffff;
   --text-color: #13242b;
-  --link-color: white;
-  --link-hover-color: var(--hover-dark-color);
-  --button-bg: var(--primary-color);
-  --button-hover-bg: var(--hover-dark-color);
+  --light-gray: #f1f1f1;
+  --dark-grey: #737373;
   --code-bg: #e8e8e8;
   --code-text-color: #326273;
-  --skip-link-bg: var(--primary-color);
-  --skip-link-text: white;
-  --footer-border: var(--secondary-color);
-  --muted-text: #ccc;
-  --light-gray: #f1f1f1;
-  --bottom-nav-bg: #f9ac4a;
-  --dark-grey: #c2c2c2;
 
   /* Font Variables */
-  --heading-font: "Nunito Sans", sans-serif;
   --body-font: "Nunito Sans", monospace;
 }
 
 html {
   font-family: var(--body-font);
+}
+
+/* main {
+  max-width: 65%;
+} */
+
+.activity {
+  max-width: 80%;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: underline;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+a:hover,
+a:focus {
+  color: var(--hover-dark-color);
 }
 
 .uppercase {
@@ -92,15 +101,16 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--heading-font);
+  font-family: var(--body-font);
+  margin-top: 1rem;
+  color: var(--dark-grey);
   color: var(--text-color);
-  margin-top: 0.5rem;
-  margin-bottom: 0.4rem;
+  color: var(--primary-color);
+
 }
 
 #root {
   font-size: 5rem;
-  color: #737373;
 }
 
 #root-subheading {
@@ -110,6 +120,7 @@ h6 {
 h1 {
   font-size: 3rem;
   font-weight: 900;
+  color: var(--dark-grey);
 }
 
 h2 {
@@ -138,7 +149,7 @@ h6 {
 }
 
 .subheading {
-  font-family: var(--heading-font);
+  font-family: var(--body-font);
   font-weight: 600;
   color: var(--primary-color);
   font-size: 1.25rem;
@@ -155,7 +166,7 @@ h6 {
 
 * {
   box-sizing: border-box;
-  margin: 0;
+  /* margin: 0; */
   padding: 0;
 }
 
@@ -168,7 +179,7 @@ a:hover {
   top: -50px;
   left: 10px;
   background: var(--primary-color);
-  color: white;
+  color: var(--background-color);
   padding: 10px;
   z-index: 100;
   text-decoration: none;
@@ -185,11 +196,10 @@ a:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: var(--main-font);
+  font-family: var(--body-font);
 }
 
 .navbar {
-  background-color: #ffffff; /* white background */
   padding: 1rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* subtle drop shadow on bottom */
 }
@@ -199,35 +209,34 @@ a:hover {
   font-weight: 800;
   color: var(--primary-color);
   text-decoration: none;
-  font-family: var(--main-font);
+  font-family: var(--body-font);
 }
 
 .navlinks a,
 .nav-container a {
   text-decoration: none;
-  color: var(--primary-color); /* black text */
+  color: var(--primary-color);
   font-size: 1.1rem;
   font-weight: bold;
   transition: color 0.3s ease, transform 0.2s ease;
   padding: 10px;
   border-radius: 5px;
-  font-family: var(--main-font);
+  font-family: var(--body-font);
 }
 
 .navlinks a:hover,
 .navlinks a:focus,
 .nav-container a:hover,
 .nav-container a:focus {
-  background-color: var(--light-green); /* lighter hover color for contrast */
+  background-color: var(--light-green);
 }
 
 
 .sidenav-links {
-  color: var(--sidenav-link);
+  color: var(--primary-color);
 }
 
 footer {
-  background-color: #ffffff;
   color: var(--primary-color);
   padding: 1.5rem;
   text-align: center;
@@ -298,14 +307,13 @@ footer .small-text {
 }
 
 .px-10.py-4 a {
-  background-color: var(--bottom-nav-bg);
-  color: var(--text-color);
+  background-color: var(--primary-color);
+  color: var(--background-color);
 }
 
 .px-10.py-4 a:hover,
 .px-10.py-4 a:focus {
-  background-color: var(--accent-color-dark);
-  color: var(--text-color);
+  background-color: var(--hover-dark-color);
 }
 
 .start-button {
@@ -315,7 +323,7 @@ footer .small-text {
   border-radius: 9999px;
   font-size: 0.875rem;
   font-weight: 600;
-  font-family: var(--main-font);
+  font-family: var(--body-font);
 }
 
 .start-button:hover,
