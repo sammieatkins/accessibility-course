@@ -12,7 +12,7 @@
   /* Color Variables */
   --primary-color: #2c5c3a;
   --hover-dark-color: #20422a;
-  --light-green: #C2EEBF;
+  --light-green: #c2eebf;
   --accent-color: #2c5c3a;
   --accent-color-dark: #20422a;
   --background-color: #ffffff;
@@ -30,9 +30,16 @@ html {
   font-family: var(--body-font);
 }
 
+/* Custom Focus Indicator */
+:focus {
+  outline: 3px solid var(--accent-color-dark); /* Accent color for focus */
+  outline-offset: 2px; /* Adjust spacing from the element */
+  box-shadow: 0 0 5px var(--primary-color); /* Optional: add a shadow effect */
+}
+
 /* main {
-  max-width: 65%;
-} */
+    max-width: 65%;
+  } */
 
 .activity {
   max-width: 80%;
@@ -74,10 +81,16 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 pre {
-  @apply p-4 m-4 rounded-lg overflow-x-auto;
+  @apply p-4 mt-4 mb-0 mx-4 rounded-lg overflow-x-auto;
   background-color: var(--code-bg);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  max-width: 100%; 
 }
 
+p, ul, ol {
+  max-width: 75ch;
+}
 p code {
   background-color: var(--code-bg);
   color: var(--code-text-color);
@@ -106,7 +119,6 @@ h6 {
   color: var(--dark-grey);
   color: var(--text-color);
   color: var(--primary-color);
-
 }
 
 #root {
@@ -201,7 +213,7 @@ a:hover {
 
 .navbar {
   padding: 1rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* subtle drop shadow on bottom */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 #logo {
@@ -230,7 +242,6 @@ a:hover {
 .nav-container a:focus {
   background-color: var(--light-green);
 }
-
 
 .sidenav-links {
   color: var(--primary-color);
@@ -261,7 +272,6 @@ footer .small-text {
   margin-top: 1rem;
   color: var(--primary-color);
 }
-
 
 .prose ul {
   list-style-type: disc !important;
@@ -365,6 +375,21 @@ footer .small-text {
   width: 1em;
   height: 1em;
   --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='m9.55 15.15l8.475-8.475q.3-.3.7-.3t.7.3t.3.713t-.3.712l-9.175 9.2q-.3.3-.7.3t-.7-.3L4.55 13q-.3-.3-.288-.712t.313-.713t.713-.3t.712.3z'/%3E%3C/svg%3E");
+  background-color: currentColor;
+  -webkit-mask-image: var(--svg);
+  mask-image: var(--svg);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+.material-symbols--info-outline-rounded {
+  display: inline-block;
+  width: 3em;
+  height: 3em;
+  color: var(--accent-color);
+  --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M12 17q.425 0 .713-.288T13 16v-4q0-.425-.288-.712T12 11t-.712.288T11 12v4q0 .425.288.713T12 17m0-8q.425 0 .713-.288T13 8t-.288-.712T12 7t-.712.288T11 8t.288.713T12 9m0 13q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12t-2.325-5.675T12 4T6.325 6.325T4 12t2.325 5.675T12 20m0-8'/%3E%3C/svg%3E");
   background-color: currentColor;
   -webkit-mask-image: var(--svg);
   mask-image: var(--svg);

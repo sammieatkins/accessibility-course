@@ -1,3 +1,7 @@
+// add an example that has actually necessary aria
+// figure out the dang flickering
+// uhhhhh keyboard trap on the code editor
+
 "use client";
 
 import { useState, useEffect, useCallback } from "react";

@@ -38,7 +38,7 @@ Can users actually use the thing? Operable means all interactive parts of the si
 Understandable means things should be clear, consistent, and easy to follow. That includes using plain language, giving clear instructions, and avoiding confusing layouts or unpredictable interactions. It also means supporting users who might have memory, attention, or processing challenges. When things are easy to understand, people can focus on what they came to do — not how to do it.
 
 ### Robust
-Can the site handle different tech and tools? Robust means your site should work across a wide range of browsers, screen readers, and assistive technologies — both now and as those tools evolve. That’s where clean, semantic HTML really matters. If your code is solid, assistive tech can do its job. If it’s a mess of div soup, it might work for you, but assistive tech will have no idea what to do with it. More on that in the [Semantic HTML](../07_semantic-HTML/instruction.md) lesson.
+Can the site handle different tech and tools? Robust means your site should work across a wide range of browsers, screen readers, and assistive technologies — both now and as those tools evolve. That’s where clean, semantic HTML really matters. If your code is solid, assistive tech can do its job. If it’s a mess of div soup, it might work for you, but assistive tech will have no idea what to do with it. More on that in the [Semantic HTML](/lessons/06_semantic-html/instruction) lesson.
 
 ## Click Around and Find Out
 Now that you know what WCAG is all about, it’s worth seeing how it’s actually structured in practice.

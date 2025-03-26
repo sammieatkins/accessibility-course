@@ -181,7 +181,7 @@ const SensoryCharacteristicsPractice = () => {
               </h3>
               {getRatingStyle(contrastRatios["Large Text to Background"], 3.0)
                 .text === "Fail" && (
-                <p className="ml-3 p-1 pl-2 pr-2 bg-red-100 text-red-700 border border-red-300 text-xs rounded-lg shadow w-max">
+                <p className="ml-3 px-3 py-1 bg-[#FFB85C] text-black border-[#E59400] text-xs rounded-lg shadow w-max">
                   Large text fails contrast.
                 </p>
               )}
@@ -194,7 +194,7 @@ const SensoryCharacteristicsPractice = () => {
               </p>
               {getRatingStyle(contrastRatios["Small Text to Background"], 4.5)
                 .text === "Fail" && (
-                <p className="mt-1 ml-3 p-1 pl-2 pr-2 bg-red-100 text-red-700 border border-red-300 text-xs rounded-lg shadow w-max">
+                <p className="mt-1 ml-3 px-3 py-1 bg-[#FFB85C] text-black border-[#E59400] text-xs rounded-lg shadow w-max">
                   Small text fails contrast.
                 </p>
               )}
@@ -211,7 +211,7 @@ const SensoryCharacteristicsPractice = () => {
               </a>
               {getRatingStyle(contrastRatios["Link to Background"], 4.5)
                 .text === "Fail" && (
-                <p className="ml-3 p-1 pl-2 pr-2 bg-red-100 text-red-700 border border-red-300 text-xs rounded-lg shadow w-max">
+                <p className="ml-3 px-3 py-1 bg-[#FFB85C] text-black border-[#E59400] text-xs rounded-lg shadow w-max">
                   Link color fails contrast.
                 </p>
               )}
@@ -234,7 +234,7 @@ const SensoryCharacteristicsPractice = () => {
                 {/* Button Background to Page Background Contrast */}
                 {getRatingStyle(contrastRatios["Button to Background"], 4.5)
                   .text === "Fail" && (
-                  <p className="bg-red-100 text-red-700 border border-red-300 text-xs p-1 rounded-lg shadow w-max">
+                  <p className="px-3 py-1 bg-[#FFB85C] text-black border-[#E59400] text-xs rounded-lg shadow w-max">
                     Button background fails contrast.
                   </p>
                 )}
@@ -242,7 +242,7 @@ const SensoryCharacteristicsPractice = () => {
                 {/* Button Text to Button Background Contrast */}
                 {getRatingStyle(contrastRatios["Button Text to Button"], 4.5)
                   .text === "Fail" && (
-                  <p className="bg-red-100 text-red-700 border border-red-300 text-xs p-1 rounded-lg shadow w-max">
+                  <p className="px-3 py-1 bg-[#FFB85C] text-black border-[#E59400] text-xs rounded-lg shadow w-max">
                     Button text fails contrast.
                   </p>
                 )}
@@ -277,10 +277,10 @@ const SensoryCharacteristicsPractice = () => {
                 <div className="flex items-center justify-between w-full">
                   <p className="font-bold text-lg">{contrast}:1</p>
                   <div className="flex gap-2 text-xs">
-                    <span className={`px-2 py-1 rounded ${aaBackground}`}>
+                    <span className={`px-3 py-1 rounded ${aaBackground}`}>
                       WCAG AA: {aaText}
                     </span>
-                    <span className={`px-2 py-1 rounded ${aaaBackground}`}>
+                    <span className={`px-3 py-1 rounded ${aaaBackground}`}>
                       WCAG AAA: {aaaText}
                     </span>
                   </div>
@@ -344,7 +344,7 @@ const SensoryCharacteristicsPractice = () => {
               )}
             </button>
 
-            <pre className="bg-[var(--code-bg)] m-0 text-[var(--code-text-color)] p-4 rounded text-sm border whitespace-pre">
+            <pre className="block bg-[var(--code-bg)] m-0 text-[var(--code-text-color)] p-4 rounded text-sm border whitespace-pre">
               {generateCss(colors)}
             </pre>
           </div>

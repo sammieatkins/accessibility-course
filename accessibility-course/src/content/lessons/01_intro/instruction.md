@@ -5,6 +5,7 @@ title: Introduction to Accessibility
 # Introduction to Accessibility
 
 <h2 class="subheading">So, what's the big deal?</h2>
+
 If you're here, I'm assuming you care at least a little about accessibility—or maybe this is just a required course for your class. Either way, the purpose of this first lesson is to solidify for you why we should even bother making the web accessible.
 
 ## What is Accessibility?

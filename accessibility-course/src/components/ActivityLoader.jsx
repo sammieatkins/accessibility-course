@@ -7,7 +7,6 @@ import SemanticHtmlPractice from "./activities/SemanticHtmlPractice";
 import AriaPractice from "./activities/AriaPractice";
 import AssistiveTechnologyPractice from "./activities/AssistiveTechnologyPractice";
 import TestingPractice from "./activities/TestingPractice";
-import WcagPractice from "./activities/WcagPractice.jsx";
 
 const activityMap = {
   AltTextPractice,
@@ -18,7 +17,6 @@ const activityMap = {
   AriaPractice,
   AssistiveTechnologyPractice,
   TestingPractice,
-  WcagPractice,
 };
 
 const ActivityLoader = ({ activity }) => {
