@@ -1,8 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
 
-// put instructions in the md file
-
 const SensoryCharacteristicsPractice = () => {
   const initialColors = {
     backgroundColor: "#ffffff",
