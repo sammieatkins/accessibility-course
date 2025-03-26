@@ -6,26 +6,55 @@ description: "How to write useful alt text"
 
 # Alt Text
 <h2 class="subheading">It's more than just 'dog.jpg'</h2>
+Alt text is probably somehting you already think you know about accessibility. Most developers know about alt text because it's one of the default attributes in an `img` tag when you use emmet shortcuts. Alt text short for alternative text. It's meant to be an equivalent alternative to a meaningful image that helps people who can’t see it understand what it shows.
 
-Alt text is a short text alternative to the image. In general, alt text is limited to approximately 250 characters or less.
+## Empathy Activity
+<!-- call it something else, this is where I think I'll put the activity I was talking about -->
 
-Alt text is **not**:
-  
-* repetitive  
-* additional  
-* source or filename  
+## How to Write Alt Text
 
+1. What Is Alt Text?
+A friendly definition: “Alt text” is short for alternative text—a description of an image that helps people who can’t see it understand what it shows.
 
-Alt text goes in the alt attribute of an image tag.
+Where it goes: Inside the alt="" attribute in HTML.
 
-```html
-<img src="" alt="" />
-```
+Usual length: ~250 characters or less.
 
-Now, let's talk about decorative images. These are the ones that don't really convey important information. For these, you can use empty alt text `alt=""`. This tells assistive technology to skip these images.
+2. Why Alt Text Matters
+Empathy + impact: Helps screen reader users understand visuals.
 
-There are images that serve a specific function, like buttons or icons. For these, the alt text should describe that function. For example, a logo that takes you to the home page should have alt text that says "Home". It shouldn't describe the logo. Alt text for images that are links should follow the same rules for accessible link text.
+Helps people with slow connections, broken images, and more.
 
-<!-- make a link here to the link text lesson -->
+Makes your site more inclusive, accessible, and useful for everyone.
 
-Pay attention to the purpose and context of the image. These may change the way a description is written and where the description is provided. The same image can have different alt text depending on its context. For example, a picture of a dog on a pet site might just be there for visual appeal. In this case, it would be decorative. However, that same picture of a dog on a quiz about identifying dog breeds would need to describe the dog in the alt text.
+3. What Alt Text Is NOT
+Not a caption.
+
+Not a filename (e.g., “dog.jpg” ❌).
+
+Not just “Image” or “Picture of…”.
+
+Not filler or decorative fluff.
+
+Not copy-pasted from the image title or surrounding text.
+
+(You can bring in that Thompson list here if you like!)
+
+4. How to Know What to Write
+Focus on purpose and context.
+
+Ask: What would someone miss if they couldn’t see this image?
+
+Different context = different alt text (give examples, like the dog on a pet site vs. a dog breed quiz).
+
+5. What About Decorative Images?
+If it’s just visual flair (no useful info), use alt="".
+
+This tells screen readers to skip it—very helpful!
+
+Examples: borders, patterns, icons that are repeated elsewhere in text.
+
+6. Alt Text for Functional Images
+If the image does something (like a button or link), describe its function, not its appearance.
+
+Example: A logo that links to the homepage → alt="Home", not “Blue and white dog logo”.

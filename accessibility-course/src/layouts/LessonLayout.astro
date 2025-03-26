@@ -114,9 +114,10 @@ const formattedLessonsArray = groupedLessonsArray.map(
             const currentSlug =
               Astro.url?.pathname?.replace("/lessons/", "") || "";
 
-            const allLessons = formattedLessonsArray.flatMap(
-              ({ lessons }) => lessons
+            const allLessons = formattedLessonsArray.flatMap(({ lessons }) =>
+              lessons.filter((lesson) => !lesson.id.endsWith("home.md"))
             );
+
             const currentIndex = allLessons.findIndex(
               (lesson) => lesson.slug === currentSlug
             );
