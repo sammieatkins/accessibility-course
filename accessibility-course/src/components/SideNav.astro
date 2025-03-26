@@ -1,0 +1,84 @@
+---
+// SideNav.astro
+
+const { groupedLessonsArray } = Astro.props;
+
+interface Lesson {
+  id: string;
+  slug: string;
+  body: string;
+  collection: string;
+  data: Record<string, any>;
+  render: any;
+}
+
+interface Props {
+  groupedLessonsArray: [string, Lesson[]][];
+}
+
+const formattedLessonsArray = groupedLessonsArray.map(
+  ([folder, lessons], index) => {
+    const lessonTitle = folder
+      .replace(/^\d+_/, "")
+      .replace(/-/g, " ")
+      .replace(/\b\w/g, (char) => char.toUpperCase());
+
+    const sortedLessons = lessons.sort((a, b) => {
+      const aFile = a.id.split("/").pop();
+      const bFile = b.id.split("/").pop();
+
+      if (aFile === "instruction.md") return -1;
+      if (bFile === "instruction.md") return 1;
+
+      return (a.data.order || 100) - (b.data.order || 100);
+    });
+
+    return { index: index + 1, title: lessonTitle, lessons: sortedLessons };
+  }
+);
+
+---
+
+<!-- Sidebar for navigation -->
+<aside
+  id="merged-sidebar"
+  role="navigation"
+  aria-label="Lessons Navigation"
+  class="w-96 overflow-y-scroll bg-lightgray px-3 py-4 text-primary"
+>
+  {
+    formattedLessonsArray.map(({ index, title, lessons }) => (
+      <div class="mb-6">
+        <h2 class="mb-2 pl-2 text-lg font-black text-text">
+          Lesson {index}: {title}
+        </h2>
+        <ul class="pl-4 space-y-2 font-medium">
+          {lessons
+            .filter((subLesson) => !subLesson.id.endsWith("home.md"))
+            .map((subLesson) => {
+              const fileName = subLesson.id.split("/")[1];
+              let label = fileName.replace(".md", "").replace("-", " ");
+              label = label.charAt(0).toUpperCase() + label.slice(1);
+
+              if (title.includes("Intro") && fileName === "instruction.md") {
+                label = "Introduction";
+              } else {
+                label = `${title}: ${label}`;
+              }
+
+              return (
+                <li>
+                  <a
+                    href={`/lessons/${subLesson.slug}`}
+                    class="sidenav-links block w-full p-2 rounded-lg text-md text-text-color hover:bg-accent-color hover:text-primary transition font-bold"
+                  >
+                    {label}
+                  </a>
+                </li>
+              );
+            })}
+        </ul>
+      </div>
+    ))
+  }
+</aside>

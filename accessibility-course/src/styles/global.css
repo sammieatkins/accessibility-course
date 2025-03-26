@@ -179,7 +179,7 @@ a:hover {
   top: -50px;
   left: 10px;
   background: var(--primary-color);
-  color: var(--background-color);
+  color: white !important;
   padding: 10px;
   z-index: 100;
   text-decoration: none;
@@ -318,7 +318,6 @@ footer .small-text {
 
 .start-button {
   background-color: var(--accent-color);
-  color: var(--text-color);
   padding: 0.5rem 1rem;
   border-radius: 9999px;
   font-size: 0.875rem;
@@ -329,7 +328,6 @@ footer .small-text {
 .start-button:hover,
 .start-button:focus {
   background-color: var(--accent-color-dark);
-  color: var(--text-color);
 }
 
 /* ICONS */

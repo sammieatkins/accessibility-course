@@ -1,9 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
 
-// change red to orange
-// focus indicator on inputs
-// change action color
 // put instructions in the md file
 
 const SensoryCharacteristicsPractice = () => {
@@ -71,11 +68,12 @@ const SensoryCharacteristicsPractice = () => {
   // Function to get pass/fail styles
   const getRatingStyle = (contrast, requiredRatio) => {
     return contrast >= requiredRatio
-      ? { text: "Pass", background: "bg-[#A8E6A2] text-black border-[#7DBF78]" } // Light Green (Pass)
+      ? { text: "Pass", background: "bg-[#A8E6A2] text-black border-[#7DBF78]" }
       : {
           text: "Fail",
-          background: "bg-[#F5A3A3] text-black border-[#D67575]",
-        }; // Light Red (Fail)
+          //         background: "bg-[#FFD6A5] text-black border-[#FFA552]", // Light Orange (Fail)
+          background: "bg-[#FFB85C] text-black border-[#E59400]",
+        };
   };
 
   // Calculate contrast ratios
@@ -130,19 +128,7 @@ const SensoryCharacteristicsPractice = () => {
   };
 
   return (
-    <div className="p-6 max-w-[1100px]">
-      <h1 className="mb-4">Accessible Color Palette Tester</h1>
-
-      <p className="mb-4">
-        Good design isn’t just about looking nice—it needs to work for everyone.
-        In this activity, you’ll adjust colors for text, buttons, and links to
-        see how contrast affects readability. The preview updates as you make
-        changes, so any color combinations that don’t meet WCAG standards will
-        be flagged. Experiment with different options, find a fully accessible
-        palette, and export your colors as CSS variables to use in your own
-        projects.
-      </p>
-
+    <div className="p-5 max-w-[1100px]">
       {/* Row 1: Pick Colors & Website Preview */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Pick Your Colors */}
@@ -158,7 +144,7 @@ const SensoryCharacteristicsPractice = () => {
                     id={id}
                     value={value}
                     onChange={(e) => handleColorChange(key, e.target.value)}
-                    className="w-10 h-6 rounded-lg appearance-none border-none outline-none p-0 bg-transparent"
+                    className="w-10 h-6 rounded-lg appearance-none border border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-color-dark)]"
                     aria-labelledby={`${id}-label`}
                   />
                   <label

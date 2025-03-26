@@ -1,0 +1,108 @@
+---
+const { groupedLessonsArray } = Astro.props;
+
+interface Lesson {
+  id: string;
+  slug: string;
+  body: string;
+  collection: string;
+  data: Record<string, any>;
+  render: any;
+}
+
+interface Props {
+  groupedLessonsArray: [string, Lesson[]][];
+}
+
+const formattedLessonsArray = groupedLessonsArray.map(
+  ([folder, lessons], index) => {
+    const lessonTitle = folder
+      .replace(/^\d+_/, "")
+      .replace(/-/g, " ")
+      .replace(/\b\w/g, (char) => char.toUpperCase());
+
+    const sortedLessons = lessons.sort((a, b) => {
+      const aFile = a.id.split("/").pop();
+      const bFile = b.id.split("/").pop();
+
+      if (aFile === "instruction.md") return -1;
+      if (bFile === "instruction.md") return 1;
+
+      return (a.data.order || 100) - (b.data.order || 100);
+    });
+
+    return { index: index + 1, title: lessonTitle, lessons: sortedLessons };
+  }
+);
+---
+
+<div class="px-10 py-4 grid grid-cols-3 items-center">
+  {
+    (() => {
+      const currentSlug = Astro.url?.pathname?.replace("/lessons/", "") || "";
+
+      const allLessons = formattedLessonsArray.flatMap(({ lessons }) =>
+        lessons.filter((lesson) => !lesson.id.endsWith("home.md"))
+      );
+
+      const currentIndex = allLessons.findIndex(
+        (lesson) => lesson.slug === currentSlug
+      );
+      const prevLesson = currentIndex > 0 ? allLessons[currentIndex - 1] : null;
+      const nextLesson =
+        currentIndex < allLessons.length - 1
+          ? allLessons[currentIndex + 1]
+          : null;
+
+      return (
+        <>
+          {/* Left column (Previous) */}
+          {prevLesson ? (
+            <a
+              href={`/lessons/${prevLesson.slug}`}
+              class="no-underline justify-self-start sidenav-links text-white bg-[var(--primary-color)] transition px-4 py-2 rounded-lg shadow hover:bg-[var(--hover-dark-color)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--hover-dark-color)]"
+              aria-label="Previous lesson"
+            >
+              ← Previous Lesson
+            </a>
+          ) : (
+            <div />
+          )}
+
+          <span class="text-center text-text-color font-bold">
+            {formattedLessonsArray
+              .map(({ index, title, lessons }) => {
+                const currentLesson = lessons.find(
+                  (lesson) => lesson.slug === currentSlug
+                );
+                if (!currentLesson) return null;
+
+                let fileName =
+                  currentLesson.id
+                    .split("/")
+                    .pop()
+                    ?.replace(/\.mdx?$/, "")
+                    .replace("-", " ") || "Unknown";
+                fileName = fileName.charAt(0).toUpperCase() + fileName.slice(1);
+
+                return `Lesson ${index}: ${title} | ${fileName}`;
+              })
+              .filter(Boolean)[0] || "Lesson Title Not Found"}
+          </span>
+
+          {nextLesson ? (
+            <a
+              href={`/lessons/${nextLesson.slug}`}
+              class="no-underline justify-self-end sidenav-links text-white bg-[var(--primary-color)] transition px-4 py-2 rounded-lg shadow hover:bg-[var(--hover-dark-color)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--hover-dark-color)]"
+              aria-label="Next lesson"
+            >
+              Next Lesson →
+            </a>
+          ) : (
+            <div />
+          )}
+        </>
+      );
+    })()
+  }
+</div>
