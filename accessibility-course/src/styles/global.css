@@ -91,6 +91,9 @@ pre {
 p, ul, ol {
   max-width: 75ch;
 }
+
+
+
 p code {
   background-color: var(--code-bg);
   color: var(--code-text-color);
@@ -106,6 +109,7 @@ p {
   font-size: 1rem;
   line-height: 1.6;
   color: var(--text-color);
+  margin: 10px 0;
 }
 
 h1,
@@ -126,7 +130,7 @@ h6 {
 }
 
 #root-subheading {
-  margin-top: -2rem;
+  margin-top: -1.5rem;
 }
 
 h1 {

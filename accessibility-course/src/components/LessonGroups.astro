@@ -1,5 +1,7 @@
 ---
 import { getGroupedLessons } from "../utils/getGroupedLessons";
+import { getLessonLabel } from "../utils/getLessonLabel";
+
 interface Lesson {
   id: string;
   slug: string;
@@ -42,53 +44,48 @@ const formattedLessonsArray = groupedLessonsArray.map(
 ---
 
 <div class="bg-white shadow-md rounded-lg overflow-hidden">
-    {
-      formattedLessonsArray.map(({ index, title, folder, lessons }) => (
-        <div class="border-b border-muted">
-          <h3 class="bg-secondary text-text px-4 py-2 font-semibold text-lg m-0">
-            Lesson {index}: {title}
-          </h3>
-          {(() => {
-            const visibleLessons = lessons.filter(
-              (lesson) => !lesson.id.endsWith("home.md")
-            );
-            const hasMultiple = visibleLessons.length > 1;
+  {
+    formattedLessonsArray.map(({ index, title, folder, lessons }) => (
+      <div class="border-b border-muted">
+        <h3 class="bg-lightgray text-text px-4 py-2 font-semibold text-lg m-0">
+          Lesson {index}: {title}
+        </h3>
+        {(() => {
+          const visibleLessons = lessons.filter(
+            (lesson) => !lesson.id.endsWith("home.md")
+          );
+          const hasMultiple = visibleLessons.length > 1;
 
-            return (
-              <div class={hasMultiple ? "divide-y divide-gray-200" : ""}>
-                {visibleLessons.map((lesson) => {
-                  const fileName =
-                    lesson.id.split("/").pop()?.replace(".md", "") || "";
-                  let label = fileName.replace(/-/g, " ");
-                  label = label.charAt(0).toUpperCase() + label.slice(1);
+          return (
+            <div class={hasMultiple ? "divide-y divide-gray-200" : ""}>
+              {visibleLessons.map((lesson) => {
+                const fileName =
+                  lesson.id.split("/").pop()?.replace(".md", "") || "";
+                const folderName = lesson.id.split("/")[0];
 
-                  if (
-                    title.includes("Intro") &&
-                    fileName === "instruction"
-                  ) {
-                    label = "Introduction";
-                  } else {
-                    label = `${title}: ${label}`;
-                  }
+                const label = getLessonLabel({
+                  fileName,
+                  folderName,
+                  title,
+                  index,
+                });
 
-                  return (
-                    <a
-                      href={`/lessons/${lesson.slug}`}
-                      class="flex items-center justify-between p-2 hover:bg-lightgray transition"
-                    >
-                      <div class="flex items-center space-x-3">
-                        <span class="text-lg font-medium text-text">
-                          {label}
-                        </span>
-                      </div>
-                      <span class="start-button text-white">Start</span>
-                    </a>
-                  );
-                })}
-              </div>
-            );
-          })()}
-        </div>
-      ))
-    }
-  </div>
+                return (
+                  <a
+                    href={`/lessons/${lesson.slug}`}
+                    class="flex items-center justify-between p-2 hover:bg-lightgray transition"
+                  >
+                    <div class="ml-10 flex items-center space-x-3">
+                      <span class="text-lg font-medium text-text">{label}</span>
+                    </div>
+                    <span class="start-button text-white">Start</span>
+                  </a>
+                );
+              })}
+            </div>
+          );
+        })()}
+      </div>
+    ))
+  }
+</div>
