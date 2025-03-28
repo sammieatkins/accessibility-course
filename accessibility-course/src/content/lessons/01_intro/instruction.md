@@ -1,6 +1,8 @@
 ---
 title: Introduction to Accessibility
 ---
+<!-- link to ADA and 508 -->
+<!-- make "Root" actually the logo? or an icon callout with my logo? -->
 
 # Introduction to Accessibility
 
@@ -31,13 +33,12 @@ Curb cuts are great, but let's bring it back to the web:
 - Text zooming isn't only beneficial for people with low vision. Ever try reading tiny text on a phone screen or viewing a detailed diagram that was way too small? Zooming helps you too.
 
 #### It's About People, Not Just Code
-<!-- Imagine trying to apply for your dream job, but the website won't let you submit your application because it's not accessible. -->
 
 The web was built to be universal—a place where anyone, anywhere, can get information or interact without barriers. By choosing accessibility, you're actively including people who might otherwise be left out entirely. Imagine you're trying to read a required article for class, but it's posted as an image—so when you try to zoom in to read it more clearly, it just gets blurrier. Or maybe you just want to order dinner online, but the site is impossible to navigate without a mouse. Accessibility means building the web we ourselves would want to use—one where nobody is locked out by poor design.
 
 #### Legal Implications
 
-If all that talk about empathy and morals didn't fully convince you, let's talk practical reasons. Accessibility isn’t just a nice-to-have—it's required by law in many countries. For instance, the Americans with Disabilities Act (ADA) and Section 508 mandate accessible digital experiences in the United States. Globally, many countries base their accessibility standards on the Web Content Accessibility Guidelines (WCAG). Companies that ignore these requirements face real legal risks, from expensive lawsuits to damaged reputations. Simply put, ignoring accessibility is risky.
+If all that talk about empathy and morals didn't fully convince you, let's talk practical reasons. Accessibility isn’t just a nice-to-have—it's required by law in many countries. For instance, the [Americans with Disabilities Act (ADA)](https://www.ada.gov/) and Section 508 mandate accessible digital experiences in the United States. Globally, many countries base their accessibility standards on the Web Content Accessibility Guidelines (WCAG). Companies that ignore these requirements face real legal risks, from expensive lawsuits to damaged reputations. Simply put, ignoring accessibility is risky.
 
 #### Career Benefits
 
@@ -47,7 +48,11 @@ Additionally, companies love SEO (search engine optimization), because SEO trans
 
 ## Look, I get it
 
-I know accessibility might feel challenging or like "extra work," especially if you're used to just getting your page up quickly. Honestly, I've been there. But here's what I've learned: accessibility is only "extra work" when you tack it on at the end. If you learn to integrate accessibility from the start, it becomes second nature. Remember when you first started using keyboard shortcuts or carefully naming your variables? At first, it probably took conscious effort, but now you'd never go back. Accessibility can—and should—be the same way.
+I know accessibility might feel challenging or like "extra work," especially if you're used to just getting your page up quickly. Honestly, I've been there. But here's what I've learned: accessibility is only "extra work" when you tack it on at the end. If you learn to integrate accessibility from the start, it becomes second nature.
+
+Remember when you first started using keyboard shortcuts or carefully naming your variables? At first, it probably took conscious effort, but now you'd never go back.
+
+**Accessibility can—and should—be the same way.**
 
 That's why this course is called "Root"—it's about grounding your web development practices in accessibility from the very beginning. Accessibility shouldn't be a separate branch you add later; it should be the foundation your code grows from.
 

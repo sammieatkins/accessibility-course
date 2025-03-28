@@ -126,7 +126,7 @@ const SensoryCharacteristicsPractice = () => {
   };
 
   return (
-    <div className="p-5 max-w-[1100px]">
+    <div className="p-5 pt-0 max-w-[1100px]">
       {/* Row 1: Pick Colors & Website Preview */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Pick Your Colors */}
@@ -142,8 +142,7 @@ const SensoryCharacteristicsPractice = () => {
                     id={id}
                     value={value}
                     onChange={(e) => handleColorChange(key, e.target.value)}
-                    className="w-10 h-6 rounded-lg appearance-none border border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-color-dark)]"
-                    aria-labelledby={`${id}-label`}
+                    className="w-10 h-6 rounded-lg appearance-none border border-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-color-dark)]"
                   />
                   <label
                     id={`${id}-label`}
@@ -158,7 +157,7 @@ const SensoryCharacteristicsPractice = () => {
           </div>
           <button
             onClick={resetColors}
-            className="text-white transition bg-[var(--primary-color)] px-4 py-2 rounded-lg shadow hover:bg-[var(--accent-color-dark)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-color-dark)]"
+            className="text-white transition bg-[var(--primary-color)] px-4 py-2 rounded-lg shadow hover:bg-[var(--accent-color-dark)] focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-color-dark)]"
           >
             Reset Colors
           </button>
@@ -230,7 +229,7 @@ const SensoryCharacteristicsPractice = () => {
               </button>
 
               {/* Warnings */}
-              <div className="flex flex-col gap-1 ml-3">
+              <div className="ml-3">
                 {/* Button Background to Page Background Contrast */}
                 {getRatingStyle(contrastRatios["Button to Background"], 4.5)
                   .text === "Fail" && (
@@ -242,7 +241,7 @@ const SensoryCharacteristicsPractice = () => {
                 {/* Button Text to Button Background Contrast */}
                 {getRatingStyle(contrastRatios["Button Text to Button"], 4.5)
                   .text === "Fail" && (
-                  <p className="px-3 py-1 bg-[#FFB85C] text-black border-[#E59400] text-xs rounded-lg shadow w-max">
+                  <p className="mt-1 px-3 py-1 bg-[#FFB85C] text-black border-[#E59400] text-xs rounded-lg shadow w-max">
                     Button text fails contrast.
                   </p>
                 )}
@@ -292,23 +291,21 @@ const SensoryCharacteristicsPractice = () => {
       </div>
 
       {/* Export Explanation */}
-      <div className="mt-6 p-4 flex items-start gap-4 bg-transparent">
+      {/* <div className="mt-6 p-4 flex items-start gap-4 bg-transparent">
         <span
           className="material-symbols--palette-outline text-2xl text-text-color mt-1"
           aria-hidden="true"
-        ></span>
-        <div>
-          <h2 className="text-lg font-semibold text-text-color mb-2">
-            Export Your Accessible Colors
-          </h2>
-          <p className="text-text-color">
-            Great job creating an accessible color palette! Now, you can easily
-            apply it to your own projects. Just copy the CSS code below and
-            paste it into your stylesheets. This will ensure your design remains
-            visually inclusive and meets accessibility standards.
-          </p>
-        </div>
+        ></span> */}
+      <div>
+        <h2 className="text-xl mt-6">Export Your Accessible Colors</h2>
+        <p className="text-text-color">
+          Great job creating an accessible color palette! Now, you can easily
+          apply it to your own projects. Just copy the CSS code below and paste
+          it into your stylesheets. This will ensure your design remains
+          visually inclusive and meets accessibility standards.
+        </p>
       </div>
+      {/* </div> */}
 
       {/* Row 3: CSS & Color Table */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
@@ -323,7 +320,7 @@ const SensoryCharacteristicsPractice = () => {
             <button
               onClick={handleCopy}
               aria-live="polite"
-              className="absolute top-2 right-3 z-10 flex items-center gap-1 text-[var(--text-color)] hover:underline focus:outline-none"
+              className="absolute top-2 right-3 z-10 flex items-center gap-1 text-[var(--text-color)] hover:underline"
             >
               {copied ? (
                 <>

@@ -10,7 +10,9 @@ description: "How to write useful alt text"
 
 <h2 class="subheading">It's more than just 'dog.jpg'</h2>
 
-Alt text is probably something you already think you know about accessibility. Most developers know about alt text because it's one of the default attributes in an `img` tag when you use Emmet shortcuts. There's more to it than just filling it with whatever text, though. Alt text is short for alternative text. It's meant to be an equivalent alternative to a meaningful image. People who can't see the image should still be able to understand what it's supposed to tell them. Alt text has other practical uses too—like boosting SEO and providing a fallback when an image doesn’t load (...not that your images would ever fail to load, obviously).
+Alt text is probably something you already think you know about accessibility. Most developers know about alt text because it's one of the default attributes in an `img` tag when you use Emmet abbreviations. There's more to it than just filling it with whatever text, though. 
+
+Alt text is short for alternative text. It's meant to be an equivalent alternative to a meaningful image. People who can't see the image should still be able to understand what it's supposed to tell them. Alt text has other practical uses too—like boosting SEO and providing a fallback when an image doesn’t load (...not that your images would ever fail to load, obviously).
 
 ## How to Write Good Alt Text
 
@@ -20,8 +22,9 @@ Alt text might seem simple at first, but there’s more to it than meets the eye
 
 An image can have completely different alt text depending on the context. If it’s used at the top of a blog post about pet ownership, it might just be setting the tone. But if it's part of a quiz asking users to identify dog breeds, suddenly the details of that image are important.
 
-Before you write alt text, ask yourself: Why is this image here? What information would be lost if someone couldn’t see it?
-That’s your guiding question. Everything else builds from there.
+Before you write alt text, ask yourself: *Why is this image here? What information would be lost if someone couldn’t see it?*
+
+Those are your guiding questions. Everything else builds from there.
 
 ### Not the Time to Get Wordy
 
@@ -29,7 +32,7 @@ Alt text is meant to be short and sweet, around 125 characters long. If you need
 
 ### Alt Text Don'ts
 
-Let’s have a quick alt text intervention. We're going to go through a few "don'ts" before we get to the "do's".
+Let’s have a quick alt text intervention. We're going to go through a few "don'ts" before we get to the "dos".
 
 First up, alt text shouldn't be **repetitive**. This means alt text shouldn't repeat what's already in the context. Sticking with our dog example, if underneath the image you already talk about the dog breed, don't include the dog breed in the alt text. In this case, the image isn't giving any new information.
 
@@ -53,6 +56,7 @@ Some images actually have a job to do. Like a logo that links to the homepage, o
 ## When Not to Use Alt Text
 
 Not every image actually needs alt text. Remember how alt text is meant to provide an equivalent experience? If an image isn’t communicating any meaningful content, it probably doesn’t need to be described. These are called decorative images. Think of things like swirls, dividers, or background shapes—visual flourishes that add style but don’t provide new information.
+
 Hate to break it to you—blind users don't care about aesthetics. Alt text for decorative images is just noise.
 
 ## How to Write Alt Text in Your Code

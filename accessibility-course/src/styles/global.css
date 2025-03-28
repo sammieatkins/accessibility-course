@@ -18,7 +18,8 @@
   --background-color: #ffffff;
   --text-color: #13242b;
   --light-gray: #f1f1f1;
-  --dark-grey: #737373;
+  --dark-gray: #737373;
+  --darker-gray: #414141;
   --code-bg: #e8e8e8;
   --code-text-color: #326273;
 
@@ -32,14 +33,9 @@ html {
 
 /* Custom Focus Indicator */
 :focus {
-  outline: 3px solid var(--accent-color-dark); /* Accent color for focus */
-  outline-offset: 2px; /* Adjust spacing from the element */
-  box-shadow: 0 0 5px var(--primary-color); /* Optional: add a shadow effect */
+  outline: 3px solid var(--accent-color-dark);
+  outline-offset: 2px;
 }
-
-/* main {
-    max-width: 65%;
-  } */
 
 .activity {
   max-width: 80%;
@@ -64,7 +60,7 @@ a:focus {
 input[type="color"] {
   border-radius: 5px;
   padding: 0;
-  border: 2px solid var(--dark-grey);
+  border: 2px solid var(--dark-gray);
 }
 
 input[type="color"]::-moz-color-swatch {
@@ -92,8 +88,6 @@ p, ul, ol {
   max-width: 75ch;
 }
 
-
-
 p code {
   background-color: var(--code-bg);
   color: var(--code-text-color);
@@ -120,7 +114,7 @@ h5,
 h6 {
   font-family: var(--body-font);
   margin-top: 1rem;
-  color: var(--dark-grey);
+  color: var(--dark-gray);
   color: var(--text-color);
   color: var(--primary-color);
 }
@@ -136,7 +130,7 @@ h6 {
 h1 {
   font-size: 3rem;
   font-weight: 900;
-  color: var(--dark-grey);
+  color: var(--dark-gray);
 }
 
 h2 {
@@ -236,19 +230,21 @@ a:hover {
   font-weight: bold;
   transition: color 0.3s ease, transform 0.2s ease;
   padding: 10px;
-  border-radius: 5px;
   font-family: var(--body-font);
+  border-bottom: 2px solid transparent;
 }
 
 .navlinks a:hover,
 .navlinks a:focus,
 .nav-container a:hover,
 .nav-container a:focus {
-  background-color: var(--light-green);
+  border-bottom: 2px solid var(--hover-dark-color);
 }
 
-.sidenav-links {
-  color: var(--primary-color);
+.navlinks a.active,
+.nav-container a.active {
+  border-bottom: 2px solid var(--accent-color-dark);
+  color: var(--accent-color-dark);
 }
 
 footer {

@@ -47,7 +47,7 @@ const formattedLessonsArray = groupedLessonsArray.map(
   {
     formattedLessonsArray.map(({ index, title, lessons }) => (
       <div class="mb-6">
-        <h2 class="mb-2 pl-2 text-lg font-black text-text">
+        <h2 class="mb-2 pl-2 text-lg font-black text-darkergray">
           Lesson {index}: {title}
         </h2>
         <ul class="pl-4 space-y-2 font-medium">
@@ -64,7 +64,8 @@ const formattedLessonsArray = groupedLessonsArray.map(
                 title,
                 index,
               });
-              
+
+
               return (
                 <li>
                   <a

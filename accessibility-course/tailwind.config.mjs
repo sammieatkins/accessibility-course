@@ -13,6 +13,8 @@ module.exports = {
         accentdark: 'var(--accent-color-dark)',
         text: 'var(--text-color)',
         lightgray: 'var(--light-gray)',
+        darkgray: 'var(--dark-gray)',
+        darkergray: 'var(--darker-gray)',
         lightgreen: 'var(--light-green)',
       },
     },
