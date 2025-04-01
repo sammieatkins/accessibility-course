@@ -8,6 +8,8 @@ import AriaPractice from "./activities/AriaPractice";
 import AssistiveTechnologyPractice from "./activities/AssistiveTechnologyPractice";
 import TestingPractice from "./activities/TestingPractice";
 import DecorativeImagePractice from "./activities/DecorativeImagePractice";
+import SkipNavPractice from "./activities/SkipNavPractice";
+import LinkTextMatching from "./activities/LinkTextMatching";
 
 const activityMap = {
   AltTextPractice,
@@ -19,6 +21,8 @@ const activityMap = {
   AssistiveTechnologyPractice,
   TestingPractice,
   DecorativeImagePractice,
+  SkipNavPractice,
+  LinkTextMatching
 };
 
 const ActivityLoader = ({ activity }) => {

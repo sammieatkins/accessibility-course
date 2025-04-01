@@ -10,7 +10,7 @@ description: "How to write useful alt text"
 
 <h2 class="subheading">It's more than just 'dog.jpg'</h2>
 
-Alt text is probably something you already think you know about accessibility. Most developers know about alt text because it's one of the default attributes in an `img` tag when you use Emmet abbreviations. There's more to it than just filling it with whatever text, though. 
+Alt text is probably something you already think you know about accessibility. Most developers know about alt text because it's one of the default attributes in an `img` tag when you use Emmet abbreviations. There's more to it than just filling it with whatever text, though.
 
 Alt text is short for alternative text. It's meant to be an equivalent alternative to a meaningful image. People who can't see the image should still be able to understand what it's supposed to tell them. Alt text has other practical uses too—like boosting SEO and providing a fallback when an image doesn’t load (...not that your images would ever fail to load, obviously).
 
@@ -22,7 +22,7 @@ Alt text might seem simple at first, but there’s more to it than meets the eye
 
 An image can have completely different alt text depending on the context. If it’s used at the top of a blog post about pet ownership, it might just be setting the tone. But if it's part of a quiz asking users to identify dog breeds, suddenly the details of that image are important.
 
-Before you write alt text, ask yourself: *Why is this image here? What information would be lost if someone couldn’t see it?*
+Before you write alt text, ask yourself: _Why is this image here? What information would be lost if someone couldn’t see it?_
 
 Those are your guiding questions. Everything else builds from there.
 

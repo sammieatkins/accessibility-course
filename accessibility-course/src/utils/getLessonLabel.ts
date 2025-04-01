@@ -21,10 +21,10 @@ export function getLessonLabel({
   } else if (isIntroFolder) {
     return `Intro: ${readableFileName}`;
   } else if (fileName === "instruction") {
-    return `Lesson ${index}: ${title}`;
+    return `${title}: Instruction`;
   } else if (fileName === "activity") {
     return `${title}: Activity`;
   } else {
-    return `${title}: ${readableFileName} Activity`;
+    return `${title}: ${readableFileName}`;
   }
 }

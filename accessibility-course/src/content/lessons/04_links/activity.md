@@ -1,7 +1,7 @@
 ---
 activity: "LinkTextPractice"
+title: "Link Text Practice"
 ---
 
-## Try link text activity
-
-<!-- the skipnav.astro file is an activity concept in progress -->
+# Link Text Practice
+You'll be given a URL with no context. Try to write descriptive link text for that URL based on what you've been taught in the [Link Text Lesson](/lessons/04_links/instruction)
