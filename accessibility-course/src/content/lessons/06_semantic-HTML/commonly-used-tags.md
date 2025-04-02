@@ -1,6 +1,7 @@
 ---
 title: "Commonly Used Tags"
 ---
+<!-- add menu -->
 
 # Commonly Used Tags
 
@@ -17,6 +18,7 @@ You can always check out the full list at [W3Schools: HTML Tags](https://www.w3s
 - [`<article>`](https://www.w3schools.com/tags/tag_article.asp): Self-contained content like blog posts or comments.
 - [`<aside>`](https://www.w3schools.com/tags/tag_aside.asp): Secondary content, like sidebars or callouts.
 - [`<footer>`](https://www.w3schools.com/tags/tag_footer.asp): Concludes a page or section with metadata or links.
+- [`<menu>`](): 
 
 ### Headings & Text Content
 

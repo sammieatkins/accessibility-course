@@ -1,30 +1,6 @@
 ---
-title: ""
+title: "ARIA Instruction"
 ---
-<!-- make sure AI bit is added -->
-
-<!-- this site: http://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA is an incredible article about aria, and i want to amke sure i hit pretty much the same info, but with my own voice and structure. -->
-
-# ARIA
-
-<h2 class="subheading">The first rule of ARIA is to not use ARIA</h2>
-
-<!-- how will a screen reader pronounce the phonetic spellings here? -->
-
-Real quick, throwing it back to wih-cahg, ARIA is pronouced ah-ree-uh. Anyway, it stands for Accessible Rich Internet Applications. Like I mentioned in the subheading, the first rule of ARIA is to not use ARIA. Why, might you ask? Well, I would argue I just told you in the [Semantic HTML Lesson](/lessons/06_semantic-HTML), but just in case you're skipping around I'll spell it out for you. Basically, ARIA is meant to _supplement_ the semantic HTML tags that already exist. Sometimes, we're creating a component that is so complex it doesn't have an existing HTML tag. _That's_ when using ARIA is entirely justified.
-
-The trick with ARIA is that it's totally possible to make a fake `<button>` tag by giving a `<div>` the role of `button` (`<div aria-role="button">`). Now, don't use this knowledge for evil (with great power comes great responsibility or whatever). Keep in mind that if it's possible to use a semantic html element, you should.
-
-<!-- pretty sure i'm paraphrasing something here: Keep in mind that if it's possible to use a semantic html element, you should. i think it's a quote linked in that article i've got at the beginning of this file. get the actual quote and quote it here with the link for reference. -->
-<!-- refine the spiderman quote joke -->
-<!-- check my div aria role button syntax -->
-<!-- list other examples after Sometimes, we're creating a component that is so complex it doesn't have an existing HTML tag.  -->
-<!-- double check what ARIA stands for -->
-
-## When _Can_ I Use ARIA?
-
-<!-- mention this use case: Heads up: Just because something looks like a sidebar doesn’t mean it should be wrapped in <aside>. If it’s your main way of getting around, like a lesson menu (wink wink), use <nav> instead—and toss in an aria-label if you’ve got more than one. -->
-<!-- wink wink joke because this site has a lesson menu. does that come across? -->
 
 # ARIA
 
@@ -37,7 +13,8 @@ But here’s the deal: the **first rule of ARIA is don’t use ARIA.**
 Sounds dramatic, right? But it’s true—and it's not just me saying it. Straight from the source:
 
 > “If you can use a native HTML element or attribute with the semantics and behavior you require already built in, _instead of re-purposing an element and adding an ARIA role, state or property to make it accessible_, then do so.”  
-> — [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA)
+> — [W3 First Rule of ARIA Use](https://www.w3.org/TR/using-aria/#rule1)
+
 <!-- actually this one: http://w3.org/TR/using-aria/#rule1 -->
 
 So, why does ARIA exist if we’re not supposed to use it?
@@ -46,17 +23,90 @@ Glad you asked.
 
 ## When HTML Can’t Do the Job
 
-In the [Semantic HTML lesson](/lessons/06_semantic-HTML/instruction), we talked about how HTML gives you a whole toolkit of meaningful elements—`<button>`, `<nav>`, `<header>`, etc.—that already work well with screen readers and other assistive technologies.
+In the [Semantic HTML lesson](/lessons/06_semantic-HTML), we talked about how HTML gives you a whole toolkit of meaningful elements—`<button>`, `<nav>`, `<header>`, etc.—that already work well with screen readers and other assistive technologies.
 
 But sometimes, we create something that HTML doesn’t have a native tag for. Let’s say:
 
 - You’re building a custom tab panel
 - You need a live alert to announce error messages
-- You’re making a dialog/modal with custom behavior
 - You’re styling a listbox from scratch
 - You’ve got a visual toggle that acts like a switch
 
 HTML doesn’t offer a built-in way to describe these patterns. That’s where ARIA comes in. It fills the gaps—but only **after** you’ve tried using semantic HTML first.
+
+Now here’s where things get tricky:
+
+You _can_ fake a button by styling a `<div>` and giving it a role—like this:
+
+```html
+<div role="button">Submit</div>
+```
+
+**Don’t use this knowledge for evil.** (With great power comes great responsibility.)
+
+Just because you can doesn’t mean you should. If a semantic element like `<button>` exists, use it. It’s already accessible, keyboard-friendly, and built to work with assistive tech. That’s the whole point.
+
+ARIA is here to support you when HTML falls short—not to replace it.
+
+## When ARIA _Is_ the Right Tool
+
+Okay, we’ve been hard on ARIA. But when used correctly, it’s powerful—and sometimes the only option.
+
+Here are some situations where ARIA is not just allowed, but encouraged:
+
+### Live Regions
+
+Need to announce changes on the page without a full reload? That’s where ARIA live regions come in.
+
+#### Examples:
+
+- Form errors that appear after a user submits
+- Cart updates in an ecommerce site
+- Status messages like “Copied to clipboard” or “Message sent”
+
+The magic attribute here is aria-live, which can be set to "polite" (wait for a pause) or "assertive" (interrupt everything). You can also use aria-atomic="true" to make screen readers announce the whole container, not just the changed part.
+
+**Note:** Use "assertive" only when the message is urgent and requires immediate attention. It interrupts the screen reader’s current output, which can be disorienting or frustrating if overused. For most updates, "polite" is the better choice.
+
+```html
+<p aria-live="polite" aria-atomic="true">
+  Your password must include at least one special character.
+</p>
+```
+
+This lets users know something changed—even if they’re not looking right at it.
+
+### Multipart Labels
+
+Sometimes a label is made up of multiple pieces. For example, a form might have helper text that expands on a short visible label. ARIA lets you tie these together using aria-labelledby.
+
+```html
+<label id="name-label">Name</label>
+<span id="name-helper">As shown on your ID</span>
+<input aria-labelledby="name-label name-helper" />
+```
+
+This way, assistive tech reads both parts as the label.
+
+### Descriptive Labels and Names
+
+When visible labels aren't enough—or don’t exist—you can give screen readers more context using:
+
+- `aria-label` – for adding an invisible label
+- `aria-labelledby` – for referencing visible content
+- `aria-describedby` – for adding helpful extra context (e.g., “Passwords must be at least 8 characters”)
+
+These are great for inputs, buttons, icons, and anything else where clarity matters.
+
+### Custom Widgets (When You Really Need Them)
+
+If you're building custom components like tab panels, or dropdown menus, semantic HTML probably won’t cut it. These are valid times to use ARIA roles like:
+
+- `role="tablist"`, `role="tab"`, `role="tabpanel"` – for tab interfaces
+- `role="alert"` – for urgent messages
+- `role="switch"` – for toggles
+
+<span class="uppercase">but</span>: You also need to replicate the expected keyboard behavior. ARIA doesn’t give you functionality—it just helps announce things properly. You still need to write the scripts that make them act like real elements.
 
 ## How ARIA Works
 
@@ -85,7 +135,7 @@ Labeling an input without a visible label:
 Marking something as decorative (and skipping it in screen readers):
 
 ```html
-<span aria-hidden="true">★</span>
+<span aria-hidden="true">❤️</span>
 ```
 
 Want to group form controls? There are ARIA roles for that—but in most cases, the native `<fieldset>` and `<legend>` do a better job. Save the fancy ARIA stuff for situations where no semantic tag exists.
