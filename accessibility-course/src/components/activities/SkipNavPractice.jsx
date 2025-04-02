@@ -1,10 +1,20 @@
+// put the sections side by side on a big screen and stacked on small screens
+// increase the default text area height to fit the content (and expand based on the content inside as it's typed?)
+// add some checks to not allow <script> tags to protect the site
+// fix the wonkiness of the skip nav button. it's being goofy at the moment
+// focus in the preview css should be a differnt color on the preview nav (probably white). curently doesn't match contrast. Then switch to the navy blue in the body
+// override all of my site's styles in the css so that it really looks like a different page.
+// light gray "skip link practice", probably get rid of it. it'd be nice to have something there for continuity, but it doesn't really fit? idk, maybe it's fine.
+// MISSING FORM LABEL FIX THAT => <p>Edit the code below to add a working skip link to the page.</p>
+
+"use client";
 import { useState, useEffect } from "react";
 
 const LOCAL_KEY = "skip-link-activity";
 
 const SkipNavPractice = () => {
   const defaultCode = `<header>
-  <h1>Accessibility Practice Site</h1>
+  <h1>Practice Site</h1>
   <!-- Try adding a skip link (with a class of "skip-link") -->
   <nav>
     <ul>
@@ -26,7 +36,6 @@ const SkipNavPractice = () => {
   const [hintLevel, setHintLevel] = useState(0);
   const [loaded, setLoaded] = useState(false);
 
-  // Load saved progress
   useEffect(() => {
     const saved = localStorage.getItem(LOCAL_KEY);
     if (saved) {
@@ -38,7 +47,6 @@ const SkipNavPractice = () => {
     setLoaded(true);
   }, []);
 
-  // Save progress
   useEffect(() => {
     localStorage.setItem(
       LOCAL_KEY,
@@ -124,7 +132,7 @@ const SkipNavPractice = () => {
         height: 1px;
         overflow: hidden;
         background: #1e293b;
-        color: #000;
+        color: #fff;
         padding: 0.5rem 1rem;
         z-index: 100;
       }
@@ -156,58 +164,62 @@ const SkipNavPractice = () => {
   ];
 
   return (
-    <div className="max-w-3xl mx-auto p-4 space-y-6">
+    <div className="max-w-2xl mx-auto p-4 font-sans text-text bg-background rounded space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold">Skip Link Practice</h2>
+        <p className="text-sm font-semibold text-darkgray">
+          Skip Link Practice
+        </p>
         <button
           onClick={handleRestart}
-          className="text-sm text-red-700 underline"
+          className="text-sm px-3 py-1 rounded text-white bg-hoverdark hover:bg-accentdark"
         >
           Restart Activity
         </button>
       </div>
 
-      <p>Edit the code below to add a working skip link to the page.</p>
+      <div className="p-4 border rounded bg-lightgray space-y-4">
+        <p>Edit the code below to add a working skip link to the page.</p>
 
-      <textarea
-        className="w-full h-80 p-3 border rounded font-mono text-sm"
-        value={code}
-        onChange={(e) => setCode(e.target.value)}
-      />
+        <textarea
+          className="w-full h-80 p-3 border border-darkgray rounded font-mono text-sm bg-white"
+          value={code}
+          onChange={(e) => setCode(e.target.value)}
+        />
 
-      <div className="flex flex-wrap gap-4 mt-2">
-        <button
-          onClick={handleSubmit}
-          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-        >
-          Submit
-        </button>
-        {hintLevel < hints.length && (
+        <div className="flex flex-wrap gap-4">
           <button
-            onClick={() => setHintLevel((h) => h + 1)}
-            className="text-blue-700 underline"
+            onClick={handleSubmit}
+            className="px-4 py-2 rounded text-white bg-accent hover:bg-accentdark"
           >
-            Show a hint
+            Submit
           </button>
+          {hintLevel < hints.length && (
+            <button
+              onClick={() => setHintLevel((h) => h + 1)}
+              className="text-accent underline"
+            >
+              Show a hint
+            </button>
+          )}
+        </div>
+
+        {hintLevel > 0 && (
+          <div className="mt-2 p-3 bg-lightgreen border-l-4 border-accent text-sm space-y-2">
+            {hints.slice(0, hintLevel).map((hint, index) => (
+              <p key={index}>{hint}</p>
+            ))}
+          </div>
+        )}
+
+        {submitted && (
+          <div className="mt-2 p-3 bg-lightgray border-l-4 border-darkgray text-sm">
+            {feedback}
+          </div>
         )}
       </div>
 
-      {hintLevel > 0 && (
-        <div className="mt-4 p-3 bg-blue-50 border-l-4 border-blue-400 text-sm space-y-2">
-          {hints.slice(0, hintLevel).map((hint, index) => (
-            <p key={index}>{hint}</p>
-          ))}
-        </div>
-      )}
-
-      {submitted && (
-        <div className="mt-4 p-3 bg-gray-100 border-l-4 border-gray-400">
-          {feedback}
-        </div>
-      )}
-
       <div>
-        <h3 className="text-lg font-semibold mt-6 mb-2">Live Preview</h3>
+        <h3 className="text-lg font-semibold mb-2">Live Preview</h3>
         {loaded && (
           <div
             className="border p-4 rounded bg-white min-h-[22rem]"

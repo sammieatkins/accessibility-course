@@ -1,14 +1,12 @@
 // fix flickers on initial load
-// make restart always visible
+// put restart button on top right of the block, opposite the progress thing
 // button colors and other css
 // fill out content for image data (10-15?)
-
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useLayoutEffect, useEffect } from "react";
 import { imageData } from "../../utils/imageData";
 
 const TOTAL_REQUIRED_CORRECT = 5;
-
 const LOCAL_STORAGE_KEY = "decorative-image-progress";
 
 const DecorativeImagePractice = () => {
@@ -20,8 +18,8 @@ const DecorativeImagePractice = () => {
   const [hasRestarted, setHasRestarted] = useState(false);
   const [hasInitialized, setHasInitialized] = useState(false);
 
-  // Load saved progress on first render
-  useEffect(() => {
+  // Use layout effect to avoid initial flicker
+  useLayoutEffect(() => {
     const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (saved) {
       const parsed = JSON.parse(saved);
@@ -122,8 +120,7 @@ const DecorativeImagePractice = () => {
     }
   }, [hasRestarted]);
 
-  // Wait until initial state has loaded to avoid flicker
-  if (!hasInitialized) return null;
+  if (!hasInitialized) return <div className="min-h-screen" />;
 
   if (correctCount >= TOTAL_REQUIRED_CORRECT) {
     return (
@@ -177,8 +174,16 @@ const DecorativeImagePractice = () => {
 
   return (
     <div className="p-4 max-w-xl mx-auto relative">
-      <div className="mb-4 text-sm text-gray-600">
-        Progress: {correctCount} / {TOTAL_REQUIRED_CORRECT} correct
+      <div className="mb-4 flex justify-between items-center text-sm text-gray-600">
+        <p className="mb-4 text-sm text-gray-600">
+          Progress: {correctCount} / {TOTAL_REQUIRED_CORRECT} correct
+        </p>
+        <button
+          className="bg-gray-300 text-gray-800 px-3 py-1 rounded hover:bg-gray-400"
+          onClick={restartActivity}
+        >
+          Restart Activity
+        </button>
       </div>
 
       <img
@@ -242,16 +247,6 @@ const DecorativeImagePractice = () => {
           </div>
         </div>
       )}
-
-      {/* Always-visible restart button */}
-      <div className="fixed bottom-4 right-4">
-        <button
-          className="bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded hover:bg-gray-400"
-          onClick={restartActivity}
-        >
-          Restart Activity
-        </button>
-      </div>
     </div>
   );
 };

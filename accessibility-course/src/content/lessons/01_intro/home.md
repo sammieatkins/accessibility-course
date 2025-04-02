@@ -11,3 +11,6 @@ Throughout the course, you’ll explore real-world examples, build empathy for u
 
 ## Why Listen to Me?
 <!-- circle picture of me -->
+I worked as a Digital Accessibility Specialist at BYU–Idaho for years helping the campus community make online content more accessible. That experience, combined with my degree in web development, is what shaped this course.
+
+I know what it’s like to feel overwhelmed by accessibility—or to not even know where to start. This course is here to change that. I’ve seen the difference accessible code can make, and I want to help you build those skills from the ground up.

@@ -38,7 +38,7 @@ const formattedLessonsArray = groupedLessonsArray.map(
 ---
 
 <!-- Sidebar for navigation -->
-<aside
+<nav
   id="merged-sidebar"
   role="navigation"
   aria-label="Lessons Navigation"
@@ -50,7 +50,7 @@ const formattedLessonsArray = groupedLessonsArray.map(
         <h2 class="mb-2 pl-2 text-lg font-black text-darkergray">
           Lesson {index}: {title}
         </h2>
-        <ul class="pl-4 space-y-2 font-medium">
+        <ul class="pl-4 space-y-2 font-medium side-nav">
           {lessons
             .filter((subLesson) => !subLesson.id.endsWith("home.md"))
             .map((subLesson) => {
@@ -81,4 +81,4 @@ const formattedLessonsArray = groupedLessonsArray.map(
       </div>
     ))
   }
-</aside>
+</nav>

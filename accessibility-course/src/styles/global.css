@@ -81,20 +81,37 @@ pre {
   background-color: var(--code-bg);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: inline-block;
-  max-width: 100%; 
+  max-width: 100%;
 }
 
-p, ul, ol {
+p,
+ul,
+ol {
   max-width: 75ch;
 }
 
-p code {
+p code,
+ul code,
+ol code {
   background-color: var(--code-bg);
-  color: var(--code-text-color);
+  color: var(--text-color);
   padding: 0.2rem 0.4rem;
-  border-radius: 0.3rem;
+  font-family: monospace;
+  font-size: 0.85rem;
+  @apply rounded-lg overflow-x-auto;
+}
+
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
+  /* background-color: var(--code-bg); */
+  padding: 0.2rem 0.4rem;
   font-family: monospace;
   @apply rounded-lg overflow-x-auto;
+  color: var(--primary-color);
 }
 
 p {
@@ -106,6 +123,14 @@ p {
   margin: 10px 0;
 }
 
+#root {
+  font-size: 5rem;
+}
+
+#root-subheading {
+  margin-top: -1.5rem;
+}
+
 h1,
 h2,
 h3,
@@ -114,17 +139,7 @@ h5,
 h6 {
   font-family: var(--body-font);
   margin-top: 1rem;
-  color: var(--dark-gray);
-  color: var(--text-color);
   color: var(--primary-color);
-}
-
-#root {
-  font-size: 5rem;
-}
-
-#root-subheading {
-  margin-top: -1.5rem;
 }
 
 h1 {
@@ -247,6 +262,11 @@ a:hover {
   color: var(--accent-color-dark);
 }
 
+/* manual override for sidenav ul */
+.side-nav {
+  list-style-type: none;
+}
+
 footer {
   color: var(--primary-color);
   padding: 1.5rem;
@@ -273,7 +293,7 @@ footer .small-text {
   color: var(--primary-color);
 }
 
-.prose ul {
+/* .prose ul {
   list-style-type: disc !important;
   margin-left: 1.5rem;
 }
@@ -281,6 +301,23 @@ footer .small-text {
 .prose ol {
   list-style-type: decimal !important;
   margin-left: 1.5rem;
+} */
+
+/* manual ul/ol bc prose is stupid */
+ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
 }
 
 @media (min-width: 768px) {
@@ -333,6 +370,7 @@ footer .small-text {
   font-size: 0.875rem;
   font-weight: 600;
   font-family: var(--body-font);
+  color: var(--background-color);
 }
 
 .start-button:hover,

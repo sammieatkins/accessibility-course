@@ -1,3 +1,5 @@
+// submit is triggering restart button??
+
 import { useState, useRef, useEffect } from "react";
 
 const urls = [
@@ -25,6 +27,7 @@ const urls = [
 
 export default function LinkTextWritingActivity() {
   const isBrowser = typeof window !== "undefined";
+  const nextButtonRef = useRef(null);
 
   const [state, setState] = useState({
     currentIndex: 0,
