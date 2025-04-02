@@ -1,3 +1,5 @@
+// bulk up image data examples
+
 "use client";
 import { useState } from "react";
 

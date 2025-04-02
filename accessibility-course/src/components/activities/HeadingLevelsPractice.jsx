@@ -1,4 +1,3 @@
-// check screen reader on this one for sure. should focus move back up to the top after you submit your answers so they can move back through? maybe the same should happen for sighted users. scroll back to the top.
 import { useState, useRef } from "react";
 
 const HeadingLevelsPractice = () => {
@@ -71,6 +70,7 @@ const HeadingLevelsPractice = () => {
   const [showResults, setShowResults] = useState(false);
   const [liveMessage, setLiveMessage] = useState("");
   const firstInputRef = useRef(null);
+  const topRef = useRef(null);
 
   const handleChange = (id, value, text) => {
     setUserAnswers((prev) => ({ ...prev, [id]: value }));
@@ -79,7 +79,13 @@ const HeadingLevelsPractice = () => {
     setLiveMessage(`Set to ${label} for: ${text}`);
   };
 
-  const handleSubmit = () => setShowResults(true);
+  const handleSubmit = () => {
+    setShowResults(true);
+    setTimeout(() => {
+      topRef.current?.scrollIntoView({ behavior: "smooth" });
+      topRef.current?.focus();
+    }, 0);
+  };
 
   const resetActivity = () => {
     setUserAnswers({});
@@ -99,9 +105,21 @@ const HeadingLevelsPractice = () => {
 
   return (
     <section className="activity mx-auto mt-8 p-4 bg-lightgray rounded-lg">
-      <h2 className="text-2xl font-bold mb-6">
-        Choose the Correct Heading Level for Each Section
-      </h2>
+      <section
+        ref={topRef}
+        tabIndex="-1"
+        className="outline-none focus:outline-none"
+      >
+        <h2 className="text-2xl font-bold mb-4">
+          Choose the Correct Heading Level for Each Section
+        </h2>
+
+        {showResults && (
+          <p className="text-lg font-semibold text-primary mb-6">
+            You got {correctCount} out of {articleData.length} correct.
+          </p>
+        )}
+      </section>
 
       <aside className="sr-only" aria-live="polite">
         {liveMessage}
@@ -177,12 +195,6 @@ const HeadingLevelsPractice = () => {
           </article>
         );
       })}
-
-      {showResults && (
-        <p className="text-lg font-semibold text-primary mt-4">
-          You got {correctCount} out of {articleData.length} correct.
-        </p>
-      )}
 
       <div className="mt-6">
         {!showResults ? (

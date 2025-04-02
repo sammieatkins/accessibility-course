@@ -59,6 +59,9 @@ Not every image actually needs alt text. Remember how alt text is meant to provi
 
 Hate to break it to you—blind users don't care about aesthetics. Alt text for decorative images is just noise.
 
+And another thing, if you're thinking about what alt text to write for an image of text... stop right there.  
+Unless it's a logo or part of a screenshot, that text should just be [real text](/lessons/06_semantic-html/instruction/#use-real-text).
+
 ## How to Write Alt Text in Your Code
 
 Alright, enough theory, let's get into how to actually code alt text. For our beginner beginners, we'll briefly cover how to write alt text at all. You use the alt attribute inside an `<img>` tag. Like this:
@@ -87,16 +90,3 @@ Like we discussed, some images are decorative. If they don’t convey any new in
     </p>
   </div>
 </div>
-
-<!-- ## Ready to Practice? -->
-
-<!-- Alt text can seem deceptively simple, but as you’ve seen, writing it well takes thought. It’s all about context, clarity, and keeping your user in mind. Now that you’ve got the basics down, let’s put that into action. In the next activity, you’ll look at a few example images and practice writing alt text that’s accurate, concise, and useful. We’ll give you feedback as you go—so don’t worry if you’re still figuring it out. -->
-
-<!--
-## Into the Weeds
-
-Now I'm going to get into some more detailed examples. -->
-
-<!-- complex images, groups of images, maps, emotional or tone based stuff. I don't wnat to exactly steal from that lesson with all the examples, though, so wherever you can adjust it to make it our own that would be best. i don't really want it to be recognizabel. -->
-
-<!-- could weave in these into the weeds examples into the activity => give tips as we go. make them do all 5 or something -->

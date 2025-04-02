@@ -1,18 +1,12 @@
 ---
 title: "Semantic HTML"
 ---
-<!-- go thorugh the tags list and see if they're stil in use -->
 
-<!-- lists => description, ordered, unordered (when to use each) -->
-<!-- tables => table captions (optional, but helpful for complex tables), th tags, NOT for layout, etc. -->
-<!-- talk about tags like <aside> and <nav> and others. especially ones that can easily replace <div> for a more semantic alternative. -->
-<!-- link to some big list of html tags? maybe w3schools has one -->
-<!-- what needs to be in the head tag -->
-<!-- real text -  maybe better in alt text lesson? -->
+<!-- personal note: go thorugh the tags list and see if they're stil in use -->
 
 # Semantic HTML
 
-<h2 class="subheading">She's a 10, but she only uses <code>&lt;div&gt;</code></h2>
+<h2 class="subheading">She's a 10, but she only uses<code>&lt;div&gt;</code></h2>
 
 Look, I’m not saying it’s a dealbreaker—but it’s definitely a red flag.
 
@@ -24,62 +18,94 @@ And hey, we’ve all written a little div soup now and then. But once you know b
 
 ## Common Semantic Tags
 
-Let’s go beyond `<div>` and `<span>`.
+So, now that we understand the 'why,' let's explore the most commonly used semantic tags that bring this structure to life.
 
 ### Structural Tags
-You may be asking "So what am I supposed to use if I can't use `<div>`?" Well, there are a ton of HTML tags, and if you've got a bit of time go ahead and look through the [W3Schools HTML Element Reference](https://www.w3schools.com/tags/). 
 
-I've compiled some semantic tags I didn't know about that are super cool.
-<!-- insert the cool ones -->
+You may be asking "So what am I supposed to use if I can't use `<div>`?" Well, there are a ton of HTML tags, and if you've got a bit of time go ahead and look through the [W3Schools HTML Element Reference](https://www.w3schools.com/tags/).
 
-These are interesting and all, but here are some you should start using on the daily:
-<!-- insert more typical ones -->
+Here are some (somewhat) [commonly used tags](/lessons/06_semantic-html/commonly-used-tags) to help get you started. Some are tags you should be familiar with, and others are a bit more niche, but still useful.
 
 ## Lists
 
-Not all lists are created equal.
+There’s more than one kind of list in HTML, and each one has a specific job. Each one comes with built-in semantics that convey the content structure.
 
-- Use `<ul>` (unordered list) when the order _doesn't_ matter (e.g., grocery items).
-- Use `<ol>` (ordered list) when the order _does_ matter (e.g., steps in a recipe).
-- Use `<dl>` (description list) for pairs of terms and definitions.
-
-Each one comes with built-in semantics that screen readers use to describe the content structure.
+- Use [`<ul>`](https://www.w3schools.com/tags/tag_ul.asp) (unordered list) when the order _doesn’t_ matter (e.g., grocery items).
+- Use [`<ol>`](https://www.w3schools.com/tags/tag_ol.asp) (ordered list) when the order _does_ matter (e.g., steps in a recipe).
+- Use [`<dl>`](https://www.w3schools.com/tags/tag_dl.asp) (description list) when you need to define terms, display paired data, or build FAQs.
 
 ## Tables
 
-Tables are great—for data. Not layout.
+Tables are great—for displaying data. But they’re not a layout tool.
 
-Here’s how to use them properly:
+Here’s how to make your tables meaningful and accessible:
 
-- Include a `<caption>` to describe what the table is about (especially for complex data).
-- Use `<th>` for headers and scope them with `scope="col"` or `scope="row"` to make things clear.
-- Never use tables to layout your page. It’s 2025. We have CSS.
+- Use a [`<caption>`](https://www.w3schools.com/tags/tag_caption.asp) to describe what the table is about, especially if the data is complex or multi-dimensional.
+- Use [`<th>`](https://www.w3schools.com/tags/tag_th.asp) for header cells, and add `scope="col"` or `scope="row"` to help screen readers understand the relationships between data.
+- Don't use tables to control layout. It’s <span id="year"></span>–we have CSS for that.
 
-## The `<head>` Game
+Semantic tables convey clear relationships between data points. Assistive tech can read headers aloud, navigate rows and columns, and provide context that would otherwise be lost. But only if your table is coded _semantically_ (AKA correctly).
 
-Don’t forget the silent MVP: the `<head>` tag.
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+## Building a Meaningful `<head>`
+
+The `<head>` tag might not show up on the screen, but it sets the foundation for everything that does. It’s where you define metadata, connect stylesheets, and give browsers and assistive tech important context before the page even renders.
 
 Here’s what you should almost always include:
 
-- `<title>` – What shows up in the browser tab
-- `<meta charset="UTF-8">` – Character encoding (UTF-8 is standard)
-- `<meta name="viewport" content="width=device-width, initial-scale=1.0">` – Essential for responsive design
-- `<link rel="stylesheet" href="style.css">` – CSS link
-- `<meta name="description" content="Short summary of your page">` – Helps with SEO
+- `<title>` – Sets the title that appears in the browser tab _and_ gets announced by screen readers when the page loads. **Tip:** Keep it concise and unique—long or repetitive titles are frustrating. I don't even want to read it, let alone listen to a screen reader say it.
+- `<meta charset="UTF-8">` – Defines character encoding. This helps prevent weird symbol glitches and ensures your text renders properly.
+- `<meta name="viewport" content="width=device-width, initial-scale=1.0">` – Makes your site scale correctly on mobile and zoomed views.
+- `<link rel="stylesheet" href="style.css">` – Connects your CSS for styling.
+- `<meta name="description" content="Short summary of your page">` – Helps search engines and [assistive technology](/lessons/08_assistive-technology/instruction) understand what the page is about.
+- `<!DOCTYPE html>` – Should be the very first line in your file. Tells browsers you’re using HTML5 (required for many semantic tags to behave correctly).
+- `<html lang="en">` – Goes outside `<head>`, but still belongs in this conversation. Adding `lang` to your root HTML element ensures screen readers use the right pronunciation rules.
 
-Bonus: Semantic HTML inside your head tag = better metadata, better discoverability, and better accessibility.
+## Use Real Text
 
-### Bonus Semantic Wins
+If something looks like text, it should _be_ text.
 
-Once you’ve got the main structure down, here are a couple of extra moves that level up your semantic game:
+Avoid using images of text—like screenshots of headers, buttons, or infographics—unless absolutely necessary. When text is embedded in an image:
 
-- **Use `lang` on inline text**:  
-  If you're including a word or phrase in another language, wrap it in a `<span>` and add the correct `lang` attribute. This helps screen readers pronounce it correctly.  
+- It can’t be read by screen readers.
+- It can’t be resized or styled by the user.
+- It can’t be translated.
+- It looks worse on high-DPI (Retina) screens because it’s pixelated.
 
-  ```html
-  <p>This dish is called <span lang="fr">bouillabaisse</span>.</p>
-  ```
-- **Use MathML for math, not images**:
+Instead, use semantic HTML and CSS to style real, accessible text. If your image has a lot of text, look into Optical Character Recognition (OCR). Thank me later.
+
+## Leave the Spacing to CSS
+This one’s important: don’t use empty HTML tags just to space things out.
+
+If you’re tempted to throw in a stray <div> or <p> just to create some breathing room, it’s time to bring in CSS. Spacing is a visual concern—and that’s what CSS is for. HTML is about structure and meaning. Every element should represent something real in your content.
+
+Using empty tags for layout muddies the semantic structure and confuses assistive tech. Want a gap between elements? Add a margin or padding rule in your CSS.
+
+## Bonus Semantic Wins
+
+Once you’ve got the main structure down, here are a couple of extra tips that will level up your semantic game:
+
+### Use `lang` on inline text
+
+If you're including a word or phrase in another language, wrap it in a `<span>` and add the correct `lang` attribute. This helps screen readers pronounce it correctly.
+
+```html
+<p>This dish is called <span lang="fr">bouillabaisse</span>.</p>
+```
+
+### Use MathML for math, not images
+
 If you're showing math content, don’t screenshot an equation. Use [MathML](https://developer.mozilla.org/en-US/docs/Web/MathML) instead. It's designed for accessible, screen-reader-friendly math on the web.
 
 These details might feel small, but they go a long way in making your site more inclusive and robust.
+
+## Now You're Speaking HTML
+
+That was a lot to take in, right? But now that you've got the basics of semantic HTML, you’re in a good place. Learning semantic HTML isn’t just about writing code—it’s about building a solid foundation for everything you’ll do next. When you really understand these tags, you’re not just making things work; you’re making things make sense.
+
+And here’s the best part: it saves you time. Instead of wasting hours reinventing the wheel with JavaScript or custom components for elements like `<dialog>`, `<section>`, or `<article>`, you can just use the built-in structure. That means faster development, cleaner code, and fewer headaches down the road.
+
+By diving into semantic HTML now, you’re setting yourself up for quicker, more efficient projects in the future. Plus, you’ll really get HTML and be able to work with it.
