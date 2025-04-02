@@ -1,4 +1,8 @@
 ---
+title: "ARIA Practice"
+description: "Practice identifying and removing unnecessary ARIA to make your code cleaner and more accessible."
+type: activity
+order: 1
 activity: AriaPractice
 ---
 

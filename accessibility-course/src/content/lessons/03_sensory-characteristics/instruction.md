@@ -1,5 +1,8 @@
 ---
-title: "Sensory Characteristics: Instruction"
+title: "Sensory Characteristics Instruction"
+description: "Learn how to use color, shape, location, and other sensory cues without excluding users. This lesson shows you how to back up visual and audio indicators with accessible, semantic alternatives."
+type: instruction
+order: 1
 ---
 
 # Sensory Characteristics

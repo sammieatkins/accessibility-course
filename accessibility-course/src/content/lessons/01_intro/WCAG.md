@@ -1,5 +1,8 @@
 ---
 title: What is WCAG?
+description: "Meet the Web Content Accessibility Guidelines (WCAG)—the foundation of digital accessibility standards. This lesson breaks down the structure of WCAG, what POUR stands for, and why compliance matters for inclusive web design (and avoiding lawsuits)."
+type: instruction
+order: 2
 ---
 
 # WCAG

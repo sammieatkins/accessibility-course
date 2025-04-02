@@ -1,8 +1,9 @@
 ---
 title: Introduction to Accessibility
+description: "Wondering why accessibility matters? This lesson explores what web accessibility really means, who benefits (spoiler: everyone), and why it should be baked into your code from the start—not tacked on at the end. It's the why behind everything that follows."
+type: instruction
+order: 1
 ---
-
-<!-- link to ADA and 508 -->
 <!-- make "Root" actually the logo? or an icon callout with my logo? -->
 
 # Introduction to Accessibility

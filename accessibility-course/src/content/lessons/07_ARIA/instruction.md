@@ -1,5 +1,8 @@
 ---
 title: "ARIA Instruction"
+description: "Learn what ARIA is, when to use it (and when not to), and how it can make complex UI components more accessible when HTML falls short."
+type: instruction
+order: 1
 ---
 
 # ARIA

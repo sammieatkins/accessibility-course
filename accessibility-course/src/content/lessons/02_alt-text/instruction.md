@@ -1,7 +1,9 @@
 ---
-title: "Alt Text: Intro"
+title: "Alt Text Instruction"
 author: Samantha Atkins
 description: "How to write useful alt text"
+type: instruction
+order: 1
 ---
 
 <!-- ask natalie what format longdescriptions should be in (londesc, aria, linked other page) -->

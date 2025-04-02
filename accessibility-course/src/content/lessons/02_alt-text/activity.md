@@ -1,5 +1,8 @@
 ---
 title: "Alt Text Practice"
+description: "Practice writing alt text that actually works. In this activity, you’ll look at images in context and write helpful, accurate descriptions for users who can’t see them."
+type: activity
+order: 2
 activity: "AltTextPractice"
 ---
 <!-- have them guess based on bad alt text -->

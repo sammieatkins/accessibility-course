@@ -1,5 +1,8 @@
 ---
 title: "Skip Link Practice"
+description: "Practice adding a skip link to improve keyboard navigation and support screen reader users."
+type: activity
+order: 3
 activity: "SkipNavPractice"
 ---
 

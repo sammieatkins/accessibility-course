@@ -1,5 +1,8 @@
 ---
-title: "Heading Levels"
+title: "Heading Levels Instruction"
+description: "Learn how to use heading levels to create clear structure—not just visual style—and why it matters for accessibility and navigation."
+type: instruction
+order: 1
 ---
 
 # Heading Levels

@@ -1,5 +1,8 @@
 ---
 title: "Link Text Instruction"
+description: "Learn how to write clear, accessible link text, when to use links vs. buttons, and why skip links matter for navigation."
+type: instruction
+order: 1
 ---
 
 # Links

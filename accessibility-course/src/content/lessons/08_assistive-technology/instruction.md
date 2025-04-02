@@ -1,5 +1,8 @@
 ---
 title: "Assistive Technology"
+description: "Get to know the major types of assistive technology—from screen readers to cognitive tools—and why understanding them is essential for building and testing accessible websites."
+type: instruction
+order: 1
 ---
 
 # Assistive Technology

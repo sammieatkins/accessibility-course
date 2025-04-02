@@ -1,6 +1,10 @@
 ---
 title: "Commonly Used Tags"
+description: "Explore a curated list of common—and surprisingly powerful—HTML tags. From structure and forms to media and templates, this reference highlights elements that make your markup more semantic, accessible, and effective."
+type: instruction
+order: 2
 ---
+
 <!-- add menu -->
 
 # Commonly Used Tags
@@ -18,7 +22,7 @@ You can always check out the full list at [W3Schools: HTML Tags](https://www.w3s
 - [`<article>`](https://www.w3schools.com/tags/tag_article.asp): Self-contained content like blog posts or comments.
 - [`<aside>`](https://www.w3schools.com/tags/tag_aside.asp): Secondary content, like sidebars or callouts.
 - [`<footer>`](https://www.w3schools.com/tags/tag_footer.asp): Concludes a page or section with metadata or links.
-- [`<menu>`](): 
+- [`<menu>`](https://www.w3schools.com/tags/tag_menu.asp): Alternative to `<ul>`, used to group menu items with `<li>`.
 
 ### Headings & Text Content
 

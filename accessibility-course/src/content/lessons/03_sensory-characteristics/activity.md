@@ -1,6 +1,9 @@
 ---
+title: Color Palette Tester
+description: "Adjust text, button, and link colors to create an accessible palette. This hands-on activity checks contrast in real time and lets you export your final colors as CSS variables."
+type: activity
+order: 1
 activity: SensoryCharacteristicsPractice
-title: Sensory Characteristics Activity
 ---
 
 # Accessible Color Palette Tester

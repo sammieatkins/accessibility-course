@@ -1,6 +1,9 @@
 ---
-activity: HeadingLevelsPractice
 title: "Heading Levels Practice"
+description: "Practice choosing the correct heading levels to create a clear, accessible structure for your content."
+type: activity
+order: 1
+activity: HeadingLevelsPractice
 ---
 
 # Heading Levels Practice

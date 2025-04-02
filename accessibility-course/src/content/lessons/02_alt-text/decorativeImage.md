@@ -1,5 +1,8 @@
 ---
-title: "Alt Text: Decoratie Image Practice"
+title: "Decoratie Image Practice"
+description: "Test your alt text instincts by deciding whether each image is decorative or meaningful based on its context."
+type: activity
+order: 1
 activity: DecorativeImagePractice
 ---
 

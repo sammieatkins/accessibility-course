@@ -1,7 +1,6 @@
 import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
-import mdx from '@astrojs/mdx';
-
+import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
 
 export default defineConfig({
@@ -11,5 +10,8 @@ export default defineConfig({
       theme: "github-light",
       wrap: true,
     },
+  },
+  content: {
+    schema: true,
   },
 });

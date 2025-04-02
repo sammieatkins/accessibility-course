@@ -1,4 +1,8 @@
 ---
+title: "Assistive Technology Practice"
+description: "Practice using different types of assistive technology—from screen readers to voice access—to better understand how users navigate the web."
+type: activity
+order: 1
 activity: AssistiveTechnologyPractice
 ---
 

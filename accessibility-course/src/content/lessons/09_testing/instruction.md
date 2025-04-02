@@ -1,5 +1,8 @@
 ---
-title: "Testing"
+title: "Testing Instruction"
+description: "Learn how to test your website for accessibility using real tools and assistive tech—and why testing early and often makes all the difference."
+type: instruction
+order: 1
 ---
 
 # Testing

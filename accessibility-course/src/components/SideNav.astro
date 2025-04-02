@@ -1,43 +1,17 @@
 ---
-import { getLessonLabel } from "../utils/getLessonLabel.ts";
-const { groupedLessonsArray } = Astro.props;
+import { getGroupedLessons } from "../utils/getGroupedLessons";
+const rawGroups = await getGroupedLessons();
 
-interface Lesson {
-  id: string;
-  slug: string;
-  body: string;
-  collection: string;
-  data: Record<string, any>;
-  render: any;
-}
+const formattedLessonsArray = rawGroups.map(({ index, folder, lessons }) => {
+  const title = folder
+    .replace(/^\d+_/, "")
+    .replace(/-/g, " ")
+    .replace(/\b\w/g, (char) => char.toUpperCase());
 
-interface Props {
-  groupedLessonsArray: [string, Lesson[]][];
-}
-
-const formattedLessonsArray = groupedLessonsArray.map(
-  ([folder, lessons], index) => {
-    const lessonTitle = folder
-      .replace(/^\d+_/, "")
-      .replace(/-/g, " ")
-      .replace(/\b\w/g, (char) => char.toUpperCase());
-
-    const sortedLessons = lessons.sort((a, b) => {
-      const aFile = a.id.split("/").pop();
-      const bFile = b.id.split("/").pop();
-
-      if (aFile === "instruction.md") return -1;
-      if (bFile === "instruction.md") return 1;
-
-      return (a.data.order || 100) - (b.data.order || 100);
-    });
-
-    return { index: index + 1, title: lessonTitle, lessons: sortedLessons };
-  }
-);
+  return { index, title, lessons };
+});
 ---
 
-<!-- Sidebar for navigation -->
 <nav
   id="merged-sidebar"
   role="navigation"
@@ -52,31 +26,17 @@ const formattedLessonsArray = groupedLessonsArray.map(
         </h2>
         <ul class="pl-4 space-y-2 font-medium side-nav">
           {lessons
-            .filter((subLesson) => !subLesson.id.endsWith("home.md"))
-            .map((subLesson) => {
-              const fileName =
-                subLesson.id.split("/").pop()?.replace(".md", "") || "";
-              const folderName = subLesson.id.split("/")[0];
-
-              let label = getLessonLabel({
-                fileName,
-                folderName,
-                title,
-                index,
-              });
-
-
-              return (
-                <li>
-                  <a
-                    href={`/lessons/${subLesson.slug}`}
-                    class="sidenav-links block w-full p-2 rounded-lg text-md text-text-color hover:bg-accent-color hover:text-primary transition font-bold"
-                  >
-                    {label}
-                  </a>
-                </li>
-              );
-            })}
+            .filter((lesson) => !lesson.id.endsWith("home.md"))
+            .map((lesson) => (
+              <li>
+                <a
+                  href={`/lessons/${lesson.slug}`}
+                  class="sidenav-links block w-full p-2 rounded-lg text-md text-text-color hover:bg-accent-color hover:text-primary transition font-bold"
+                >
+                  {lesson.data.title}
+                </a>
+              </li>
+            ))}
         </ul>
       </div>
     ))

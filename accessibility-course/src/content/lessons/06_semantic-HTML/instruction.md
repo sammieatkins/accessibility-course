@@ -1,5 +1,8 @@
 ---
 title: "Semantic HTML"
+description: "Learn how to write meaningful, accessible HTML using semantic tags that improve structure, usability, and code clarity."
+type: instruction
+order: 1
 ---
 
 <!-- personal note: go thorugh the tags list and see if they're stil in use -->

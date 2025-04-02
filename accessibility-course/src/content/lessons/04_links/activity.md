@@ -1,6 +1,9 @@
 ---
-activity: "LinkTextPractice"
 title: "Link Text Practice"
+description: "Practice writing clear, descriptive link text based on the destination URL."
+type: activity
+order: 2
+activity: "LinkTextPractice"
 ---
 
 # Link Text Practice
