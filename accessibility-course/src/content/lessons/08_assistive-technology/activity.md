@@ -10,7 +10,7 @@ activity: AssistiveTechnologyPractice
 
 In this activity, you’ll try using real assistive technologies to navigate a website—ideally one you’ve built. You’re welcome to test this course site too if that’s easier. This isn’t about doing everything perfectly. It’s about seeing the web through someone else’s tools and noticing where things break, disappear, or just get weird. Because that’s the stuff real users run into every day.
 
-> **Pro tip:** Assistive tech can feel a little chaotic the first time you use it. That’s normal. Before you turn anything on, scroll down and learn how to turn it back _off_.
+> **Pro tip:** Assistive tech can feel a little chaotic the first time you use it. That’s normal. Before you turn anything on, make sure you know how to turn it _off_.
 
 ## First: How to Turn Things Off
 

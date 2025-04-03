@@ -1,49 +1,50 @@
 // add an example that has actually necessary aria
-// figure out the dang flickering
 // uhhhhh keyboard trap on the code editor
 
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
-import { useUndoCodeEditor } from "../../hooks/useUndoCodeEditor";
-
-const initialCode = `<div role="main" aria-label="Main Content" role="region">
-  <section role="region" aria-labelledby="title">
-    <h1 id="title">Welcome</h1>
-    <p>This section has too much ARIA.</p>
-  </section>
-</div>`;
+import { useState, useEffect } from "react";
 
 const AriaPractice = () => {
-  const { code, updateCode, undo, reset, history } =
-    useUndoCodeEditor(initialCode);
+  const defaultCode = `<nav role="navigation" aria-label="Main Navigation">
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+  </ul>
+</nav>
+
+<main role="main" aria-label="Main Content">
+  <section role="region" aria-labelledby="welcome-heading">
+    <h1 id="welcome-heading">Welcome to Our Site</h1>
+    <p>This section introduces our services and mission.</p>
+    <button role="button" onclick="alert('Hello')">Click Me</button>
+  </section>
+</main>`;
+
+  const LOCAL_KEY = "aria-practice-code";
+  const [code, setCode] = useState(defaultCode);
   const [feedback, setFeedback] = useState("");
-  const [hasMounted, setHasMounted] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [hintLevel, setHintLevel] = useState(0);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    setHasMounted(true);
+    const saved = localStorage.getItem(LOCAL_KEY);
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      setCode(parsed.code || defaultCode);
+      setSubmitted(parsed.submitted || false);
+      setHintLevel(parsed.hintLevel || 0);
+    }
+    setLoaded(true);
   }, []);
 
-  const handleKeyDown = useCallback(
-    (e) => {
-      const isUndo =
-        (e.ctrlKey || e.metaKey) &&
-        e.key.toLowerCase() === "z" &&
-        history.length > 0;
-
-      if (isUndo) {
-        e.preventDefault();
-        undo();
-      }
-    },
-    [history, undo]
-  );
-
   useEffect(() => {
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [handleKeyDown]);
+    localStorage.setItem(
+      LOCAL_KEY,
+      JSON.stringify({ code, submitted, hintLevel })
+    );
+  }, [code, submitted, hintLevel]);
 
   const checkAria = () => {
     const cleaned = code.replace(/\s+/g, " ").toLowerCase();
@@ -59,59 +60,117 @@ const AriaPractice = () => {
       !cleaned.includes("aria-");
 
     if (tooMuchAria) {
-      setFeedback("🚫 Too much ARIA! Try simplifying the roles and labels.");
+      setFeedback("Too much ARIA! Try simplifying the roles and labels.");
     } else if (semanticOnly) {
       setFeedback(
-        "✅ Nice! You’re letting semantic HTML do the heavy lifting."
+        "Nice work. You’re letting semantic HTML do the heavy lifting."
       );
     } else {
-      setFeedback("⚠️ Getting closer! Try removing redundant ARIA roles.");
+      setFeedback("Getting closer. Try removing redundant ARIA roles.");
     }
+
+    setSubmitted(true);
   };
 
-  return (
-    <div className="max-w-4xl mx-auto space-y-4">
-      <LiveProvider code={code} language="html">
-        <LiveEditor
-          onChange={updateCode}
-          className="border rounded p-4 font-mono bg-gray-50 focus:outline focus:outline-2 focus:outline-green-300"
-        />
-        <LiveError className="text-red-600" />
-        {hasMounted && (
-          <LivePreview className="border p-4 bg-white rounded min-h-[100px] transition-opacity duration-200" />
-        )}
-      </LiveProvider>
+  const handleRestart = () => {
+    setCode(defaultCode);
+    setFeedback("");
+    setSubmitted(false);
+    setHintLevel(0);
+    localStorage.removeItem(LOCAL_KEY);
+  };
 
-      <div className="flex gap-4 flex-wrap">
+  const styledPreview = `
+    <style>
+      .preview-wrapper {
+        font-family: sans-serif;
+        line-height: 1.6;
+        background-color: #f8fafc;
+        padding: 2rem;
+      }
+
+      .preview-wrapper main,
+      .preview-wrapper section {
+        background: white;
+        padding: 2rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 0 4px rgba(0,0,0,0.1);
+        margin-bottom: 2rem;
+      }
+    </style>
+
+    <div class="preview-wrapper">
+      ${code}
+    </div>
+  `;
+
+  const hints = [
+    "ARIA should be used when native HTML isn't sufficient.",
+    'Try removing unnecessary role="region" or aria-label.',
+    "Use semantic elements like <main> and <section> instead of adding ARIA for structure.",
+  ];
+
+  return (
+    <div className="max-w-2xl mx-auto p-4 font-sans text-text bg-background rounded space-y-2">
+      <div className="flex items-center justify-between">
+        <p className="text-sm font-semibold text-darkgray">ARIA Practice</p>
         <button
-          onClick={checkAria}
-          className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+          onClick={handleRestart}
+          className="text-sm px-3 py-1 rounded text-white bg-hoverdark hover:bg-accentdark"
         >
-          Check My Code
-        </button>
-        <button
-          onClick={undo}
-          disabled={history.length === 0}
-          className={`px-4 py-2 text-white rounded ${
-            history.length === 0
-              ? "bg-gray-300 cursor-not-allowed"
-              : "bg-yellow-500 hover:bg-yellow-600"
-          }`}
-        >
-          Undo
-        </button>
-        <button
-          onClick={() => {
-            reset();
-            setFeedback("");
-          }}
-          className="px-4 py-2 bg-gray-400 text-white rounded hover:bg-gray-500"
-        >
-          Reset Code
+          Restart Activity
         </button>
       </div>
 
-      {feedback && <p className="text-lg">{feedback}</p>}
+      <div className="p-4 border rounded bg-lightgray">
+
+        <textarea
+          className="w-full h-80 p-3 border border-darkgray rounded font-mono text-sm bg-white"
+          value={code}
+          onChange={(e) => setCode(e.target.value)}
+        />
+
+        <div className="flex flex-wrap gap-4">
+          <button
+            onClick={checkAria}
+            className="px-4 py-2 rounded text-white bg-accent hover:bg-accentdark"
+          >
+            Submit
+          </button>
+          {hintLevel < hints.length && (
+            <button
+              onClick={() => setHintLevel((h) => h + 1)}
+              className="text-accent underline"
+            >
+              Show a hint
+            </button>
+          )}
+        </div>
+
+        {hintLevel > 0 && (
+          <div className="mt-2 p-3 bg-lightgreen border-l-4 border-hoverdark rounded text-sm space-y-2">
+            {hints.slice(0, hintLevel).map((hint, index) => (
+              <p key={index}>{hint}</p>
+            ))}
+          </div>
+        )}
+
+        {submitted && (
+          <div className="mt-2 p-3 bg-lightgray border-l-4 border-darkgray text-sm">
+            {feedback}
+          </div>
+        )}
+      </div>
+
+      <div>
+        <h3 className="text-lg font-semibold mb-2">Live Preview</h3>
+        {loaded && (
+          <div
+            className="border p-4 rounded bg-white min-h-[22rem]"
+            dangerouslySetInnerHTML={{ __html: styledPreview }}
+          />
+        )}
+      </div>
     </div>
   );
 };
