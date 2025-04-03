@@ -6,11 +6,9 @@ import BottomNav from "../components/BottomNav.astro";
 import SidebarToggle from "../components/SidebarToggle.jsx";
 import ActivityLoader from "../components/ActivityLoader";
 
-let { activity, groupedLessonsArray, title } = Astro.props;
-
-if (!Array.isArray(groupedLessonsArray)) {
-  groupedLessonsArray = [];
-}
+let { activity, title } = Astro.props;
+const rawGrouped = Astro.props.groupedLessonsArray;
+const groupedLessonsArray = Array.isArray(rawGrouped) ? rawGrouped : [];
 ---
 
 <BaseLayout title={title}>
