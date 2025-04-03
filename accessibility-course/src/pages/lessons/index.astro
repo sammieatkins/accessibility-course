@@ -1,9 +1,13 @@
 ---
-import Layout from '../../layouts/LessonLayout.astro';
-import { getGroupedLessons } from '../../utils/getGroupedLessons';
+import Layout from "../../layouts/LessonLayout.astro";
+import { getGroupedLessons } from "../../utils/getGroupedLessons";
 
 const groupedLessonsArray = await getGroupedLessons();
 const activity = "";
 ---
 
-<Layout groupedLessonsArray={groupedLessonsArray} activity={activity} />
+<Layout
+  title="All Lessons"
+  groupedLessonsArray={groupedLessonsArray}
+  activity={activity}
+/>
