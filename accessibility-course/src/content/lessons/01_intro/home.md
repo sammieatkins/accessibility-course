@@ -1,5 +1,5 @@
 ---
-title: Home | Accessibility Course
+title: "Root"
 description: "Welcome to Root: a web accessibility course built to help you learn inclusive coding from the ground up. You'll gain real-world skills, explore key concepts like alt text and keyboard navigation, and build the confidence to create websites everyone can use."
 type: instruction
 order: 0

@@ -3,7 +3,7 @@ export default function ReportBarrierPage() {
     <form
       action="https://formspree.io/f/xgvanlqw"
       method="POST"
-      className="max-w-2xl mx-auto p-6 bg-lightgray rounded font-sans text-text"
+      className="max-w-lg mx-auto p-6 bg-lightgray rounded font-sans text-text"
     >
       <input
         type="hidden"

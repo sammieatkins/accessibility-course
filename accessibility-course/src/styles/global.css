@@ -292,15 +292,9 @@ footer {
 }
 
 footer a {
-  color: var(--primary-color);
   text-decoration: none;
   font-weight: bold;
   transition: color 0.3s ease;
-}
-
-footer a:hover,
-footer a:focus {
-  color: var(--hover-dark-color);
 }
 
 footer .small-text {

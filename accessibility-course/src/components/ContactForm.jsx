@@ -3,7 +3,7 @@ export default function ContactPage() {
     <form
       action="https://formspree.io/f/mqapydjw"
       method="POST"
-      className="max-w-2xl mx-auto p-6 bg-lightgray rounded font-sans text-text"
+      className="max-w-lg mx-auto p-6 bg-lightgray rounded font-sans text-text "
     >
       <input
         type="hidden"
@@ -11,12 +11,6 @@ export default function ContactPage() {
         value="New Contact Form Submission"
       />
       <input type="hidden" name="_redirect" value="/thank-you" />
-
-      <h1 className="text-2xl font-bold mb-4 text-accent">Contact Me</h1>
-      <p className="mb-6 text-sm text-darkgray">
-        Have a question, suggestion, or just want to say hi? Drop me a note
-        below.
-      </p>
 
       <div className="mb-4">
         <label htmlFor="name" className="block font-medium mb-1">

@@ -5,9 +5,14 @@ const currentPath = url.pathname;
 
 <nav class="navbar">
   <div class="nav-container">
-    <a href="/" id="logo" class="inline-block"
-      ><img src="/images/root_logo.png" alt="home" class="block" /></a
+    <a
+      href="/"
+      id="logo"
+      class={`inline-block ${currentPath === "/" ? "active" : ""}`}
+      aria-current={currentPath === "/" ? "page" : undefined}
     >
+      <img src="/images/root_logo.png" alt="home" class="block" />
+    </a>
 
     <div class="navlinks">
       <a
