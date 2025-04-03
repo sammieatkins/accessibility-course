@@ -45,7 +45,8 @@ const formattedLessonsArray = rawGroups.map(({ index, folder, lessons }) => {
               <li>
                 <a
                   href={`/lessons/${lesson.slug}`}
-                  class="sidenav-links block w-full p-2 rounded-lg text-md text-text-color hover:bg-accent-color hover:text-primary transition font-bold"
+                  id="sidenav-links"
+                  class="block w-full p-2 rounded-lg text-md transition font-bold"
                 >
                   {lesson.data.title}
                 </a>

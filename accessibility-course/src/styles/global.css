@@ -13,8 +13,8 @@
   --primary-color: #2c5c3a;
   --hover-dark-color: #20422a;
   --light-green: #c2eebf;
-  --accent-color: #2c5c3a;
-  --accent-color-dark: #20422a;
+  --accent-color: #b5436e;
+  --accent-color-dark: #8e1644;
   --background-color: #ffffff;
   --text-color: #13242b;
   --light-gray: #f1f1f1;
@@ -31,7 +31,6 @@
   height: 100%;
 } */
 
-
 html {
   font-family: var(--body-font);
 }
@@ -47,15 +46,16 @@ html {
 }
 
 a {
-  color: var(--primary-color);
+  color: var(--accent-color);
   text-decoration: underline;
   font-weight: 500;
   transition: color 0.2s ease;
 }
 
 a:hover,
-a:focus {
-  color: var(--hover-dark-color);
+a:focus,
+a:visited {
+  color: var(--accent-color-dark);
 }
 
 .uppercase {
@@ -234,17 +234,20 @@ a:hover {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-#logo {
-  font-size: 1.5rem;
-  font-weight: 800;
+#sidenav-links {
   color: var(--primary-color);
-  text-decoration: none;
-  font-family: var(--body-font);
+}
+
+#logo {
+  display: inline-block;
+  line-height: 0;
 }
 
 #logo img {
-  width: 30%;
-  margin: 0 auto;
+  display: block;
+  width: 100px; /* or max-width: 100%; if you want it flexible */
+  height: auto;
+  margin: 0;
 }
 
 .navlinks a,
@@ -356,10 +359,10 @@ li {
     font-size: 0.875rem;
   }
 
-  #logo img {
+  /* #logo img {
     width: 10%;
     margin: 0;
-  }
+  } */
 }
 
 @media (min-width: 1024px) {
