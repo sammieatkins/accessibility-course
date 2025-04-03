@@ -25,6 +25,8 @@ const formattedLessonsArray = safeGrouped.map(([folder, lessons], index) => {
 
   return { index: index + 1, title: lessonTitle, lessons: sortedLessons };
 });
+
+// console.log("SAFE GROUPED:", safeGrouped);
 ---
 
 <div class="px-10 py-4 grid grid-cols-3 items-center">
