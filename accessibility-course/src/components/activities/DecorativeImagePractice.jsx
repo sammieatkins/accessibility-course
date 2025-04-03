@@ -190,7 +190,7 @@ export default function DecorativeImagePractice() {
               <div
                 className={`p-3 border-l-4 rounded-sm ${
                   wasCorrect
-                    ? "bg-lightgreen border-accent"
+                    ? "bg-lightgreen border-primary"
                     : "bg-red-100 border-red-600"
                 }`}
               >
@@ -216,7 +216,7 @@ export default function DecorativeImagePractice() {
               </div>
 
               <button
-                className="px-4 py-2 rounded text-white bg-hoverdark hover:bg-accentdark"
+                className="px-4 py-2 rounded text-white bg-accent hover:bg-accentdark"
                 onClick={handleNext}
               >
                 Next

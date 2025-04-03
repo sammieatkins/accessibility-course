@@ -10,7 +10,7 @@ const { activity, groupedLessonsArray, title } = Astro.props;
 ---
 
 <BaseLayout title={title}>
-  <div class="flex w-full min-h-screen relative items-start">
+  <div class="flex w-full min-h-screen">
     <SidebarToggle client:load />
     <SideNav groupedLessonsArray={groupedLessonsArray} />
 

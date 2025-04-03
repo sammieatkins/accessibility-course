@@ -105,7 +105,7 @@ export default function AltTextPractice() {
         {/* 1. Side-by-side section */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
           {/* Example Alt Text */}
-          <div className="bg-lightgreen border-l-4 border-accent p-4 rounded-md shadow-sm h-full pt-0">
+          <div className="bg-lightgreen border-l-4 border-primary p-4 rounded-md shadow-sm h-full pt-0">
             <h3 className="text-lg font-bold text-text mb-2">
               Example Alt Text
             </h3>
@@ -249,7 +249,7 @@ export default function AltTextPractice() {
               {renderFeedback()}
               <button
                 onClick={handleNext}
-                className="mt-6 px-4 py-2 rounded text-white bg-primary hover:bg-hoverdark"
+                className="mt-6 px-4 py-2 rounded text-white bg-accent hover:bg-accentdark"
               >
                 Next
               </button>

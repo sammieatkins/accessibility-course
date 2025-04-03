@@ -4,14 +4,33 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout title="Contact">
-  <main
-    id="main-content"
-    class="flex justify-center min-h-[calc(100vh-4rem-4rem)]"
-  >
+  <main id="main-content" class="flex justify-center">
     <div class="max-w-[80ch] p-4">
       <h1>Contact</h1>
-      <!-- form to message me -->
-      <!-- form to report a barrier (have both of these forms? idk...) -->
+
+      <div class="grid gap-6 sm:grid-cols-2">
+        <a
+          href="https://example.com/contact-form"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="block p-6 rounded-lg border border-lightgray shadow hover:bg-lightgreen transition-colors"
+        >
+          <h2 class="text-xl font-semibold mb-2 text-primary">Contact Me</h2>
+          <p>Have a question, suggestion, or just want to say hi?</p>
+        </a>
+
+        <a
+          href="https://example.com/accessibility-barrier-form"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="block p-6 rounded-lg border border-lightgray shadow hover:bg-lightgreen transition-colors"
+        >
+          <h2 class="text-xl font-semibold mb-2 text-primary">
+            Report an Accessibility Issue
+          </h2>
+          <p>Notice something that could be more accessible? Let me know!</p>
+        </a>
+      </div>
     </div>
   </main>
 </BaseLayout>

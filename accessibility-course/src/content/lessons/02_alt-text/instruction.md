@@ -79,10 +79,11 @@ Like we discussed, some images are decorative. If they don’t convey any new in
 ```
 
 <div className="mt-0 p-4 flex items-center gap-4 bg-transparent">
-  <span
+  <!-- <span
     className="material-symbols--info-outline-rounded text-2xl text-text-color"
     aria-hidden="true"
-  ></span>
+  ></span> -->
+  <img src="/images/icon_eyes_right.png" alt="" class="icon-eyes"/>
   <div>
     <h2 className="text-lg font-semibold text-text-color mb-2">Important</h2>
     <p className="text-text-color">

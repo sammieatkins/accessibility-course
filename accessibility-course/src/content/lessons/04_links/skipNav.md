@@ -24,4 +24,4 @@ To test your skip link:
 
 If it works, focus should jump straight to the link in the preview's main content.
 
-(We’ll cover more keyboard testing tips in the [Assistive Technology lesson](/lessons/08_assistive-technology/instruction), but for now, just try it out.)
+(We’ll cover more keyboard testing tips in the [Assistive Technology Practice](/lessons/08_assistive-technology/activity/#keyboard-navigation), but for now, just try it out.)

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 const questions = [
   {
@@ -73,6 +73,8 @@ export default function LinkTextMatchingActivity() {
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
+  const radioRef = useRef(null);
+
   const currentQuestion = questions[currentQuestionIndex];
   const correctAnswer = currentQuestion.options.find(
     (opt) => opt.isCorrect
@@ -87,6 +89,18 @@ export default function LinkTextMatchingActivity() {
     setSelectedAnswer("");
     setSubmitted(false);
     setCurrentQuestionIndex((prev) => prev + 1);
+    setTimeout(() => {
+      radioRef.current?.focus();
+    }, 0);
+  };
+
+  const handleRestart = () => {
+    setCurrentQuestionIndex(0);
+    setSelectedAnswer("");
+    setSubmitted(false);
+    setTimeout(() => {
+      radioRef.current?.focus();
+    }, 0);
   };
 
   const renderFeedback = () => {
@@ -127,10 +141,17 @@ export default function LinkTextMatchingActivity() {
 
   return (
     <div className="max-w-2xl mx-auto p-4 rounded font-sans text-text bg-background">
-
-      <p className="text-sm font-semibold text-darkgray mb-3">
-        Progress: {currentQuestionIndex + 1} / {questions.length}
-      </p>
+      <div className="flex items-center justify-between mb-3">
+        <p className="text-sm font-semibold text-darkgray">
+          Progress: {currentQuestionIndex + 1} / {questions.length}
+        </p>
+        <button
+          onClick={handleRestart}
+          className="text-sm px-3 py-1 rounded bg-hoverdark text-white hover:bg-accentdark"
+        >
+          Restart Activity
+        </button>
+      </div>
 
       <div className="p-4 border rounded bg-lightgray">
         <fieldset>
@@ -145,6 +166,7 @@ export default function LinkTextMatchingActivity() {
               return (
                 <div key={id} className="flex items-center">
                   <input
+                    ref={idx === 0 ? radioRef : null}
                     type="radio"
                     id={id}
                     name="option"
@@ -152,7 +174,8 @@ export default function LinkTextMatchingActivity() {
                     disabled={submitted}
                     checked={selectedAnswer === opt.url}
                     onChange={() => setSelectedAnswer(opt.url)}
-                    className="mr-2"
+                    className="mr-2 h-5 w-5 rounded-full focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:outline-none"
+                    style={{ accentColor: "var(--accent-color)" }}
                   />
                   <label htmlFor={id}>{opt.url}</label>
                 </div>
@@ -177,13 +200,17 @@ export default function LinkTextMatchingActivity() {
             <div className="mt-4 space-y-4">
               {renderFeedback()}
 
-              {currentQuestionIndex < questions.length - 1 && (
+              {currentQuestionIndex < questions.length - 1 ? (
                 <button
                   onClick={handleNext}
-                  className="px-4 py-2 rounded text-white bg-hoverdark hover:brightness-110"
+                  className="px-4 py-2 rounded text-white bg-accent hover:bg-accentdark"
                 >
                   Next Question
                 </button>
+              ) : (
+                <p className="font-semibold text-accent">
+                  You've completed the activity!
+                </p>
               )}
             </div>
           )}

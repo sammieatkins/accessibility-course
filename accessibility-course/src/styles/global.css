@@ -48,8 +48,7 @@ html {
 a {
   color: var(--accent-color);
   text-decoration: underline;
-  font-weight: 500;
-  transition: color 0.2s ease;
+  text-decoration-color: currentColor !important;
 }
 
 a:hover,
@@ -250,6 +249,10 @@ a:hover {
   margin: 0;
 }
 
+.icon-eyes {
+  width: 5%;
+}
+
 .navlinks a,
 .nav-container a {
   text-decoration: none;
@@ -394,6 +397,24 @@ li {
 .start-button:hover,
 .start-button:focus {
   background-color: var(--accent-color-dark);
+}
+
+#lesson-start {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+  text-decoration-color: white !important;
+  text-decoration: underline;
+  text-decoration-color: white;
+}
+
+#lesson-start:hover,
+#lesson-start:focus {
+  background-color: var(--hover-dark-color) !important;
+}
+
+#lesson-link {
+  color: var(--primary-color) !important;
+  text-decoration-color: var(--primary-color);
 }
 
 @media (max-width: 1023px) {
