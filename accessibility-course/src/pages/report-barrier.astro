@@ -1,15 +1,14 @@
 ---
 import "../styles/global.css";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ContactForm from "../components/ContactForm.jsx";
+import ReportBarrierForm from "../components/ReportBarrierForm.jsx";
 ---
 
-<BaseLayout title="Contact">
+<BaseLayout title="Report a Barrier">
   <main id="main-content" class="flex justify-center flex-grow">
     <div class="max-w-[80ch] p-4">
-      <h1 class="text-2xl font-bold mb-4 text-accent">Contact Me</h1>
-
-      <ContactForm client:load />
+      <h1>Report an Accessibility Issue</h1>
+      <ReportBarrierForm client:load />
     </div>
   </main>
 </BaseLayout>
