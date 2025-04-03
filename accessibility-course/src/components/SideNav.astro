@@ -8,14 +8,21 @@ const rawGroups = await getGroupedLessons();
 const safeGrouped = Array.isArray(rawGroups) ? rawGroups : [];
 
 // Format each group (same as before)
-const formattedLessonsArray = safeGrouped.map(([folder, lessons], i) => {
-  const title = folder
-    .replace(/^\d+_/, "")
-    .replace(/-/g, " ")
-    .replace(/\b\w/g, (char) => char.toUpperCase());
+const formattedLessonsArray = safeGrouped
+  .filter(
+    (group) =>
+      Array.isArray(group) &&
+      typeof group[0] === "string" &&
+      Array.isArray(group[1])
+  )
+  .map(([folder, lessons], i) => {
+    const title = folder
+      .replace(/^\d+_/, "")
+      .replace(/-/g, " ")
+      .replace(/\b\w/g, (char) => char.toUpperCase());
 
-  return { index: i + 1, title, lessons };
-});
+    return { index: i + 1, title, lessons };
+  });
 ---
 
 <div

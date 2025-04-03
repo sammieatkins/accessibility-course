@@ -2,7 +2,16 @@
 import Layout from "../../layouts/LessonLayout.astro";
 import { getGroupedLessons } from "../../utils/getGroupedLessons";
 
-const groupedLessonsArray = await getGroupedLessons();
+const rawGroups = await getGroupedLessons();
+
+const groupedLessonsArray = Array.isArray(rawGroups)
+  ? rawGroups.map(([folder, lessons], index) => ({
+      index: index + 1,
+      folder,
+      lessons,
+    }))
+  : [];
+
 const activity = "";
 ---
 

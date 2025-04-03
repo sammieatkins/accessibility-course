@@ -1,24 +1,28 @@
 ---
 import { getGroupedLessons } from "../utils/getGroupedLessons";
+import type Lesson from "../types/Lesson";
 
 const rawGroups = await getGroupedLessons();
 const groupedLessonsArray = Array.isArray(rawGroups) ? rawGroups : [];
 
-const formattedLessonsArray = groupedLessonsArray.map(
-  ({ folder, index, lessons }) => {
+const formattedLessonsArray = groupedLessonsArray
+  .filter(
+    (entry): entry is [string, Lesson[]] =>
+      Array.isArray(entry) && entry.length === 2
+  )
+  .map(([folder, lessons], i) => {
     const title = folder
       .replace(/^\d+_/, "")
       .replace(/-/g, " ")
       .replace(/\b\w/g, (char) => char.toUpperCase());
 
     return {
-      index,
+      index: i + 1,
       title,
       folder,
       lessons,
     };
-  }
-);
+  });
 ---
 
 <div class="bg-white shadow-md rounded-lg overflow-hidden">
