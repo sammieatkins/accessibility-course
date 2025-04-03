@@ -1,14 +1,6 @@
 ---
-const { groupedLessonsArray } = Astro.props;
-
-interface Lesson {
-  id: string;
-  slug: string;
-  body: string;
-  collection: string;
-  data: Record<string, any>;
-  render: any;
-}
+import type Lesson from '../types/Lesson';
+const { groupedLessonsArray = [] } = Astro.props;
 
 interface Props {
   groupedLessonsArray: [string, Lesson[]][];
