@@ -1,7 +1,8 @@
 ---
 import { getGroupedLessons } from "../utils/getGroupedLessons";
 
-const groupedLessonsArray = await getGroupedLessons();
+const rawGroups = await getGroupedLessons();
+const groupedLessonsArray = Array.isArray(rawGroups) ? rawGroups : [];
 
 const formattedLessonsArray = groupedLessonsArray.map(
   ({ folder, index, lessons }) => {
