@@ -5,6 +5,8 @@ type: instruction
 order: 1
 ---
 
+<!-- live regions => dynamic regions. pages that update without reload. -->
+
 # ARIA
 
 <h2 class="subheading">The first rule of ARIA is: don’t use ARIA</h2>

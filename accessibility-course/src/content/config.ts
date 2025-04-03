@@ -7,6 +7,7 @@ const lessons = defineCollection({
     description: z.string().min(1),
     type: z.enum(["instruction", "activity"]),
     order: z.number().nonnegative(),
+    activity: z.string().optional(),
   }),
 });
 

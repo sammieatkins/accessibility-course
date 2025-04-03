@@ -9,7 +9,7 @@ import { imageData } from "../../utils/imageData";
 const TOTAL_REQUIRED_CORRECT = 5;
 const LOCAL_STORAGE_KEY = "decorative-image-progress";
 
-const DecorativeImagePractice = () => {
+export default function DecorativeImagePractice() {
   const [usedContextIds, setUsedContextIds] = useState(new Set());
   const [current, setCurrent] = useState(null);
   const [correctCount, setCorrectCount] = useState(0);
@@ -18,7 +18,6 @@ const DecorativeImagePractice = () => {
   const [hasRestarted, setHasRestarted] = useState(false);
   const [hasInitialized, setHasInitialized] = useState(false);
 
-  // Use layout effect to avoid initial flicker
   useLayoutEffect(() => {
     const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (saved) {
@@ -34,7 +33,6 @@ const DecorativeImagePractice = () => {
     setHasInitialized(true);
   }, []);
 
-  // Save progress when state changes
   useEffect(() => {
     if (!hasInitialized) return;
     const toSave = {
@@ -83,7 +81,6 @@ const DecorativeImagePractice = () => {
     const { imageId, contextIndex } = current;
     const image = imageData.find((img) => img.id === imageId);
     const scenario = image?.contexts[contextIndex];
-
     if (!image || !scenario) return;
 
     const isCorrect = selectedDecorative === scenario.isDecorative;
@@ -120,34 +117,35 @@ const DecorativeImagePractice = () => {
     }
   }, [hasRestarted]);
 
-  if (!hasInitialized) return <div className="min-h-screen" />;
+  if (!hasInitialized) return <div className="min-h-screen bg-background" />;
 
-  if (correctCount >= TOTAL_REQUIRED_CORRECT) {
-    return (
-      <div className="p-4 text-center">
-        <h2 className="text-2xl font-semibold mb-4">All done!</h2>
-        <p className="text-lg">You got 5 correct answers. Great job!</p>
+  const image = current
+    ? imageData.find((img) => img.id === current.imageId)
+    : null;
+  const scenario = image?.contexts[current?.contextIndex];
+
+  return (
+    <div className="max-w-2xl mx-auto p-4 font-sans text-text bg-background rounded">
+      <div className="flex items-center justify-between">
+        <p className="text-sm font-semibold text-darkgray">
+          Progress: {correctCount} / {TOTAL_REQUIRED_CORRECT}
+        </p>
         <button
-          className="mt-6 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
           onClick={restartActivity}
+          className="mb-4 px-3 py-1 rounded text-white bg-hoverdark hover:bg-accentdark"
         >
           Restart Activity
         </button>
       </div>
-    );
-  }
 
-  if (!current) {
-    if (usedContextIds.size > 0 || showExplanation || wasCorrect !== null) {
-      return (
-        <div className="p-4 text-center">
+      {!current && usedContextIds.size > 0 ? (
+        <div className="p-4 border rounded bg-lightgray text-center">
           <h2 className="text-xl font-semibold mb-2">
             You're out of scenarios!
           </h2>
-          <p className="mb-4">You completed all available image contexts.</p>
           <p className="mb-4">
-            You got {correctCount} correct out of {usedContextIds.size} (
-            {Math.round((correctCount / usedContextIds.size) * 100)}%).
+            You got {correctCount} out of {usedContextIds.size} correct (
+            {Math.round((correctCount / usedContextIds.size) * 100)}%)
           </p>
           {correctCount < TOTAL_REQUIRED_CORRECT ? (
             <p className="mb-4">Try again to reach 5 correct answers!</p>
@@ -155,100 +153,78 @@ const DecorativeImagePractice = () => {
             <p className="mb-4">Awesome work!</p>
           )}
           <button
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
             onClick={restartActivity}
+            className="mt-4 px-4 py-2 rounded text-white bg-hoverdark hover:bg-accentdark"
           >
             Restart Activity
           </button>
         </div>
-      );
-    }
+      ) : !current ? (
+        <p className="p-4">Loading...</p>
+      ) : (
+        <div className="p-4 border rounded bg-lightgray">
+          <img
+            src={image.src}
+            alt={image.alt}
+            className="w-full rounded mb-4 shadow"
+          />
+          <p className="mb-4">{scenario.context}</p>
 
-    return <p className="p-4">Loading...</p>;
-  }
+          {!showExplanation ? (
+            <div className="flex gap-4">
+              <button
+                className="px-4 py-2 rounded text-white bg-accent hover:bg-accentdark"
+                onClick={() => handleAnswer(true)}
+              >
+                Decorative
+              </button>
+              <button
+                className="px-4 py-2 rounded text-white bg-accent hover:bg-accentdark"
+                onClick={() => handleAnswer(false)}
+              >
+                Meaningful
+              </button>
+            </div>
+          ) : (
+            <div className="mt-4 space-y-4">
+              <div
+                className={`p-3 border-l-4 rounded-sm ${
+                  wasCorrect
+                    ? "bg-lightgreen border-accent"
+                    : "bg-red-100 border-red-600"
+                }`}
+              >
+                <p className="font-semibold mb-1">
+                  {wasCorrect ? "You got it right!" : "That wasn't correct."}
+                </p>
+              </div>
 
-  const image = imageData.find((img) => img.id === current.imageId);
-  const scenario = image?.contexts[current.contextIndex];
+              <div>
+                <h3 className="text-lg font-semibold text-text">Why?</h3>
+                <p className="text-sm text-darkergray">
+                  {scenario.explanation}
+                </p>
+              </div>
 
-  if (!image || !scenario) return <p>Error loading activity.</p>;
+              <div>
+                <h3 className="text-lg font-semibold text-text">
+                  Alt Text for This Context
+                </h3>
+                <p className="font-mono bg-white text-sm rounded p-2 mt-1 border">
+                  {scenario.altForContext}
+                </p>
+              </div>
 
-  return (
-    <div className="p-4 max-w-xl mx-auto relative">
-      <div className="mb-4 flex justify-between items-center text-sm text-gray-600">
-        <p className="mb-4 text-sm text-gray-600">
-          Progress: {correctCount} / {TOTAL_REQUIRED_CORRECT} correct
-        </p>
-        <button
-          className="bg-gray-300 text-gray-800 px-3 py-1 rounded hover:bg-gray-400"
-          onClick={restartActivity}
-        >
-          Restart Activity
-        </button>
-      </div>
-
-      <img
-        src={image.src}
-        alt={image.alt}
-        className="w-full rounded-md shadow mb-4"
-      />
-
-      <div className="mb-4">{scenario.context}</div>
-
-      {!showExplanation && (
-        <div className="flex gap-4 mb-4">
-          <button
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-            onClick={() => handleAnswer(true)}
-          >
-            Decorative
-          </button>
-          <button
-            className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-            onClick={() => handleAnswer(false)}
-          >
-            Meaningful
-          </button>
-        </div>
-      )}
-
-      {showExplanation && (
-        <div className="mb-4">
-          <div className="mt-2 mb-4 p-3 rounded border bg-gray-50">
-            <p
-              className={`font-semibold ${
-                wasCorrect ? "text-green-700" : "text-red-700"
-              }`}
-            >
-              {wasCorrect ? "You got it right!" : "That wasn't correct."}
-            </p>
-          </div>
-
-          <div className="mt-4">
-            <h3 className="text-lg font-semibold text-gray-800">Why?</h3>
-            <p className="mt-1 text-gray-700">{scenario.explanation}</p>
-          </div>
-
-          <div className="mt-4">
-            <h3 className="text-lg font-semibold text-gray-800">
-              Alt Text for This Context
-            </h3>
-            <p className="mt-1 font-mono bg-gray-100 rounded p-2 text-sm">
-              {scenario.altForContext}
-            </p>
-          </div>
-
-          <div className="mt-4">
-            <button
-              className="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-900"
-              onClick={handleNext}
-            >
-              Next
-            </button>
-          </div>
+              <button
+                className="px-4 py-2 rounded text-white bg-hoverdark hover:bg-accentdark"
+                onClick={handleNext}
+              >
+                Next
+              </button>
+            </div>
+          )}
         </div>
       )}
     </div>
   );
-};
-
-export default DecorativeImagePractice;
+}
