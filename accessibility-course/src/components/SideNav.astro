@@ -8,13 +8,13 @@ const rawGroups = await getGroupedLessons();
 const safeGrouped = Array.isArray(rawGroups) ? rawGroups : [];
 
 // Format each group (same as before)
-const formattedLessonsArray = safeGrouped.map(({ index, folder, lessons }) => {
+const formattedLessonsArray = safeGrouped.map(([folder, lessons], i) => {
   const title = folder
     .replace(/^\d+_/, "")
     .replace(/-/g, " ")
     .replace(/\b\w/g, (char) => char.toUpperCase());
 
-  return { index, title, lessons };
+  return { index: i + 1, title, lessons };
 });
 ---
 
