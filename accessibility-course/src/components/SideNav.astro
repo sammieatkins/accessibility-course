@@ -1,8 +1,14 @@
 ---
 import { getGroupedLessons } from "../utils/getGroupedLessons";
+
+// Get the lesson groups from your utility function
 const rawGroups = await getGroupedLessons();
 
-const formattedLessonsArray = rawGroups.map(({ index, folder, lessons }) => {
+// Make sure it's an array to avoid crashes
+const safeGrouped = Array.isArray(rawGroups) ? rawGroups : [];
+
+// Format each group (same as before)
+const formattedLessonsArray = safeGrouped.map(({ index, folder, lessons }) => {
   const title = folder
     .replace(/^\d+_/, "")
     .replace(/-/g, " ")

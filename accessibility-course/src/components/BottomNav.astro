@@ -1,31 +1,30 @@
 ---
-import type Lesson from '../types/Lesson';
-const { groupedLessonsArray = [] } = Astro.props;
+import type Lesson from "../types/Lesson";
+const rawGrouped = Astro.props.groupedLessonsArray;
+const safeGrouped = Array.isArray(rawGrouped) ? rawGrouped : [];
 
 interface Props {
   groupedLessonsArray: [string, Lesson[]][];
 }
 
-const formattedLessonsArray = groupedLessonsArray.map(
-  ([folder, lessons], index) => {
-    const lessonTitle = folder
-      .replace(/^\d+_/, "")
-      .replace(/-/g, " ")
-      .replace(/\b\w/g, (char) => char.toUpperCase());
+const formattedLessonsArray = safeGrouped.map(([folder, lessons], index) => {
+  const lessonTitle = folder
+    .replace(/^\d+_/, "")
+    .replace(/-/g, " ")
+    .replace(/\b\w/g, (char) => char.toUpperCase());
 
-    const sortedLessons = lessons.sort((a, b) => {
-      const aFile = a.id.split("/").pop();
-      const bFile = b.id.split("/").pop();
+  const sortedLessons = lessons.sort((a, b) => {
+    const aFile = a.id.split("/").pop();
+    const bFile = b.id.split("/").pop();
 
-      if (aFile === "instruction.md") return -1;
-      if (bFile === "instruction.md") return 1;
+    if (aFile === "instruction.md") return -1;
+    if (bFile === "instruction.md") return 1;
 
-      return (a.data.order || 100) - (b.data.order || 100);
-    });
+    return (a.data.order || 100) - (b.data.order || 100);
+  });
 
-    return { index: index + 1, title: lessonTitle, lessons: sortedLessons };
-  }
-);
+  return { index: index + 1, title: lessonTitle, lessons: sortedLessons };
+});
 ---
 
 <div class="px-10 py-4 grid grid-cols-3 items-center">

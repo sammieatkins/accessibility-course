@@ -8,6 +8,7 @@ import ActivityLoader from "../components/ActivityLoader";
 
 let { activity, title } = Astro.props;
 const rawGrouped = Astro.props.groupedLessonsArray;
+console.log("GOT groupedLessonsArray?", Array.isArray(rawGrouped));
 const groupedLessonsArray = Array.isArray(rawGrouped) ? rawGrouped : [];
 ---
 
