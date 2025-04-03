@@ -6,16 +6,4 @@ const groupedLessonsArray = await getGroupedLessons();
 const activity = "";
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Accessibility Course</title>
-  </head>
-  <body>
-    <Layout groupedLessonsArray={groupedLessonsArray} activity={activity}/>
-    <main id="main-content" class="flex-1 mx-0 pl-10 min-h-[calc(100vh-4rem-4rem)]">
-      <slot></slot>
-    </main>
-  </body>
-</html>
+<Layout groupedLessonsArray={groupedLessonsArray} activity={activity} />

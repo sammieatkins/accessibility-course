@@ -1,35 +1,26 @@
 ---
-// figure out the 80 characters thing. maybe only for paragraphs? or certain text? maybe just for lessons instead of activities?
 import "../styles/global.css";
-import ActivityLoader from "../components/ActivityLoader";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SideNav from "../components/SideNav.astro";
 import BottomNav from "../components/BottomNav.astro";
+import SidebarToggle from "../components/SidebarToggle.jsx";
+import ActivityLoader from "../components/ActivityLoader";
 
 const { activity, groupedLessonsArray, title } = Astro.props;
-
-// might need to add interface Props later
 ---
 
 <BaseLayout title={title}>
-  <div class="flex w-full flex-1">
+  <div class="flex w-full min-h-screen relative items-start">
+    <SidebarToggle client:load />
     <SideNav groupedLessonsArray={groupedLessonsArray} />
 
     <div class="flex flex-col flex-1">
-      <main
-        id="main-content"
-        class="mx-0 pl-10 pb-0 mb-0 flex-1 overflow-y-auto"
-      >
+      <main id="main-content" class="mx-0 pl-10 pb-0 mb-0 flex-1">
         <div class="p-4 text-text-color">
           <slot />
         </div>
-        {
-          activity ? (
-            <ActivityLoader activity={activity} client:visible />
-          ) : null
-        }
+        {activity && <ActivityLoader activity={activity} client:visible />}
       </main>
-
       <BottomNav groupedLessonsArray={groupedLessonsArray} />
     </div>
   </div>
