@@ -5,35 +5,37 @@ import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
   const lessons = await getCollection("lessons");
-  
+
   return lessons.map((lesson) => ({
     params: { slug: lesson.slug },
     props: lesson,
   }));
 }
 
-
 // Get all lesson files from the "lessons" collection
-const lessons = await getCollection('lessons');
-// console.log(lessons)
+const lessons = await getCollection("lessons");
+// console.log("LESSONS:", lessons);
 
 // Group lessons by the folder name (i.e. the first part of the `lesson.id` before the "/")
-const groupedLessons = lessons.reduce((groups: { [key: string]: typeof lessons }, lesson) => {
-  const folder = lesson.id.split('/')[0];
-  // console.log(folder)
-  if (!groups[folder]) {
-    groups[folder] = [];
-  }
-  groups[folder].push(lesson);
-  return groups;
-}, {});
+const groupedLessons = lessons.reduce(
+  (groups: { [key: string]: typeof lessons }, lesson) => {
+    const folder = lesson.id.split("/")[0];
+    // console.log(folder)
+    if (!groups[folder]) {
+      groups[folder] = [];
+    }
+    groups[folder].push(lesson);
+    return groups;
+  },
+  {}
+);
 
 // groupedLessonsArray is a list of lists. then each list has the folder name and a list of objects. each object is a lesson file in that folder. those objects have data, including: id (the file path), slug (it's the same as the filepath but with dangler left off, like without ".md"), body (the content of the file), collection (the collection name), data (the frontmatter data), render (the rendered content)
 const groupedLessonsArray = Object.entries(groupedLessons);
+// console.log("GROUPED:", groupedLessonsArray);
 
 const lesson = Astro.props;
 const { Content } = await lesson.render();
-
 ---
 
 <LessonLayout {...lesson.data} groupedLessonsArray={groupedLessonsArray}>
