@@ -1,7 +1,9 @@
 ---
 import type Lesson from "../types/Lesson";
 const rawGrouped = Astro.props.groupedLessonsArray;
-const safeGrouped = Array.isArray(rawGrouped) ? rawGrouped : [];
+const safeGrouped: [string, Lesson[]][] = Array.isArray(rawGrouped)
+  ? rawGrouped
+  : [];
 
 interface Props {
   groupedLessonsArray: [string, Lesson[]][];
