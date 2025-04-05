@@ -1,14 +1,15 @@
 ---
-import { getGroupedLessons } from "../utils/getGroupedLessons";
+// import { getGroupedLessons } from "../utils/getGroupedLessons";
 
-// Get the lesson groups from your utility function
-const rawGroups = await getGroupedLessons();
+// const rawGroups = await getGroupedLessons();
 
-// Make sure it's an array to avoid crashes
-const safeGrouped = Array.isArray(rawGroups) ? rawGroups : [];
+// const safeGrouped = Array.isArray(rawGroups) ? rawGroups : [];
+import type Lesson from "../types/Lesson";
 
-// Format each group (same as before)
-const formattedLessonsArray = safeGrouped
+const { groupedLessonsArray } = Astro.props as {
+  groupedLessonsArray: [string, Lesson[]][];
+};
+const formattedLessonsArray = groupedLessonsArray
   .filter(
     (group) =>
       Array.isArray(group) &&

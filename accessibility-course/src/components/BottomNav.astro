@@ -1,32 +1,32 @@
 ---
 import type Lesson from "../types/Lesson";
-const rawGrouped = Astro.props.groupedLessonsArray;
-const safeGrouped: [string, Lesson[]][] = Array.isArray(rawGrouped)
-  ? rawGrouped
-  : [];
-
-interface Props {
+const { groupedLessonsArray } = Astro.props as {
   groupedLessonsArray: [string, Lesson[]][];
-}
+};
 
-const formattedLessonsArray = safeGrouped.map(([folder, lessons], index) => {
-  const lessonTitle = folder
-    .replace(/^\d+_/, "")
-    .replace(/-/g, " ")
-    .replace(/\b\w/g, (char) => char.toUpperCase());
+// const safeGrouped: [string, Lesson[]][] = Array.isArray(rawGrouped)
+//   ? rawGrouped
+//   : [];
 
-  const sortedLessons = lessons.sort((a, b) => {
-    const aFile = a.id.split("/").pop();
-    const bFile = b.id.split("/").pop();
+// interface Props {
+//   groupedLessonsArray: [string, Lesson[]][];
+// }
 
-    if (aFile === "instruction.md") return -1;
-    if (bFile === "instruction.md") return 1;
+const formattedLessonsArray = groupedLessonsArray
+  .filter(
+    (group): group is [string, Lesson[]] =>
+      Array.isArray(group) &&
+      typeof group[0] === "string" &&
+      Array.isArray(group[1])
+  )
+  .map(([folder, lessons], i) => {
+    const title = folder
+      .replace(/^\d+_/, "")
+      .replace(/-/g, " ")
+      .replace(/\b\w/g, (char) => char.toUpperCase());
 
-    return (a.data.order || 100) - (b.data.order || 100);
+    return { index: i + 1, title, lessons };
   });
-
-  return { index: index + 1, title: lessonTitle, lessons: sortedLessons };
-});
 
 // console.log("SAFE GROUPED:", safeGrouped);
 ---
