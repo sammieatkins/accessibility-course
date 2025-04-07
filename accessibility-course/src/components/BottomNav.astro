@@ -27,11 +27,33 @@ const formattedLessonsArray = groupedLessonsArray
 <div class="lesson-nav-container responsive-lesson-nav">
   {
     (() => {
-      const allLessons = formattedLessonsArray
-        .flatMap(({ lessons }) =>
-          lessons.filter((lesson) => !lesson.id.endsWith("home.md"))
-        )
-        .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+      const allLessons = formattedLessonsArray.flatMap(
+        ({ index, title, lessons }) => {
+          const filtered = lessons.filter(
+            (lesson) => !lesson.id.endsWith("home.md")
+          );
+
+          const instructions = filtered
+            .filter((lesson) => lesson.data.type === "instruction")
+            .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+
+          const activities = filtered
+            .filter((lesson) => lesson.data.type === "activity")
+            .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+
+          const ordered = [...instructions, ...activities];
+
+          // Print the current folder index and lesson order
+          console.log(`Lesson ${index}: ${title}`);
+          ordered.forEach((lesson, i) => {
+            console.log(
+              `  ${i + 1}. ${lesson.data.title} (slug: ${lesson.slug}, order: ${lesson.data.order})`
+            );
+          });
+
+          return ordered;
+        }
+      );
 
       const normalize = (s: string) => s.replace(/\/$/, "").toLowerCase();
 
@@ -75,11 +97,6 @@ const formattedLessonsArray = groupedLessonsArray
                     ?.replace(/\.mdx?$/, "")
                     .replace("-", " ") || "Unknown";
                 fileName = fileName.charAt(0).toUpperCase() + fileName.slice(1);
-
-                console.log("fileName", fileName);
-                console.log("title", title);
-                console.log("index", index);
-                console.log("HELLOOOOOO");
 
                 return `Lesson ${index}: ${title} | ${fileName}`;
               })
