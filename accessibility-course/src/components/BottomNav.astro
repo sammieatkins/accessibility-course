@@ -23,7 +23,7 @@ const formattedLessonsArray = groupedLessonsArray
     return { index: i + 1, title, lessons };
   });
 
-  // console.log("formattedLessonsArray", formattedLessonsArray);
+// console.log("formattedLessonsArray", formattedLessonsArray);
 ---
 
 <div class="lesson-nav-container responsive-lesson-nav">
@@ -35,9 +35,12 @@ const formattedLessonsArray = groupedLessonsArray
         lessons.filter((lesson) => !lesson.id.endsWith("home.md"))
       );
 
+      const normalize = (s: string) => s.replace(/\/$/, "").toLowerCase();
+
       const currentIndex = allLessons.findIndex(
-        (lesson) => lesson.slug === currentSlug
+        (lesson) => normalize(lesson.slug) === normalize(currentSlug)
       );
+
       const prevLesson = currentIndex > 0 ? allLessons[currentIndex - 1] : null;
       const nextLesson =
         currentIndex < allLessons.length - 1
@@ -74,11 +77,11 @@ const formattedLessonsArray = groupedLessonsArray
                     ?.replace(/\.mdx?$/, "")
                     .replace("-", " ") || "Unknown";
                 fileName = fileName.charAt(0).toUpperCase() + fileName.slice(1);
-                
+
                 console.log("fileName", fileName);
                 console.log("title", title);
                 console.log("index", index);
-                console.log("HELLOOOOOO")
+                console.log("HELLOOOOOO");
 
                 return `Lesson ${index}: ${title} | ${fileName}`;
               })
