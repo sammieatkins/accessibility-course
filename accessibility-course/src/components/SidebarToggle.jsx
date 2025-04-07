@@ -23,7 +23,7 @@ export default function SidebarToggle() {
 
   return (
     <button
-      className="lg:hidden ml-4 mt-4 bg-transparent text-primary p-2 rounded-full"
+      className="sidebar-toggle-button"
       onClick={() => setIsOpen(true)}
       aria-label="Open menu"
     >

@@ -1,14 +1,10 @@
 ---
-// import { getGroupedLessons } from "../utils/getGroupedLessons";
-
-// const rawGroups = await getGroupedLessons();
-
-// const safeGrouped = Array.isArray(rawGroups) ? rawGroups : [];
 import type Lesson from "../types/Lesson";
 
 const { groupedLessonsArray } = Astro.props as {
   groupedLessonsArray: [string, Lesson[]][];
 };
+
 const formattedLessonsArray = groupedLessonsArray
   .filter(
     (group) =>
@@ -22,7 +18,22 @@ const formattedLessonsArray = groupedLessonsArray
       .replace(/-/g, " ")
       .replace(/\b\w/g, (char) => char.toUpperCase());
 
-    return { index: i + 1, title, lessons };
+    const filtered = lessons.filter((lesson) => !lesson.id.endsWith("home.md"));
+
+    const instructions = filtered
+      .filter((lesson) => lesson.data.type === "instruction")
+      .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+
+    const activities = filtered
+      .filter((lesson) => lesson.data.type === "activity")
+      .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+
+    return {
+      index: i + 1,
+      title,
+      instructions,
+      activities,
+    };
   });
 ---
 
@@ -47,25 +58,23 @@ const formattedLessonsArray = groupedLessonsArray
   }
 
   {
-    formattedLessonsArray.map(({ index, title, lessons }) => (
+    formattedLessonsArray.map(({ index, title, instructions, activities }) => (
       <div class="mb-6">
         <h2 class="mb-2 pl-2 text-lg font-black text-darkergray">
           Lesson {index}: {title}
         </h2>
         <ul class="pl-4 space-y-2 font-medium side-nav">
-          {lessons
-            .filter((lesson) => !lesson.id.endsWith("home.md"))
-            .map((lesson) => (
-              <li>
-                <a
-                  href={`/lessons/${lesson.slug}`}
-                  id="sidenav-links"
-                  class="block w-full p-2 rounded-lg text-md transition font-bold"
-                >
-                  {lesson.data.title}
-                </a>
-              </li>
-            ))}
+          {[...instructions, ...activities].map((lesson) => (
+            <li>
+              <a
+                href={`/lessons/${lesson.slug}`}
+                id="sidenav-links"
+                class="block w-full p-2 rounded-lg text-md transition font-bold"
+              >
+                {lesson.data.title}
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
     ))

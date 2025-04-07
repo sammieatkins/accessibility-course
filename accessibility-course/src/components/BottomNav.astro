@@ -4,14 +4,6 @@ const { groupedLessonsArray } = Astro.props as {
   groupedLessonsArray: [string, Lesson[]][];
 };
 
-// const safeGrouped: [string, Lesson[]][] = Array.isArray(rawGrouped)
-//   ? rawGrouped
-//   : [];
-
-// interface Props {
-//   groupedLessonsArray: [string, Lesson[]][];
-// }
-
 const formattedLessonsArray = groupedLessonsArray
   .filter(
     (group): group is [string, Lesson[]] =>
@@ -27,11 +19,9 @@ const formattedLessonsArray = groupedLessonsArray
 
     return { index: i + 1, title, lessons };
   });
-
-// console.log("SAFE GROUPED:", safeGrouped);
 ---
 
-<div class="px-10 py-4 grid grid-cols-3 items-center">
+<div class="lesson-nav-container responsive-lesson-nav">
   {
     (() => {
       const currentSlug = Astro.url?.pathname?.replace("/lessons/", "") || "";
@@ -55,7 +45,7 @@ const formattedLessonsArray = groupedLessonsArray
           {prevLesson ? (
             <a
               href={`/lessons/${prevLesson.slug}`}
-              class="no-underline justify-self-start sidenav-links text-white bg-[var(--primary-color)] transition px-4 py-2 rounded-lg shadow hover:bg-[var(--hover-dark-color)] focus:ring-2 focus:ring-offset-2 focus:ring-[var(--hover-dark-color)]"
+              class="lesson-nav-link"
               aria-label="Previous lesson"
             >
               ← Previous Lesson
@@ -88,7 +78,7 @@ const formattedLessonsArray = groupedLessonsArray
           {nextLesson ? (
             <a
               href={`/lessons/${nextLesson.slug}`}
-              class="no-underline justify-self-end sidenav-links text-white bg-[var(--primary-color)] transition px-4 py-2 rounded-lg shadow hover:bg-[var(--hover-dark-color)] focus:ring-2 focus:ring-offset-2 focus:ring-[var(--hover-dark-color)]"
+              class="lesson-nav-link"
               aria-label="Next lesson"
             >
               Next Lesson →

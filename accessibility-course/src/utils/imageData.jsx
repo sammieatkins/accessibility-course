@@ -20,7 +20,7 @@ export const imageData = [
         isDecorative: true,
         explanation:
           "This image is used as a visual banner and doesn't add any new or essential information to the blog post.",
-        altForContext: '"alt="""',
+        altForContext: "",
       },
       {
         context: (
@@ -55,8 +55,7 @@ export const imageData = [
         isDecorative: false,
         explanation:
           "The image helps potential adopters understand what the specific dog looks like. It's essential for making informed decisions and adds meaningful context to the listing.",
-        altForContext:
-          'alt="Fawn-colored pug standing in grass, facing the camera"',
+        altForContext: "Fawn-colored pug",
       },
     ],
   },

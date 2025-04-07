@@ -1,7 +1,5 @@
-// fix flickers on initial load
-// put restart button on top right of the block, opposite the progress thing
-// button colors and other css
-// fill out content for image data (10-15?)
+// the summary page might have to be adjusted once i add all the image data.
+
 "use client";
 import { useState, useLayoutEffect, useEffect } from "react";
 import { imageData } from "../../utils/imageData";
@@ -117,7 +115,7 @@ export default function DecorativeImagePractice() {
     }
   }, [hasRestarted]);
 
-  if (!hasInitialized) return <div className="min-h-screen bg-background" />;
+  if (!hasInitialized) return <div className="activity-container" />;
 
   const image = current
     ? imageData.find((img) => img.id === current.imageId)
@@ -125,100 +123,77 @@ export default function DecorativeImagePractice() {
   const scenario = image?.contexts[current?.contextIndex];
 
   return (
-    <div className="max-w-2xl mx-auto p-4 font-sans text-text bg-background rounded">
-      <div className="flex items-center justify-between">
-        <p className="text-sm font-semibold text-darkgray">
+    <div className="activity-container">
+      <div className="activity-header">
+        <p className="activity-progress">
           Progress: {correctCount} / {TOTAL_REQUIRED_CORRECT}
         </p>
-        <button
-          onClick={restartActivity}
-          className="mb-4 px-3 py-1 rounded text-white bg-hoverdark hover:bg-accentdark"
-        >
+        <button className="button-accent" onClick={restartActivity}>
           Restart Activity
         </button>
       </div>
 
       {!current && usedContextIds.size > 0 ? (
-        <div className="p-4 border rounded bg-lightgray text-center">
-          <h2 className="text-xl font-semibold mb-2">
-            You're out of scenarios!
-          </h2>
-          <p className="mb-4">
+        <div className="activity-box">
+          <h2 className="activity-title">You're out of scenarios!</h2>
+          <p>
             You got {correctCount} out of {usedContextIds.size} correct (
             {Math.round((correctCount / usedContextIds.size) * 100)}%)
           </p>
-          {correctCount < TOTAL_REQUIRED_CORRECT ? (
-            <p className="mb-4">Try again to reach 5 correct answers!</p>
-          ) : (
-            <p className="mb-4">Awesome work!</p>
-          )}
-          <button
-            onClick={restartActivity}
-            className="mt-4 px-4 py-2 rounded text-white bg-hoverdark hover:bg-accentdark"
-          >
+          <p>
+            {correctCount < TOTAL_REQUIRED_CORRECT
+              ? "Try again to reach 5 correct answers!"
+              : "Awesome work!"}
+          </p>
+          <button className="button-accent" onClick={restartActivity}>
             Restart Activity
           </button>
         </div>
       ) : !current ? (
-        <p className="p-4">Loading...</p>
+        <p>Loading...</p>
       ) : (
-        <div className="p-4 border rounded bg-lightgray">
-          <img
-            src={image.src}
-            alt={image.alt}
-            className="w-full rounded mb-4 shadow"
-          />
-          <p className="mb-4">{scenario.context}</p>
+        <div className="activity-box">
+          <img src={image.src} alt={image.alt} className="activity-image" />
+          <p className="activity-context">{scenario.context}</p>
 
           {!showExplanation ? (
-            <div className="flex gap-4">
+            <div className="button-row">
               <button
-                className="px-4 py-2 rounded text-white bg-accent hover:bg-accentdark"
+                className="button-accent"
                 onClick={() => handleAnswer(true)}
               >
                 Decorative
               </button>
               <button
-                className="px-4 py-2 rounded text-white bg-accent hover:bg-accentdark"
+                className="button-accent"
                 onClick={() => handleAnswer(false)}
               >
                 Meaningful
               </button>
             </div>
           ) : (
-            <div className="mt-4 space-y-4">
+            <div className="explanation-block">
               <div
-                className={`p-3 border-l-4 rounded-sm ${
-                  wasCorrect
-                    ? "bg-lightgreen border-primary"
-                    : "bg-red-100 border-red-600"
+                className={`feedback-message ${
+                  wasCorrect ? "feedback-correct" : "feedback-incorrect"
                 }`}
               >
-                <p className="font-semibold mb-1">
+                <p className="feedback-label">
                   {wasCorrect ? "You got it right!" : "That wasn't correct."}
                 </p>
               </div>
 
               <div>
-                <h3 className="text-lg font-semibold text-text">Why?</h3>
-                <p className="text-sm text-darkergray">
-                  {scenario.explanation}
-                </p>
+                <h3>Why?</h3>
+                <p>{scenario.explanation}</p>
               </div>
 
               <div>
-                <h3 className="text-lg font-semibold text-text">
-                  Alt Text for This Context
-                </h3>
-                <p className="font-mono bg-white text-sm rounded p-2 mt-1 border">
-                  {scenario.altForContext}
-                </p>
+                <h3>Alt Text for This Context</h3>
+                <p className="alt-text-block">alt="{scenario.altForContext}"</p>
               </div>
 
-              <button
-                className="px-4 py-2 rounded text-white bg-accent hover:bg-accentdark"
-                onClick={handleNext}
-              >
+              <button className="button-accent" onClick={handleNext}>
                 Next
               </button>
             </div>
