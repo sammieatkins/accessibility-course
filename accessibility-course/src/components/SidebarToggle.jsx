@@ -1,3 +1,5 @@
+// add clicking outside the sidenav to close it
+
 import { useEffect, useState } from "react";
 
 export default function SidebarToggle() {

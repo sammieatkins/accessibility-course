@@ -22,18 +22,16 @@ const formattedLessonsArray = groupedLessonsArray
 
     return { index: i + 1, title, lessons };
   });
-
-// console.log("formattedLessonsArray", formattedLessonsArray);
 ---
 
 <div class="lesson-nav-container responsive-lesson-nav">
   {
     (() => {
-      // const currentSlug = Astro.url?.pathname?.replace("/lessons/", "") || "";
-
-      const allLessons = formattedLessonsArray.flatMap(({ lessons }) =>
-        lessons.filter((lesson) => !lesson.id.endsWith("home.md"))
-      );
+      const allLessons = formattedLessonsArray
+        .flatMap(({ lessons }) =>
+          lessons.filter((lesson) => !lesson.id.endsWith("home.md"))
+        )
+        .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
 
       const normalize = (s: string) => s.replace(/\/$/, "").toLowerCase();
 
