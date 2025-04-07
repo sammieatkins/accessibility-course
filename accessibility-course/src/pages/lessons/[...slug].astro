@@ -38,6 +38,6 @@ const lesson = Astro.props;
 const { Content } = await lesson.render();
 ---
 
-<LessonLayout {...lesson.data} groupedLessonsArray={groupedLessonsArray}>
+<LessonLayout {...lesson.data} groupedLessonsArray={groupedLessonsArray} slug={lesson.slug}>
   <Content />
 </LessonLayout>
