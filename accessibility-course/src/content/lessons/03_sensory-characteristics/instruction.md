@@ -16,7 +16,6 @@ Sensory characteristics include things like color, shape, location, size, sound,
 <div class="important-callout">
   <img src="/images/icon_eyes_right.png" alt="" class="icon-eyes" />
   <div>
-    <h2 class="important-heading">Important</h2>
     <div class="important-content">
       <p>
         You should never rely on just one sensory cue to convey meaning. If someone can’t see color, hear a sound, or use a mouse, your design still needs to hold up.

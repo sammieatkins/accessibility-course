@@ -81,12 +81,11 @@ Like we discussed, some images are decorative. If they don’t convey any new in
 <div class="important-callout">
   <img src="/images/icon_eyes_right.png" alt="" class="icon-eyes" />
   <div>
-    <h2 class="important-heading">Important</h2>
     <div class="important-content">
       <p>
         Leaving out the <code>alt</code> attribute completely is not the same as setting it to empty.
         If you leave it off entirely, some screen readers will try to guess what the image is by
-        reading the file name—which is never helpful.
+        reading the file name.
       </p>
     </div>
   </div>

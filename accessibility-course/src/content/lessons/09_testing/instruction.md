@@ -19,7 +19,18 @@ Plus, testing early and often makes your job _easier_. The more accessibility pr
 
 ## Manual Testing: The Real MVP
 
-Let’s be blunt: **automated tools are helpful, but they’re not enough**. Most automated tools only catch about 30% of accessibility issues. That means **you** have to catch the other 70% using what you’ve learned.
+Let’s be blunt: **automated tools are helpful, but they’re not enough**. 
+
+<div class="important-callout">
+  <img src="/images/icon_eyes_right.png" alt="" class="icon-eyes" />
+  <div>
+    <div class="important-content">
+      <p>
+        Most automated tools only catch about 30% of accessibility issues. That means <strong>you</strong> have to catch the other 70% using what you’ve learned.
+      </p>
+    </div>
+  </div>
+</div>
 
 Here’s what automated tools can’t do:
 

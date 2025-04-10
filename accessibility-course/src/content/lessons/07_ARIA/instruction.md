@@ -5,7 +5,7 @@ type: instruction
 order: 1
 ---
 
-<!-- live regions => dynamic regions. pages that update without reload. -->
+<!-- pages that update without reload. -->
 
 # ARIA
 
@@ -55,13 +55,13 @@ ARIA is here to support you when HTML falls short—not to replace it.
 
 ## When ARIA _Is_ the Right Tool
 
-Okay, we’ve been hard on ARIA. But when used correctly, it’s powerful—and sometimes the only option.
+Okay, we’ve been hard on ARIA. But when used correctly, it’s powerful—and sometimes the only option. Let's go through some situations where ARIA is not just allowed, but encouraged.
 
-Here are some situations where ARIA is not just allowed, but encouraged:
+### Dynamic Regions
 
-### Live Regions
+Sometimes content changes on the page without a full refresh. Maybe a user submits a form and gets an error message, or they click “Add to cart” and a little number in the corner updates. That’s where ARIA live regions come in.
 
-Need to announce changes on the page without a full reload? That’s where ARIA live regions come in.
+These are areas of the page that notify assistive technologies—like screen readers—when something changes, even if the user didn’t directly interact with it.
 
 #### Examples:
 
@@ -145,14 +145,12 @@ Marking something as decorative (and skipping it in screen readers):
 
 Want to group form controls? There are ARIA roles for that—but in most cases, the native `<fieldset>` and `<legend>` do a better job. Save the fancy ARIA stuff for situations where no semantic tag exists.
 
-## Coming Up
+## Final Thoughts
+Yes, we’ve said “use semantic HTML first” a few times. But that’s not because ARIA is bad. It’s because ARIA is specific. It’s designed for situations where native elements don’t cover what your UI needs to do.
 
-Now that you know what ARIA is—and when not to use it—you’re ready to dig into some real-world examples.
+### Here’s Your Game Plan:
+- Start with the real HTML tag—you’d be surprised how far that gets you.
+- Use ARIA where it adds value, like labeling complex widgets or announcing dynamic changes.
+- Always test—ARIA doesn’t do anything on its own unless assistive tech knows how to interpret it, and you’ve wired up the expected behavior.
 
-In the next part of this lesson, we’ll go over:
-
-- A quick ARIA cheat sheet (what the attributes do)
-- When to use roles vs. labels
-- How to test your ARIA with a screen reader
-
-Because adding ARIA is one thing—but making sure it works is where the real skill comes in.
+If you're ever in doubt, check the [ARIA Authoring Practices Guide (APG)](https://www.w3.org/WAI/ARIA/apg/). It’s packed with examples and shows how ARIA fits into real components.

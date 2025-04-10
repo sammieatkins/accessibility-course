@@ -30,7 +30,6 @@ For each example, you’ll see:
 <div class="important-callout">
   <img src="/images/icon_eyes_right.png" alt="" class="icon-eyes" />
   <div>
-    <h2 class="important-heading">Important</h2>
     <div class="important-content">
       <p>
         All of the images in this activity are meaningful—none of them are decorative. Each one is included for a reason, and your alt text should help users understand that reason.

@@ -43,14 +43,6 @@ const formattedLessonsArray = groupedLessonsArray
 
           const ordered = [...instructions, ...activities];
 
-          // Print the current folder index and lesson order
-          console.log(`Lesson ${index}: ${title}`);
-          ordered.forEach((lesson, i) => {
-            console.log(
-              `  ${i + 1}. ${lesson.data.title} (slug: ${lesson.slug}, order: ${lesson.data.order})`
-            );
-          });
-
           return ordered;
         }
       );

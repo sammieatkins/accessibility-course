@@ -41,10 +41,10 @@ They read out loud everything from headings and links to button labels and image
 
 Examples:
 
-- **NVDA** (Windows, free)
-- **JAWS** (Windows, paid)
-- **VoiceOver** (built into macOS and iOS)
-- **Narrator** (built into Windows)
+- NVDA (Windows, free)
+- JAWS (Windows, paid)
+- VoiceOver (built into macOS and iOS)
+- Narrator (built into Windows)
 
 ## Voice Control Tools
 
@@ -54,8 +54,8 @@ Voice control software scans what's on the screen and lets users activate elemen
 
 Examples:
 
-- **Dragon NaturallySpeaking** (Windows, paid)
-- **Voice Access** (built into Android and Windows)
+- Dragon NaturallySpeaking (Windows, paid)
+- Voice Access (built into Android and Windows)
 
 ## Screen Magnifiers & Zoom
 
@@ -63,29 +63,24 @@ Not everyone needs a screen reader—sometimes they just need things _bigger_. M
 
 This can mean zooming into a small section of the screen (like using a digital magnifying glass) or scaling up the entire interface. It helps people with low vision read and interact more comfortably.
 
-That said, not everyone wants things bigger. Some users with **tunnel vision** (a reduced visual field, like looking through a straw) may actually prefer **smaller text**, so they can fit more content into the small part of the screen they can see clearly. The takeaway? Preferences vary—and your layout should be flexible enough to support both.
+That said, not everyone wants things bigger. Some users with tunnel vision (a reduced visual field, like looking through a straw) may actually prefer smaller text, so they can fit more content into the small part of the screen they can see clearly. The takeaway? Preferences vary—and your layout should be flexible enough to support both.
 
 Examples:
 
-- **ZoomText** (Windows)
-- Built-in zoom in most operating systems and browsers (like `Ctrl +` or `Cmd +`)
-
-Examples:
-
-- **ZoomText** (Windows)
+- ZoomText (Windows)
 - Built-in zoom in most operating systems and browsers (like `Ctrl +` or `Cmd +`)
 
 ## Switch Devices & Keyboard Navigation
 
 Users with motor impairments may navigate with just one or two switches—or with a keyboard alone. Switch systems move through items one at a time, and the user activates the one they want using a simple input.
 
-For example, a **sip-and-puff switch** works by detecting air pressure—users "sip" (inhale) or "puff" (exhale) into a tube to make selections. Others use head movement, blinking, or eye-tracking to navigate and click.
+For example, a sip-and-puff switch works by detecting air pressure—users "sip" (inhale) or "puff" (exhale) into a tube to make selections. Others use head movement, blinking, or eye-tracking to navigate and click.
 
 Examples:
 
-- **Sip-and-puff switches**
-- **Eye-tracking setups**
-- Basic keyboard navigation using **Tab**, **Shift+Tab**, **Enter**, and **Space**
+- Sip-and-puff switches
+- Eye-tracking setups
+- Basic keyboard navigation using Tab, Shift+Tab, Enter, and Space
 
 ## Cognitive and Learning Aids
 
@@ -95,7 +90,7 @@ Some highlight words as they’re read aloud. Others block pop-ups or reformat w
 
 Examples:
 
-- **Text-to-speech software**
+- Text-to-speech software
 - Simplified or distraction-free interfaces
 - Focus and time management tools
 
@@ -107,23 +102,17 @@ That’s why accessibility isn’t about coding for “the blind user” or “t
 
 ## Assistive Tech: Not Just for the Web
 
-While this course focuses on web-based tools, it’s worth noting that assistive technology isn’t limited to screen readers or switch devices. Broadly speaking, assistive tech is **anything that helps someone with a disability navigate the world more effectively**—and that includes tools far outside the browser.
+While this course focuses on web-based tools, it’s worth noting that assistive technology isn’t limited to screen readers or switch devices. Broadly speaking, assistive tech is anything that helps someone with a disability navigate the world more effectively—and that includes tools far outside the browser.
 
-Some examples:
+Examples:
 
 - A calendar app that helps someone with ADHD stay organized
 - Dictation software that lets someone write using their voice
 - Custom key mapping for users with limited mobility
 - Color overlays or screen filters for users with dyslexia or visual stress
 
-You might even use some of these tools yourself—and yes, that still counts. Assistive technology isn’t about the label. It’s about reducing friction and increasing access.
-
-## Getting Ready to Test
-
-You don’t need to master every type of assistive tech—but you should get familiar enough to know how to try it. Even the basics can go a long way. In the next few lessons, we’ll walk through how to start testing your site with keyboard nav, screen readers, zoom, and more.
-
 ## Final Thoughts
 
 Assistive technology isn’t fringe or niche—it’s _how people use the web_. If your code only works on your device, with your setup, and your habits, it’s not truly working.
 
-You don’t need to be an expert in every tool. But knowing what’s out there—and how your code interacts with it—is what separates good developers from great ones. You’re building for real people. Let’s make sure they can actually use what you build.
+You don’t need to be an expert in every tool. But knowing what’s out there—and how your code interacts with it—is what separates good developers from great ones.

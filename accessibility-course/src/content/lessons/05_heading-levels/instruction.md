@@ -22,7 +22,6 @@ Most screen readers have a shortcut key to jump from heading to heading. If your
 <div class="important-callout">
   <img src="/images/icon_eyes_right.png" alt="" class="icon-eyes" />
   <div>
-    <h2 class="important-heading">Important</h2>
     <div class="important-content">
       <p>
         Headings aren't just a helpful feature—it’s how the majority of screen reader users navigate the web. (See <a href="https://webaim.org/projects/screenreadersurvey10/#finding">WebAIM Screen Reader Survey - Finding Information</a>)

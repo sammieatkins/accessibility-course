@@ -38,7 +38,6 @@ Links are for **navigation**—connecting one page, section, or resource to anot
 <div class="important-callout">
   <img src="/images/icon_eyes_right.png" alt="" class="icon-eyes" />
   <div>
-    <h2 class="important-heading">Important</h2>
     <div class="important-content">
       <p>
         Always use the native HTML elements unless you have a very good reason not to. They come with built-in accessibility and behaviors that custom components often forget to replicate.
