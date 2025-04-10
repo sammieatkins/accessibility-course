@@ -1,3 +1,5 @@
+// ??? make it an actual article?
+
 import { useState } from "react";
 
 const SemanticHtmlPractice = () => {
@@ -63,10 +65,6 @@ const SemanticHtmlPractice = () => {
 
   return (
     <section className="activity mx-auto mt-8 p-4 bg-lightgray rounded-lg">
-      <h2 className="text-2xl font-bold mb-4">
-        Build the Skeleton: Choose the Best Tag for Each Page Section
-      </h2>
-
       {showResults && (
         <p className="text-lg font-semibold text-primary mb-6">
           You got {correctCount} out of {structure.length} correct.

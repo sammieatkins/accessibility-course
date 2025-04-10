@@ -27,6 +27,16 @@ For each example, you’ll see:
 - **Skip the obvious.** No need to say “image of…”—screen readers already know it’s an image.
 - **Only describe what’s visually there.** Don’t reveal information the image doesn’t show (especially if it’s part of a quiz or test).
 
-All of the images in this activity are meaningful—none of them are decorative. Each one is included for a reason, and your alt text should help users understand that reason.
+<div class="important-callout">
+  <img src="/images/icon_eyes_right.png" alt="" class="icon-eyes" />
+  <div>
+    <h2 class="important-heading">Important</h2>
+    <div class="important-content">
+      <p>
+        All of the images in this activity are meaningful—none of them are decorative. Each one is included for a reason, and your alt text should help users understand that reason.
+      </p>
+    </div>
+  </div>
+</div>
 
 Once you submit your description, you’ll see an example answer and have a chance to reflect before moving on.

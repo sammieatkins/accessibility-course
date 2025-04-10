@@ -13,7 +13,17 @@ order: 1
 
 Sensory characteristics include things like color, shape, location, size, sound, and orientation. These cues are helpful—unless they’re the only way you’re communicating something important.
 
-You should never rely on just one sensory cue to convey meaning. If someone can’t see color, hear a sound, or use a mouse, your design still needs to hold up.
+<div class="important-callout">
+  <img src="/images/icon_eyes_right.png" alt="" class="icon-eyes" />
+  <div>
+    <h2 class="important-heading">Important</h2>
+    <div class="important-content">
+      <p>
+        You should never rely on just one sensory cue to convey meaning. If someone can’t see color, hear a sound, or use a mouse, your design still needs to hold up.
+      </p>
+    </div>
+  </div>
+</div>
 
 ## Location
 
@@ -39,7 +49,7 @@ But even when color isn’t the only cue, it still needs to be readable. That’
 
 Examples of good use of color:
 
-- “Required fields are marked in red and with an asterisk (*).”
+- “Required fields are marked in red and with an asterisk (\*).”
 - A button that uses both a red background and a trash can icon with an accessible name like "Delete".
 
 <!-- add a bit about the activity. can easily be fixed with practice. can make a cute color palette that's still accessible. dive more into contrast. -->

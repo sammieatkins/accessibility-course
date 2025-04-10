@@ -6,6 +6,8 @@ order: 1
 activity: LinkTextMatching
 ---
 
+<!-- ??? put this activity before the instruction? -->
+
 # Link Text Matching Activity
 Let’s see how well link text actually communicates where it leads.
 

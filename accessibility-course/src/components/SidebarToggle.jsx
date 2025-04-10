@@ -12,11 +12,24 @@ export default function SidebarToggle() {
       document.body.classList.remove("sidebar-open");
     }
 
-    const onEscape = (e) => {
+    const handleEscape = (e) => {
       if (e.key === "Escape") setIsOpen(false);
     };
-    window.addEventListener("keydown", onEscape);
-    return () => window.removeEventListener("keydown", onEscape);
+
+    const handleClickOutside = (e) => {
+      const sidebarEl = document.getElementById("merged-sidebar");
+      if (sidebarEl && !sidebarEl.contains(e.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleEscape);
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      window.removeEventListener("keydown", handleEscape);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, [isOpen]);
 
   useEffect(() => {

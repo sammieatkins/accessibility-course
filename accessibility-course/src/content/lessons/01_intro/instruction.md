@@ -4,7 +4,6 @@ description: "Wondering why accessibility matters? This lesson explores what web
 type: instruction
 order: 1
 ---
-<!-- make "Root" actually the logo? or an icon callout with my logo? -->
 
 # Introduction to Accessibility
 

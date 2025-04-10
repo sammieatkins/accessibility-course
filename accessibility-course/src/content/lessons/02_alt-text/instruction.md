@@ -78,18 +78,16 @@ Like we discussed, some images are decorative. If they don’t convey any new in
 <img src="swirl.svg" alt="" />
 ```
 
-<div className="mt-0 p-4 flex items-center gap-4 bg-transparent">
-  <!-- <span
-    className="material-symbols--info-outline-rounded text-2xl text-text-color"
-    aria-hidden="true"
-  ></span> -->
-  <img src="/images/icon_eyes_right.png" alt="" class="icon-eyes"/>
+<div class="important-callout">
+  <img src="/images/icon_eyes_right.png" alt="" class="icon-eyes" />
   <div>
-    <h2 className="text-lg font-semibold text-text-color mb-2">Important</h2>
-    <p className="text-text-color">
-      Leaving out the <code>alt</code> attribute completely is not the same as setting it to empty.
-      If you leave it off entirely, some screen readers will try to guess what the image is by
-      reading the file name—which is never helpful.
-    </p>
+    <h2 class="important-heading">Important</h2>
+    <div class="important-content">
+      <p>
+        Leaving out the <code>alt</code> attribute completely is not the same as setting it to empty.
+        If you leave it off entirely, some screen readers will try to guess what the image is by
+        reading the file name—which is never helpful.
+      </p>
+    </div>
   </div>
 </div>

@@ -7,7 +7,6 @@ activity: HeadingLevelsPractice
 ---
 
 # Heading Levels Practice
-<h2 class="subheading">When everything's bold, nothing is</h2>
 
 In this activity, you'll look at different parts of an article and decide what heading level is the most appropriate for each section.
 

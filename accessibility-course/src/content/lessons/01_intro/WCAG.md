@@ -11,8 +11,6 @@ order: 2
 
 First things first, let's pronounce it "wih-cahg". I’ve heard “wee-cag” before and... look, I can’t stop you, but I will judge you.
 
-<!-- link for w3c and wcag? -->
-
 Let's circle back to what [WCAG](https://www.w3.org/WAI/standards-guidelines/wcag/) even is. It stands for the Web Content Accessibility Guidelines (you see why we're talking about this first, right?), and it was made by the [World Wide Web Consortium (aka W3C)](https://www.w3.org/). WCAG is what we mean when we say a website _"meets accessibility standards"_, and W3C is the group that decided on those standards. It's not technically legally binding on its own, but most accessibility laws reference it (like ADA or Section 508).
 
 ## WCAG Structure

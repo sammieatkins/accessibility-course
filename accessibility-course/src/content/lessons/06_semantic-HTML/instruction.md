@@ -5,7 +5,7 @@ type: instruction
 order: 1
 ---
 
-<!-- personal note: go thorugh the tags list and see if they're stil in use -->
+<!-- !!! personal note: go thorugh the tags list and see if they're stil in use -->
 
 # Semantic HTML
 
@@ -21,7 +21,7 @@ And hey, we’ve all written a little div soup now and then. But once you know b
 
 ## Common Semantic Tags
 
-So, now that we understand the 'why,' let's explore the most commonly used semantic tags that bring this structure to life.
+So, now that we understand the why, let's explore the most commonly used semantic tags that bring this structure to life.
 
 ### Structural Tags
 
@@ -47,7 +47,19 @@ Here’s how to make your tables meaningful and accessible:
 - Use [`<th>`](https://www.w3schools.com/tags/tag_th.asp) for header cells, and add `scope="col"` or `scope="row"` to help screen readers understand the relationships between data.
 - Don't use tables to control layout. It’s <span id="year"></span>–we have CSS for that.
 
-Semantic tables convey clear relationships between data points. Assistive tech can read headers aloud, navigate rows and columns, and provide context that would otherwise be lost. But only if your table is coded _semantically_ (AKA correctly).
+<!-- Semantic tables convey clear relationships between data points. Assistive tech can read headers aloud, navigate rows and columns, and provide context that would otherwise be lost. But only if your table is coded <em>semantically</em> (AKA correctly). -->
+
+<div class="important-callout">
+  <img src="/images/icon_eyes_right.png" alt="" class="icon-eyes" />
+  <div>
+    <div class="important-content">
+      <p>
+        <!-- Assistive tech can navigate and interpret tables—but only if they're coded <em>semantically</em>. -->
+        Semantic tables convey clear relationships between data points. Assistive tech can read headers aloud, navigate rows and columns, and provide context that would otherwise be lost. But only if your table is coded <em>semantically</em> (AKA correctly).
+      </p>
+    </div>
+  </div>
+</div>
 
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
@@ -81,9 +93,10 @@ Avoid using images of text—like screenshots of headers, buttons, or infographi
 Instead, use semantic HTML and CSS to style real, accessible text. If your image has a lot of text, look into Optical Character Recognition (OCR). Thank me later.
 
 ## Leave the Spacing to CSS
+
 This one’s important: don’t use empty HTML tags just to space things out.
 
-If you’re tempted to throw in a stray <div> or <p> just to create some breathing room, it’s time to bring in CSS. Spacing is a visual concern—and that’s what CSS is for. HTML is about structure and meaning. Every element should represent something real in your content.
+If you’re tempted to throw in a stray `<div>` or `<p>` just to create some breathing room, it’s time to bring in CSS. Spacing is a visual concern—and that’s what CSS is for. HTML is about structure and meaning. Every element should represent something real in your content.
 
 Using empty tags for layout muddies the semantic structure and confuses assistive tech. Want a gap between elements? Add a margin or padding rule in your CSS.
 
@@ -109,6 +122,4 @@ These details might feel small, but they go a long way in making your site more 
 
 That was a lot to take in, right? But now that you've got the basics of semantic HTML, you’re in a good place. Learning semantic HTML isn’t just about writing code—it’s about building a solid foundation for everything you’ll do next. When you really understand these tags, you’re not just making things work; you’re making things make sense.
 
-And here’s the best part: it saves you time. Instead of wasting hours reinventing the wheel with JavaScript or custom components for elements like `<dialog>`, `<section>`, or `<article>`, you can just use the built-in structure. That means faster development, cleaner code, and fewer headaches down the road.
-
-By diving into semantic HTML now, you’re setting yourself up for quicker, more efficient projects in the future. Plus, you’ll really get HTML and be able to work with it.
+And here’s the best part: it saves you time. Instead of wasting hours reinventing the wheel with JavaScript or custom components for elements like `<dialog>`, `<dl>`, or `<code>`, you can just use the built-in structure. That means faster development, cleaner code, and fewer headaches down the road.

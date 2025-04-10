@@ -5,8 +5,6 @@ type: instruction
 order: 2
 ---
 
-<!-- add menu -->
-
 # Commonly Used Tags
 
 This is a list of HTML tags I’ve compiled. It’s not meant to be exhaustive, and yes—some of these are the basics everyone knows. But others are more niche, surprisingly useful, or just plain cool. Some get forgotten about even though they can really come in handy.

@@ -19,7 +19,7 @@ You can’t build for what you don’t understand. Assistive technology (AT) isn
 
 It also keeps you from playing accessibility whack-a-mole later. Debugging alt text and tab order after launch is way harder (and more frustrating) than doing it right the first time. By learning how these tools work, you’ll be able to test as you go—and make smarter decisions all around.
 
-For a peek into how people actually use assistive tech, check out [WebAIM’s annual screen reader survey](https://webaim.org/projects/screenreadersurvey10/). If you're curious about the full dataset and setup, feel free to dive in—but if you want to skip to the good part, head straight to the [Landmarks and Regions section](https://webaim.org/projects/screenreadersurvey10/#landmarks). It’s light reading, promise.
+For a peek into how people actually use assistive tech, check out [WebAIM’s annual screen reader survey](https://webaim.org/projects/screenreadersurvey10/). If you're curious about the full dataset and setup, feel free to dive in—but if you want to skip to the good part, head straight to the [Landmarks and Regions section](https://webaim.org/projects/screenreadersurvey10/#landmarks) and read on from there. It’s light reading, promise.
 
 ## What is Assistive Technology?
 

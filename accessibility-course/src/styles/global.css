@@ -31,6 +31,12 @@
   height: 100%;
 } */
 
+body.sidebar-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+
 html {
   font-family: var(--body-font);
 }
@@ -103,6 +109,16 @@ ol code {
   font-family: monospace;
   font-size: 0.85rem;
   @apply rounded-lg overflow-x-auto;
+}
+
+a code {
+  color: var(--accent-color);
+}
+
+a:hover code,
+a:focus code,
+a:visited code {
+  color: var(--accent-color-dark);
 }
 
 h1 code,
@@ -547,6 +563,8 @@ li {
     width: 80%;
     max-width: 300px;
     height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     background-color: var(--background-color);
     box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
   }
@@ -646,6 +664,36 @@ li {
   .sidebar-toggle-button {
     display: none;
   }
+}
+
+.important-callout {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: transparent;
+  padding: 1rem;
+  margin-top: 0;
+}
+
+.important-callout .icon-eyes {
+  width: 3rem;
+  height: auto;
+}
+
+.important-heading {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+.important-content {
+  color: var(--text-color);
+}
+
+.important-content p {
+  margin: 0;
+  max-width: 70ch;
 }
 
 /* ICONS */

@@ -25,7 +25,7 @@ Many assistive tech users navigate by jumping from link to link, meaning they mi
 
 ## Consistency
 
-If you have two links that lead to different places, they need to say different things.
+If you have two links that lead to different places, the link text needs to be different.
 
 If two links lead to the same place, they should say the same thing.
 
@@ -35,7 +35,17 @@ Enough said, really.
 
 Links are for **navigation**—connecting one page, section, or resource to another. Buttons are for **actions**, like submitting a form, opening a modal, or toggling a menu. If it moves the user somewhere new, use a link. If it makes something happen on the same page, use a button.
 
-And always use the native HTML elements unless you have a very good reason not to. They come with built-in accessibility and behaviors that custom components often forget to replicate.
+<div class="important-callout">
+  <img src="/images/icon_eyes_right.png" alt="" class="icon-eyes" />
+  <div>
+    <h2 class="important-heading">Important</h2>
+    <div class="important-content">
+      <p>
+        Always use the native HTML elements unless you have a very good reason not to. They come with built-in accessibility and behaviors that custom components often forget to replicate.
+      </p>
+    </div>
+  </div>
+</div>
 
 ## Skip Links: The Unsung Heroes of Navigation
 

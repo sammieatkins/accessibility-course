@@ -5,3 +5,5 @@ type: activity
 order: 1
 activity: SemanticHtmlPractice
 ---
+
+<!-- !!! add instruction here -->

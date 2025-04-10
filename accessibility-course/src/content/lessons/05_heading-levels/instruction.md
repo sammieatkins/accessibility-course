@@ -5,7 +5,7 @@ type: instruction
 order: 1
 ---
 
-<!-- mention how designers see heading levels as strictly visual, but on the web we have to consider the semantic nature of headings. it's just fine if you're printing, but not with tech. -->
+<!-- ??? mention how designers see heading levels as strictly visual, but on the web we have to consider the semantic nature of headings. it's just fine if you're printing, but not with tech. -->
 
 # Heading Levels
 
@@ -19,7 +19,17 @@ When sighted users skim a page, they often scroll quickly and look for bold or l
 
 Most screen readers have a shortcut key to jump from heading to heading. If your headings aren’t structured clearly—or worse, if you skipped levels entirely—it’s like handing someone a table of contents with random page numbers and missing chapters.
 
-This isn’t just a helpful feature—it’s how the majority of screen reader users navigate the web.
+<div class="important-callout">
+  <img src="/images/icon_eyes_right.png" alt="" class="icon-eyes" />
+  <div>
+    <h2 class="important-heading">Important</h2>
+    <div class="important-content">
+      <p>
+        Headings aren't just a helpful feature—it’s how the majority of screen reader users navigate the web. (See <a href="https://webaim.org/projects/screenreadersurvey10/#finding">WebAIM Screen Reader Survey - Finding Information</a>)
+      </p>
+    </div>
+  </div>
+</div>
 
 ## Use Headings as Logical Categories
 
@@ -73,7 +83,7 @@ It’s okay to vary styling a bit to match your brand, but each level should sti
 
 ### Subtitle Exception
 
-One time it’s okay to break that visual pattern is when you have a subtitle right under your `<h1>`.
+One time where it’s okay to break that visual pattern is when you have a subtitle right under your `<h1>`.
 
 ```html
 <h1>Heading Levels</h1>

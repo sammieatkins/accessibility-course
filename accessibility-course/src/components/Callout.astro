@@ -1,0 +1,14 @@
+---
+const { type = "important", children } = Astro.props;
+const label = type.charAt(0).toUpperCase() + type.slice(1);
+---
+
+<div class={`important-callout ${type}`}>
+  <img src="/images/icon_eyes_right.png" alt="" class="icon-eyes" />
+  <div>
+    <h2 class="important-heading">{label}</h2>
+    <div class="important-content">
+      {children}
+    </div>
+  </div>
+</div>
