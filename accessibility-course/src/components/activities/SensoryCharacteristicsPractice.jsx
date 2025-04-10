@@ -1,4 +1,5 @@
 // add aria polite to the updating "small text fails contrast" warnings
+// make sure the calculations are actually accurate
 
 "use client";
 import { useState, useEffect } from "react";

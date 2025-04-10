@@ -1,5 +1,3 @@
-// submit is triggering restart button??
-
 import { useState, useRef, useEffect } from "react";
 
 const urls = [

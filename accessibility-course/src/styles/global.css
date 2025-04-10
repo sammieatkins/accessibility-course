@@ -494,6 +494,10 @@ li {
   background-color: var(--accent-color-dark);
 }
 
+.button-block {
+  display: block;
+}
+
 .explanation-block {
   margin-top: 1rem;
   display: flex;

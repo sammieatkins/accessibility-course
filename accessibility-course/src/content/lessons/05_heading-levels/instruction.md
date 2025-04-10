@@ -5,6 +5,8 @@ type: instruction
 order: 1
 ---
 
+<!-- mention how designers see heading levels as strictly visual, but on the web we have to consider the semantic nature of headings. it's just fine if you're printing, but not with tech. -->
+
 # Heading Levels
 
 <h2 class="subheading">Looks aren’t everything</h2>

@@ -1,5 +1,5 @@
 // add clicking outside the sidenav to close it
-
+// not scrollable on big screen zoomed in (scrollable with mouse) and should be
 import { useEffect, useState } from "react";
 
 export default function SidebarToggle() {

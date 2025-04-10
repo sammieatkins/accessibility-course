@@ -230,7 +230,7 @@ export default function AltTextPractice() {
               <button
                 onClick={handleSubmit}
                 disabled={!userAltText.trim()}
-                className="button-accent"
+                className="button-accent button-block"
                 style={
                   !userAltText.trim()
                     ? { opacity: 0.5, cursor: "not-allowed" }
