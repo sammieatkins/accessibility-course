@@ -19,9 +19,9 @@ If you've ever updated your phone's OS or had an app stop working until you upda
 
 There are also three levels of conformance (for now):
 
-- Level A – You showed up. Bare minimum.
-- Level AA – The standard most organizations aim for (and what most laws require).
-- Level AAA – You're climbing Everest in flip-flops. Nice work, but not required.
+- Level A
+- Level AA
+- Level AAA
 
 ## <span class="uppercase">pour</span>
 
@@ -31,11 +31,11 @@ This concept is straight from W3C. It’s the foundation WCAG is built on—ever
 
 ### Perceivable
 
-Can users actually sense the content? Perceivable means making sure there’s a way for everyone to access and understand what’s on the pagepage—no matter how they’re experiencing it. If someone can’t see the screen, there should be alt text or screen reader support that communicates what’s going on. If there’s audio, there should be captions. If it can’t be perceived, it can’t be used. Simple as that.
+Can users actually sense the content? Perceivable means making sure there’s a way for everyone to access and understand what’s on the page—no matter how they’re experiencing it. If someone can’t see the screen, there should be alt text or screen reader support that communicates what’s going on. If there’s audio, there should be captions. If it can’t be perceived, it can’t be used. Simple as that.
 
 ### Operable
 
-Can users actually use the thing? Operable means all interactive parts of the site— links, buttons, forms—need to be functional for everyone, whether they’re using a mouse, keyboard, or assistive tech. That includes making sure there’s enough time to complete actions, avoiding flashy content that could trigger seizures, and making controls easy to reach and activate. If a user can’t operate your site, they’re locked out—even if all the content is technically there.
+Can users actually use the thing? Operable means all interactive parts of the site— links, buttons, forms—need to be functional for everyone, whether they’re using a mouse, keyboard, or assistive tech. That includes making sure there’s enough time to complete actions, avoiding flashy content that could trigger seizures, and making controls easy to reach and activate.
 
 ### Understandable
 

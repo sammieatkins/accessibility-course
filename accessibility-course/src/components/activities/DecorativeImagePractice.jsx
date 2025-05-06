@@ -4,7 +4,6 @@
 import { useState, useLayoutEffect, useEffect } from "react";
 import { imageData } from "../../utils/imageData";
 
-const TOTAL_REQUIRED_CORRECT = 5;
 const LOCAL_STORAGE_KEY = "decorative-image-progress";
 
 export default function DecorativeImagePractice() {
@@ -126,7 +125,7 @@ export default function DecorativeImagePractice() {
     <div className="activity-container">
       <div className="activity-header">
         <p className="activity-progress">
-          Progress: {correctCount} / {TOTAL_REQUIRED_CORRECT}
+          Progress: {correctCount} / {usedContextIds.size}
         </p>
         <button className="button-accent" onClick={restartActivity}>
           Restart Activity
@@ -139,11 +138,6 @@ export default function DecorativeImagePractice() {
           <p>
             You got {correctCount} out of {usedContextIds.size} correct (
             {Math.round((correctCount / usedContextIds.size) * 100)}%)
-          </p>
-          <p>
-            {correctCount < TOTAL_REQUIRED_CORRECT
-              ? "Try again to reach 5 correct answers!"
-              : "Awesome work!"}
           </p>
           <button className="button-accent" onClick={restartActivity}>
             Restart Activity

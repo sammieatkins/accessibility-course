@@ -38,11 +38,13 @@ Let’s have a quick alt text intervention. We're going to go through a few "don
 
 First up, alt text shouldn't be **repetitive**. This means alt text shouldn't repeat what's already in the context. Sticking with our dog example, if underneath the image you already talk about the dog breed, don't include the dog breed in the alt text. In this case, the image isn't giving any new information.
 
-We also don’t want alt text to be additional—it’s not the place to break out new ideas. I know, this might sound contradictory. First I said don’t repeat things, now I’m telling you not to add anything new? Well, as Iron Man once said, “There’s a little gray area in there and that’s where you operate.”
+We also don’t want alt text to be **additional**—it’s not the place to break out new ideas. I know, this might sound contradictory. First I said don’t repeat things, now I’m telling you not to add anything new? Well, as Iron Man once said, “There’s a little gray area in there and that’s where you operate.”
 
 For example, think back to that quiz we mentioned earlier about identifying dog breeds. If the image is part of a question asking the user to name the breed, you wouldn’t want to give away the answer in the alt text. That would add new information that isn’t visually conveyed.
 
-Next thing to avoid: don't start with **"image of"**. Assistive technology will already know it's an image because you used an `<img>` tag. In certain circumstances, explaining the type of image is useful (like “Bar graph showing monthly snowfall totals”). But generally, using semantic tags already gives assistive tech a lot of information. Our last major "don't" is making your alt text **just a filename**. Seriously, not helpful. I don't care how descriptive your naming system is.
+Next thing to avoid: don't start with **"image of"**. Assistive technology will already know it's an image because you used an `<img>` tag. In certain circumstances, explaining the type of image is useful (like “Bar graph showing monthly snowfall totals”). But generally, using semantic tags already gives assistive tech a lot of information.
+
+Our last major "don't" is making your alt text **just a filename**. Seriously, not helpful. I don't care how descriptive your naming system is.
 
 So, to summarize, **don't**...
 
@@ -61,7 +63,8 @@ Not every image actually needs alt text. Remember how alt text is meant to provi
 
 Hate to break it to you—blind users don't care about aesthetics. Alt text for decorative images is just noise.
 
-And another thing, if you're thinking about what alt text to write for an image of text... stop right there.  
+And another thing, if you're thinking about what alt text to write for an image of text... stop right there.
+
 Unless it's a logo or part of a screenshot, that text should just be [real text](/lessons/06_semantic-html/instruction/#use-real-text).
 
 ## How to Write Alt Text in Your Code
